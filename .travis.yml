@@ -12,9 +12,9 @@ deploy:
   provider: heroku
   api_key:
     secure: 8488c898-cdf7-4ada-8f56-9a58631293e7
-  app: binluis-parkingwebapp
+  app: parkingwebappmobile
   on:
-    repo: BinLuIS/ParkingWebApp
+    repo: BinLuIS/ParkingWebAppMobile
 #notifications:
 #  webhooks:
 #    on_success: change  # options: [always|never|change] default: always
