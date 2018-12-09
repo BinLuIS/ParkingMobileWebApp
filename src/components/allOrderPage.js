@@ -17,7 +17,7 @@ const data = [
   },
 ];
 const NUM_SECTIONS = 1;
-const NUM_ROWS_PER_SECTION = 10;
+const NUM_ROWS_PER_SECTION = data.length;
 let pageIndex = 0;
 
 const dataBlobs = {};
@@ -41,7 +41,7 @@ function genData(pIndex = 0) {
   rowIDs = [...rowIDs];
 }
 
-class ListViewExample extends React.Component {
+class ListViewExample extends Component {
   constructor(props) {
     super(props);
     const getSectionData = (dataBlob, sectionID) => dataBlob[sectionID];
@@ -115,7 +115,7 @@ class ListViewExample extends React.Component {
               <div>{obj.timePeriod}</div>
             </div>
           </div>
-          <div style={{marginTop: '40px' }}>詳細信息</div>
+          <div style={{marginTop: '40px' }}>詳細信息 ></div>
           {/* <div
             style={{
               lineHeight: '50px',
@@ -137,7 +137,7 @@ class ListViewExample extends React.Component {
       <ListView
         ref={el => this.lv = el}
         dataSource={this.state.dataSource}
-        renderHeader={() => <h1>訂單</h1>}
+        renderHeader={() => <h1 style={{textAlign:"center"}}>訂單</h1>}
         renderFooter={() => (<div style={{ padding: 30, textAlign: 'center' }}>
           {this.state.isLoading ? 'Loading...' : ''}
         </div>)}
@@ -160,7 +160,7 @@ class ListViewExample extends React.Component {
   }
 }
 
-export default class allOrderPage extends React.Component {
+export default class allOrderPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -298,5 +298,3 @@ export default class allOrderPage extends React.Component {
     );
   }
 }
-
-ReactDOM.render(<allOrderPage />, document.getElementById('root'));

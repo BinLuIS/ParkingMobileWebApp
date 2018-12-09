@@ -5,7 +5,6 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import 'antd-mobile/dist/antd-mobile.css';
 import {BrowserRouter as Router} from 'react-router-dom';
-import requestFormPage from './components/requestFormPage';
 
 // ReactDOM.render(<App />, document.getElementById('root'));
 // ReactDOM.render(<DatePicker />, document.getElementById('root'));
