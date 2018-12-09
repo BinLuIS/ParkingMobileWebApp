@@ -2,28 +2,33 @@ import { TabBar, ListView } from 'antd-mobile';
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom';
 
-const data = [
-  {
-    timePeriod: '17:00-18:00',
-    carNumber: '<車牌NO.>',
-  },
-  {
-    timePeriod: '17:00-18:00',
-    carNumber: '<車牌NO.>',
-  },
-  {
-    timePeriod: '17:00-18:00',
-    carNumber: '<車牌NO.>',
-  },
+
+
+let data = [
+  // {
+  //   timePeriod: '17:00-18:00',
+  //   carNumber: '<車牌NO.>',
+  // },
+  // {
+  //   timePeriod: '17:00-18:00',
+  //   carNumber: '<車牌NO.>',
+  // },
+  // {
+  //   timePeriod: '17:00-18:00',
+  //   carNumber: '<車牌NO.>',
+  // },
 ];
+
 const NUM_SECTIONS = 1;
-const NUM_ROWS_PER_SECTION = data.length;
+
+
 let pageIndex = 0;
 
 const dataBlobs = {};
 let sectionIDs = [];
 let rowIDs = [];
 function genData(pIndex = 0) {
+  const NUM_ROWS_PER_SECTION = data.length;
   for (let i = 0; i < NUM_SECTIONS; i++) {
     const ii = (pIndex * NUM_SECTIONS) + i;
     const sectionName = `Section ${ii}`;
@@ -112,7 +117,7 @@ class ListViewExample extends Component {
             <img style={{ height: '64px', marginRight: '15px' }} src={require('../icon/likeicon.png')} alt="" />
             <div style={{ lineHeight: 1, padding: '10px 0'}}>
               <div style={{ marginBottom: '8px', fontWeight: 'bold' }}>{obj.carNumber}</div>
-              <div>{obj.timePeriod}</div>
+              <div>'17:00-18:00'</div>
             </div>
           </div>
           <div style={{marginTop: '40px' }}>詳細信息 ></div>
@@ -167,8 +172,18 @@ export default class allOrderPage extends Component {
       selectedTab: 'blueTab',
       hidden: false,
     };
+    this.getResponse();
   }
-
+  getResponse() {
+    fetch('https://parkingsystem.herokuapp.com/orders')
+    .then(results => results.json())
+    .then(res => {
+      data = res;
+      console.log(res);
+      console.log(data);
+    });
+    
+  }
   renderContent(pageText) {
     return (
       <div style={{ backgroundColor: 'white', height: '100%', textAlign: 'center' }}>
