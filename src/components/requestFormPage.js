@@ -13,7 +13,7 @@ export default class requestFormPage extends Component {
 
     return (
       <div>
-        <List renderHeader={() => <span><h2>申請停車</h2></span>}>
+        <List renderHeader={() => <span><h1 style={{textAlign:"center", color: "white"}}>申請停車</h1></span>}>
           <InputItem style={{ padding: "50px" }}>
           <p style={{ color: "#1890ff" }}>姓名 </p>
           </InputItem>
