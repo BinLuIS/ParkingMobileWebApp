@@ -1,39 +1,32 @@
-import React, { Component } from 'react'
+import { List, InputItem, WhiteSpace, Button } from 'antd-mobile';
+import React, { Component } from 'react';
 
-const dataSource = [{
-    key: '1',
-    name: 'Mike',
-    age: 32,
-    address: '10 Downing Street'
-  }, {
-    key: '2',
-    name: 'John',
-    age: 42,
-    address: '10 Downing Street'
-  }];
-  
-  const columns = [{
-    title: 'Name',
-    dataIndex: 'name',
-    key: 'name',
-  }, {
-    title: 'Age',
-    dataIndex: 'age',
-    key: 'age',
-  }, {
-    title: 'Address',
-    dataIndex: 'address',
-    key: 'address',
-  }];
-  
- 
 export default class requestFormPage extends Component {
-    
+  
+  onAdded = () => {
+    const {input} = this.refs
+    console.log(input)
+    this.props.addNewOrderRequest(input.state.value)
+    input.value = ''
+  }
   render() {
+
     return (
       <div>
-        <p style={{textAlign: 'center',marginTop:'15rem',color:'#1890ff', fontSize:'2rem'}}>Request Form Page Page</p>
+        <List renderHeader={() => <span><h2>申請停車</h2></span>}>
+          <InputItem style={{ padding: "50px" }}>
+          <p style={{ color: "#1890ff" }}>姓名 </p>
+          </InputItem>
+          <InputItem ref='input' style={{ padding: "50px" }}>
+          <p style={{ color: "#1890ff" }}>車牌號碼 </p>
+          </InputItem>
+        </List>
+        <br />
+        <div>
+          <Button type="primary" onClick={this.onAdded}>提交</Button><WhiteSpace />
+        
+        </div>
       </div>
-    )
+    );
   }
 }
