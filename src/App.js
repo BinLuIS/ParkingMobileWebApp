@@ -4,7 +4,7 @@ import { Layout, Menu, Icon } from 'antd';
 import {Route, Link,Switch} from 'react-router-dom'
 import WelcomePage from './components/WelcomePage';
 import TablePage from './components/TablePage'
-import requestFormPage from './components/requestFormPage';
+import requestFormPage from './containers/requestFormPageContainer';
 
 const { Header, Sider, Content } = Layout;
 class App extends Component {
