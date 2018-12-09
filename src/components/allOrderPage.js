@@ -1,32 +1,19 @@
 import { TabBar, ListView } from 'antd-mobile';
+import { Icon } from 'antd';
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom';
+import '../css/allOrderPage.css';
 
 
-
-let data = [
-  // {
-  //   timePeriod: '17:00-18:00',
-  //   carNumber: '<車牌NO.>',
-  // },
-  // {
-  //   timePeriod: '17:00-18:00',
-  //   carNumber: '<車牌NO.>',
-  // },
-  // {
-  //   timePeriod: '17:00-18:00',
-  //   carNumber: '<車牌NO.>',
-  // },
-];
+let data = [];
 
 const NUM_SECTIONS = 1;
-
-
 let pageIndex = 0;
 
 const dataBlobs = {};
 let sectionIDs = [];
 let rowIDs = [];
+
 function genData(pIndex = 0) {
   const NUM_ROWS_PER_SECTION = data.length;
   for (let i = 0; i < NUM_SECTIONS; i++) {
@@ -114,13 +101,13 @@ class ListViewExample extends Component {
       return (
         <div key={rowID} style={{ padding: '0 15px', display: "flex", justifyContent: 'space-between'}}>
           <div style={{ display: 'flex', padding: '15px 0' }}>
-            <img style={{ height: '64px', marginRight: '15px' }} src={require('../icon/likeicon.png')} alt="" />
+            <img style={{ height: '64px', marginRight: '15px' }} src={require('../icon/caricon.png')} alt="" />
             <div style={{ lineHeight: 1, padding: '10px 0'}}>
               <div style={{ marginBottom: '8px', fontWeight: 'bold' }}>{obj.carNumber}</div>
-              <div>'17:00-18:00'</div>
+              <div>停車時間: 17:00</div>
             </div>
           </div>
-          <div style={{marginTop: '40px' }}>詳細信息 ></div>
+          <div style={{marginTop: '40px', fontSize: '20px'}}>搶單 <Icon type="right" width ="20px" height ="20px" /></div>
           {/* <div
             style={{
               lineHeight: '50px',
@@ -142,9 +129,9 @@ class ListViewExample extends Component {
       <ListView
         ref={el => this.lv = el}
         dataSource={this.state.dataSource}
-        renderHeader={() => <h1 style={{textAlign:"center"}}>訂單</h1>}
+        renderHeader={() => <h1 style={{textAlign:"center", color: "white"}}>訂單</h1>}
         renderFooter={() => (<div style={{ padding: 30, textAlign: 'center' }}>
-          {this.state.isLoading ? 'Loading...' : ''}
+          {this.state.isLoading ? '下載中...' : ''}
         </div>)}
         // renderSectionHeader={sectionData => (
         //   <div>{`Task ${sectionData.split(' ')[1]}`}</div>
@@ -216,20 +203,20 @@ export default class allOrderPage extends Component {
           <TabBar.Item
             title="搶單"
             key="gradOrder"
-            icon={<div style={{
-              width: '22px',
-              height: '22px',
-              background: 'url(https://zos.alipayobjects.com/rmsportal/sifuoDUQdAFKAVcFGROC.svg) center center /  21px 21px no-repeat' }}
-            />
+            icon={
+              <Icon type="profile"  />
             }
-            selectedIcon={<div style={{
-              width: '22px',
-              height: '22px',
-              background: 'url(https://zos.alipayobjects.com/rmsportal/iSrlOTqrKddqbOmlvUfq.svg) center center /  21px 21px no-repeat' }}
-            />
+            // icon={<div style={{
+            //   width: '22px',
+            //   height: '22px',
+            //   background: 'url(https://zos.alipayobjects.com/rmsportal/sifuoDUQdAFKAVcFGROC.svg) center center /  21px 21px no-repeat' }}
+            // />
+            // }
+            selectedIcon={
+              <Icon type="profile" theme="filled" />
             }
             selected={this.state.selectedTab === 'blueTab'}
-            badge={1}
+            // badge={1}
             onPress={() => {
               this.setState({
                 selectedTab: 'blueTab',
@@ -241,22 +228,14 @@ export default class allOrderPage extends Component {
           </TabBar.Item>
           <TabBar.Item
             icon={
-              <div style={{
-                width: '22px',
-                height: '22px',
-                background: 'url(https://gw.alipayobjects.com/zos/rmsportal/BTSsmHkPsQSPTktcXyTV.svg) center center /  21px 21px no-repeat' }}
-              />
+              <Icon type="car"/>
             }
             selectedIcon={
-              <div style={{
-                width: '22px',
-                height: '22px',
-                background: 'url(https://gw.alipayobjects.com/zos/rmsportal/ekLecvKBnRazVLXbWOnE.svg) center center /  21px 21px no-repeat' }}
-              />
+              <Icon type="car"  theme="twoTone"/>
             }
             title="停取"
             key="getOrder"
-            badge={'new'}
+            // badge={'123'}
             selected={this.state.selectedTab === 'redTab'}
             onPress={() => {
               this.setState({
@@ -269,22 +248,14 @@ export default class allOrderPage extends Component {
           </TabBar.Item>
           <TabBar.Item
             icon={
-              <div style={{
-                width: '22px',
-                height: '22px',
-                background: 'url(https://zos.alipayobjects.com/rmsportal/psUFoAMjkCcjqtUCNPxB.svg) center center /  21px 21px no-repeat' }}
-              />
+              <Icon type="clock-circle"/>
             }
             selectedIcon={
-              <div style={{
-                width: '22px',
-                height: '22px',
-                background: 'url(https://zos.alipayobjects.com/rmsportal/IIRLrXXrFAhXVdhMWgUI.svg) center center /  21px 21px no-repeat' }}
-              />
+              <Icon type="clock-circle" theme="filled"/>
             }
             title="歷史"
             key="history"
-            dot
+            // dot
             selected={this.state.selectedTab === 'greenTab'}
             onPress={() => {
               this.setState({
@@ -295,8 +266,12 @@ export default class allOrderPage extends Component {
             {this.renderContent('history')}
           </TabBar.Item>
           <TabBar.Item
-            icon={{ uri: 'https://zos.alipayobjects.com/rmsportal/asJMfBrNqpMMlVpeInPQ.svg' }}
-            selectedIcon={{ uri: 'https://zos.alipayobjects.com/rmsportal/gjpzzcrPMkhfEqgbYvmN.svg' }}
+            icon={
+              <Icon type="user" />
+            }
+            selectedIcon={
+              <Icon type="user" theme="outlined"/>
+            }
             title="個人"
             key="personal"
             selected={this.state.selectedTab === 'yellowTab'}
