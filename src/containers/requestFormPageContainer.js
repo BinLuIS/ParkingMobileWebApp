@@ -10,7 +10,7 @@ const mapDispatchToProps =(dispatch) => ({
       }
       console.log(newOrderRequestItem)
      console.log(JSON.stringify(newOrderRequestItem))
-     fetch("https://parkingsystem.herokuapp.com/orders", {
+     fetch("http://localhost:8080/orders", {
        method: 'POST', 
        headers: new Headers({
        'Content-Type': 'application/json'
