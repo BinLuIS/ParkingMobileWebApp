@@ -1,5 +1,6 @@
 import { List, InputItem, WhiteSpace, Button } from 'antd-mobile';
 import React, { Component } from 'react';
+import  { Router } from 'react-router';
 
 export default class requestFormPage extends Component {
   
@@ -8,6 +9,7 @@ export default class requestFormPage extends Component {
     console.log(input)
     this.props.addNewOrderRequest(input.state.value)
     input.value = ''
+    this.props.history.push('/allOrderPage')
   }
   render() {
 
