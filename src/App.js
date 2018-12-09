@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import './css/App.css';
 import { Layout, Menu, Icon } from 'antd';
 import {Route, Link,Switch} from 'react-router-dom'
 import WelcomePage from './components/WelcomePage';
