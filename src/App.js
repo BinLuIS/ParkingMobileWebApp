@@ -20,7 +20,9 @@ class App extends Component {
             <Route path="/requestFormPage" component={requestFormPage}></Route>
             <Route path="/clerkPage" component={clerkPage}></Route>
             <Route path="/pickAcceptedOrderParkingLocationPage" component={pickAcceptedOrderParkingLocationPage}></Route>
+            <Route path="/pickAcceptedOrderCarPage/:id" component={pickAcceptedOrderCarPage}></Route>
             <Route path="/pickAcceptedOrderCarPage" component={pickAcceptedOrderCarPage}></Route>
+
           </Switch>
         </Content>
       </Layout>
