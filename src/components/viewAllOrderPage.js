@@ -15,7 +15,7 @@ export default class viewAllOrderPage extends Component {
     }
 
     getAllOrder=()=>{
-        fetch('https://parkingsystem.herokuapp.com/orders?status=Pending')
+        fetch('https://parkingsystem.herokuapp.com/orders?status=pendingParking')
         .then(results => results.json())
         .then(res => {
           this.setState({data:res})
