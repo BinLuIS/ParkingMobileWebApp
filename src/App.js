@@ -5,6 +5,8 @@ import {Route, Link,Switch} from 'react-router-dom'
 import clerkPage from './components/clerkPage';
 import requestFormPage from './containers/requestFormPageContainer';
 import pickCarPage from './components/pickCarPage';
+import selectParkingLot from './components/selectParkingLot';
+
 
 const { Header, Sider, Content } = Layout;
 class App extends Component {
@@ -18,6 +20,7 @@ class App extends Component {
             <Route path="/requestFormPage" component={requestFormPage}></Route>
             <Route path="/clerkPage" component={clerkPage}></Route>
             <Route path="/pickCarPage" component={pickCarPage}></Route>
+			<Route path="/selectParkingLot" component={selectParkingLot}></Route>
           </Switch>
         </Content>
       </Layout>
