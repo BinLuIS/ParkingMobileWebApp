@@ -19,6 +19,7 @@ const mapDispatchToProps =(dispatch) => ({
      body: JSON.stringify(newOrderRequestItem)
    }).then(res => res.json())
    .then(res => {
+    alert("成功申請")
      dispatch({
        type: "ADD_NEW_ORDER_REQUEST",
        payload: {
@@ -28,8 +29,45 @@ const mapDispatchToProps =(dispatch) => ({
          status: res.status
        }
      })
+   }) 
+   },
+   addNewFetchRequest: newOrderRequest => {
+    const newOrderRequestItem ={
+      carNumber: newOrderRequest,
+      status: 'pendingFetching'
+    }
+    console.log(newOrderRequestItem)
+    fetch("https://parkingsystem.herokuapp.com/orders?carNumber="+newOrderRequest, {
+    mode: 'cors', 
+  }).then(res => res.json())
+  .then(({id}) => {
+    if(typeof id!== 'undefined'){
+    fetch("https://parkingsystem.herokuapp.com/orders/"+id, {
+     method: 'PATCH', 
+     headers: new Headers({
+     'Content-Type': 'application/json'
+   }), 
+   mode: 'cors', 
+   body: JSON.stringify(newOrderRequestItem)
+ }).then(res => res.json())
+ .then(res => {
+  alert("成功申請")
+   dispatch({
+     type: "ADD_NEW_ORDER_REQUEST",
+     payload: {
+       id: res.id,
+       carNumber: res.carNumber,
+       requestType: res.requestType,
+       status: res.status
+     }
    })
-    
-   } 
  })
+}
+else{
+  alert("車子不在停車場")
+}
+})
+   }
+  })
+   
  export default connect(null, mapDispatchToProps)(requestFormPage)

@@ -11,7 +11,15 @@ export default class requestFormPage extends Component {
     this.props.addNewOrderRequest(carnum.state.value)
     carnum.setState({value: ''});
     name.setState({value: ''});
-    alert("成功申請")
+    // this.props.history.push('/allOrderPage')
+  }
+  onFetch = () => {
+    const {name,carnum} = this.refs
+    console.log(carnum)
+    console.log(name)
+    this.props.addNewFetchRequest(carnum.state.value)
+    carnum.setState({value: ''});
+    name.setState({value: ''});
     // this.props.history.push('/allOrderPage')
   }
   render() {
@@ -28,7 +36,8 @@ export default class requestFormPage extends Component {
         </List>
         <br />
         <div>
-          <Button type="primary" onClick={this.onAdded}>提交</Button><WhiteSpace />
+          <Button type="primary" onClick={this.onAdded}>泊車</Button><WhiteSpace />
+          <Button type="primary" onClick={this.onFetch}>取車</Button><WhiteSpace />
         
         </div>
       </div>
