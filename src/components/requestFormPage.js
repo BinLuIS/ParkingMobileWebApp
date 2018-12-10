@@ -8,8 +8,9 @@ export default class requestFormPage extends Component {
     const {input} = this.refs
     console.log(input)
     this.props.addNewOrderRequest(input.state.value)
-    input.value = ''
-    this.props.history.push('/allOrderPage')
+    input.setState({value: ''});
+    alert("成功申請")
+    // this.props.history.push('/allOrderPage')
   }
   render() {
 

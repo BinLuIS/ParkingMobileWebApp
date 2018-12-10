@@ -72,7 +72,7 @@ class ListViewExample extends Component {
     console.log('reach end', event);
     this.setState({ isLoading: true });
     setTimeout(() => {
-      genData(++pageIndex);
+      /*genData(++pageIndex);*/
       this.setState({
         dataSource: this.state.dataSource.cloneWithRowsAndSections(dataBlobs, sectionIDs, rowIDs),
         isLoading: false,
