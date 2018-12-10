@@ -41,7 +41,7 @@ export default class viewAcceptedOrderPage extends Component {
                     {/* <div>停車時間: 17:00</div> */}
                 </div>
                 </div>
-                {this.getAction}
+                {this.getAction(each.status)}
             </div>
             </List.Item>
             )}
