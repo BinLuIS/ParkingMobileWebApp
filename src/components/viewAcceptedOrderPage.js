@@ -10,6 +10,10 @@ export default class viewAcceptedOrderPage extends Component {
     }
     
     componentDidMount() {
+        this.getOrder();
+    }
+
+    getOrder=()=>{
         fetch('https://parkingsystem.herokuapp.com/parkingclerks/1/orders?status=accepted,parked,pendingFetching')
         .then(results => results.json())
         .then(res => {
@@ -19,11 +23,40 @@ export default class viewAcceptedOrderPage extends Component {
         });
     }
 
-    getAction=(status)=>{
-        if(status=='accepted'){
+    fetchCar=(order) => {
+        const fetchCarItem ={
+          carNumber: order.carNumber,
+          status: 'completed'
+        }
+        console.log(fetchCarItem)
+        fetch("https://parkingsystem.herokuapp.com/orders?carNumber="+order.carNumber, {
+        mode: 'cors', 
+      }).then(res => res.json())
+      .then(resp => {
+        console.log(resp[0].status)
+        if(resp.length>0 && resp[0].status=='pendingFetching'){
+        fetch("https://parkingsystem.herokuapp.com/orders/"+resp[0].id, {
+         method: 'PATCH', 
+         headers: new Headers({
+         'Content-Type': 'application/json'
+       }), 
+       mode: 'cors', 
+       body: JSON.stringify(fetchCarItem)
+     }).then(res => res.json())
+     .then(res => {
+      alert("訂單完成")
+      this.getOrder();
+     })
+    }
+    })
+
+       }    
+
+    getAction=(order)=>{
+        if(order.status=='accepted'){
             return <div style={{marginTop: '40px', fontSize: '20px'}}>泊車 <Icon type="right" width ="20px" height ="20px" /></div>
-        }else if(status=='pendingFetching'){
-            return <div style={{marginTop: '40px', fontSize: '20px'}}>取車 <Icon type="right" width ="20px" height ="20px" /></div>
+        }else if(order.status=='pendingFetching'){
+            return <div style={{marginTop: '40px', fontSize: '20px'}} onClick={()=>this.fetchCar(order)}>取車 <Icon type="right" width ="20px" height ="20px" /></div>
         }
     }
 
@@ -41,7 +74,7 @@ export default class viewAcceptedOrderPage extends Component {
                     {/* <div>停車時間: 17:00</div> */}
                 </div>
                 </div>
-                {this.getAction(each.status)}
+                {this.getAction(each)}
             </div>
             </List.Item>
             )}
