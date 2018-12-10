@@ -5,10 +5,12 @@ import  { Router } from 'react-router';
 export default class requestFormPage extends Component {
   
   onAdded = () => {
-    const {input} = this.refs
-    console.log(input)
-    this.props.addNewOrderRequest(input.state.value)
-    input.setState({value: ''});
+    const {name,carnum} = this.refs
+    console.log(carnum)
+    console.log(name)
+    this.props.addNewOrderRequest(carnum.state.value)
+    carnum.setState({value: ''});
+    name.setState({value: ''});
     alert("成功申請")
     // this.props.history.push('/allOrderPage')
   }
@@ -17,10 +19,10 @@ export default class requestFormPage extends Component {
     return (
       <div>
         <List renderHeader={() => <span><h1 style={{textAlign:"center", color: "white"}}>申請停車</h1></span>}>
-          <InputItem style={{ padding: "50px" }}>
+          <InputItem ref='name' style={{ padding: "50px" }}>
           <p style={{ color: "#1890ff" }}>姓名 </p>
           </InputItem>
-          <InputItem ref='input' style={{ padding: "50px" }}>
+          <InputItem ref='carnum' style={{ padding: "50px" }}>
           <p style={{ color: "#1890ff" }}>車牌號碼 </p>
           </InputItem>
         </List>
