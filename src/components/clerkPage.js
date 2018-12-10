@@ -4,8 +4,12 @@ import React, { Component } from 'react'
 import ReactDOM from 'react-dom';
 import '../css/allOrderPage.css';
 import ListViewExample from './viewAllOrderPage';
+import ViewAcceptedOrderPage from './viewAcceptedOrderPage';
+import ViewHistoryOrderPage from './viewHistoryOrderPage';
+import ViewPersonalPage from './viewPersonalPage';
 
-export default class allOrderPage extends Component {
+
+export default class clerkPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -15,23 +19,6 @@ export default class allOrderPage extends Component {
     
   }
   
-  renderContent(pageText) {
-    return (
-      <div style={{ backgroundColor: 'white', height: '100%', textAlign: 'center' }}>
-        <div style={{ paddingTop: 60 }}>Clicked “{pageText}” tab， show “{pageText}” information</div>
-        <a style={{ display: 'block', marginTop: 40, marginBottom: 20, color: '#108ee9' }}
-          onClick={(e) => {
-            e.preventDefault();
-            this.setState({
-              hidden: !this.state.hidden,
-            });
-          }}
-        >
-          Click to show/hide tab-bar
-        </a>
-      </div>
-    );
-  }
 
   render() {
     return (
@@ -88,7 +75,7 @@ export default class allOrderPage extends Component {
             }}
             data-seed="logId1"
           >
-            {this.renderContent('getOrder')}
+          <ViewAcceptedOrderPage />
           </TabBar.Item>
           <TabBar.Item
             icon={
@@ -107,7 +94,7 @@ export default class allOrderPage extends Component {
               });
             }}
           >
-            {this.renderContent('history')}
+          <ViewHistoryOrderPage />
           </TabBar.Item>
           <TabBar.Item
             icon={
@@ -125,7 +112,7 @@ export default class allOrderPage extends Component {
               });
             }}
           >
-            {this.renderContent('personal')}
+          <ViewPersonalPage />
           </TabBar.Item>
         </TabBar>
       </div>
