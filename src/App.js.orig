@@ -2,9 +2,14 @@ import React, { Component } from 'react';
 import './css/App.css';
 import { Layout, Menu, Icon } from 'antd';
 import {Route, Link,Switch} from 'react-router-dom'
-import allOrderPage from './components/allOrderPage';
+<<<<<<< HEAD
+import WelcomePage from './components/WelcomePage';
+import TablePage from './components/TablePage'
 import requestFormPage from './containers/requestFormPageContainer';
-import pickCarPage from './components/pickCarPage';
+=======
+import allOrderPage from './components/allOrderPage';
+import requestFormPage from './components/requestFormPage';
+>>>>>>> 74cf82ff6d3aa96af4e17149e4820e96040a382f
 
 const { Header, Sider, Content } = Layout;
 class App extends Component {
@@ -17,7 +22,6 @@ class App extends Component {
             <Route path="/" exact component={()=><h1>home page</h1>}></Route>
             <Route path="/requestFormPage" component={requestFormPage}></Route>
             <Route path="/allOrderPage" component={allOrderPage}></Route>
-            <Route path="/pickCarPage" component={pickCarPage}></Route>
           </Switch>
         </Content>
       </Layout>
