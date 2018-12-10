@@ -2,3 +2,10 @@
 .demoTitle:after {
   border-bottom: none;
 }
+.am-list-item.am-input-item {
+  height: 60px;
+  padding-top: 15px;
+  padding-left: 15px;
+  padding-bottom: -15px;
+}
+
