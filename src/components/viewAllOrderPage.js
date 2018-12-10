@@ -2,7 +2,7 @@ import { TabBar, ListView,List } from 'antd-mobile';
 import { Icon } from 'antd';
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom';
-import '../css/allOrderPage.css';
+import '../css/viewAllOrderPage.css';
 
 
 export default class viewAllOrderPage extends Component {
@@ -11,7 +11,11 @@ export default class viewAllOrderPage extends Component {
     }
     
     componentDidMount() {
-        fetch('https://parkingsystem.herokuapp.com/orders')
+        this.getAllOrder()
+    }
+
+    getAllOrder=()=>{
+        fetch('https://parkingsystem.herokuapp.com/orders?status=Pending')
         .then(results => results.json())
         .then(res => {
           this.setState({data:res})
@@ -19,10 +23,25 @@ export default class viewAllOrderPage extends Component {
           console.log(this.state.data);
         });
     }
+    grabOrder=(order)=>{
+        fetch('https://parkingsystem.herokuapp.com/parkingclerks/1/orders',{
+            mode: 'cors',
+            method: 'POST', 
+            body: JSON.stringify({
+            "parkingOrderId" : order.id
+            }),
+            headers: new Headers({ 'Content-Type': 'application/json'})
+        })
+        .then(results => results.json())
+        .then(res => {
+          this.getAllOrder();
+        });
+    }
 
     render() {
   
       return (
+          <div>
           <List renderHeader={() => <span><h1 style={{textAlign:"center", color: "white"}}>訂單</h1></span>}>
           {this.state.data.map(each=>
             <List.Item>
@@ -31,16 +50,17 @@ export default class viewAllOrderPage extends Component {
                 <img style={{ width:'54px', height: '64px', marginRight: '15px' }} src={require('../icon/caricon.png')} alt="" />
                 <div style={{ lineHeight: 1, padding: '10px 0'}}>
                     <div style={{ marginBottom: '8px', fontWeight: 'bold' }}>{each.carNumber}</div>
-                    <div>停車時間: 17:00</div>
+                    {/* <div>停車時間: 17:00</div> */}
                 </div>
                 </div>
-                <div style={{marginTop: '40px', fontSize: '20px'}}>搶單 <Icon type="right" width ="20px" height ="20px" /></div>
+                <div style={{marginTop: '40px', fontSize: '20px'}} onClick={()=>this.grabOrder(each)}>搶單 <Icon type="right" width ="20px" height ="20px" /></div>
                 
             </div>
             </List.Item>
             )}
             
           </List>
+          </div>
       );
     }
   }

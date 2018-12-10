@@ -2,7 +2,7 @@ import { TabBar, ListView } from 'antd-mobile';
 import { Icon } from 'antd';
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom';
-import '../css/allOrderPage.css';
+import '../css/clerkPage.css';
 import ListViewExample from './viewAllOrderPage';
 import ViewAcceptedOrderPage from './viewAcceptedOrderPage';
 import ViewHistoryOrderPage from './viewHistoryOrderPage';
