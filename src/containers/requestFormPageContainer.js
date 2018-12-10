@@ -40,9 +40,10 @@ const mapDispatchToProps =(dispatch) => ({
     fetch("https://parkingsystem.herokuapp.com/orders?carNumber="+newOrderRequest, {
     mode: 'cors', 
   }).then(res => res.json())
-  .then(({id}) => {
-    if(typeof id!== 'undefined'){
-    fetch("https://parkingsystem.herokuapp.com/orders/"+id, {
+  .then(resp => {
+    console.log(resp[0].status)
+    if(resp.length>0 && resp[0].status=='parked'){
+    fetch("https://parkingsystem.herokuapp.com/orders/"+resp[0].id, {
      method: 'PATCH', 
      headers: new Headers({
      'Content-Type': 'application/json'
