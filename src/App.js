@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './css/App.css';
 import { Layout, Menu, Icon } from 'antd';
 import {Route, Link,Switch} from 'react-router-dom'
-import clerkPage from './components/clerkPage';
+import ClerkPage from './components/clerkPage';
 import requestFormPage from './containers/requestFormPageContainer';
 import pickAcceptedOrderParkingLocationPage from './components/pickAcceptedOrderParkingLocationPage';
 import pickAcceptedOrderCarPage from './components/pickAcceptedOrderCarPage';
@@ -10,6 +10,7 @@ import viewAcceptedOrderPage from './components/viewAcceptedOrderPage';
 import Login from './components/Login'
 import { getCurrentUser } from './util/APIUtils';
 import { ACCESS_TOKEN } from './constants';
+import clerkPage from './components/clerkPage';
 
 const { Header, Sider, Content } = Layout;
 class App extends Component {
@@ -47,16 +48,13 @@ class App extends Component {
     this.loadCurrentUser();
   }
 
-  handleLogout(redirectTo="/login") {
+  handleLogout=(history)=>{
     localStorage.removeItem(ACCESS_TOKEN);
-
     this.setState({
       currentUser: null,
       isAuthenticated: false
     });
-
-    this.props.history.push(redirectTo);
-    
+    history.push('/');
   }
 
   handleLogin=(history)=> {
@@ -65,13 +63,14 @@ class App extends Component {
   }
 
   render() {
+    console.log()
     return (
       <Layout>
         <Content>
           <Switch>
             <Route path="/" exact render={(props) => <Login onLogin={this.handleLogin} {...props} />}></Route>
             <Route path="/requestFormPage" component={requestFormPage}></Route>
-            <Route path="/clerkPage" component={clerkPage} onLogout={this.handleLogout}></Route>
+            <Route path="/clerkPage" render={(props) => <ClerkPage onLogout={this.handleLogout} {...props} />}/>
             <Route path="/viewAcceptedOrderPage" component={viewAcceptedOrderPage}></Route>
             <Route path="/pickAcceptedOrderCarPage/pickAcceptedOrderParkingLocationPage" component={pickAcceptedOrderParkingLocationPage}></Route>
             <Route path="/pickAcceptedOrderParkingLocationPage" component={pickAcceptedOrderParkingLocationPage}></Route>

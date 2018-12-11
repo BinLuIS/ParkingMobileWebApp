@@ -22,7 +22,10 @@ export default class clerkPage extends Component {
       orderID: -1,
       lotName: ""
     };
-    
+  }
+
+  handleLogout=()=>{
+    this.props.onLogout(this.props.history)
   }
   
   renderContent(pageName) {
@@ -36,6 +39,7 @@ export default class clerkPage extends Component {
     }
   }
   render() {
+    console.log(this.props);
     return (
       <div style={{ position: 'fixed', height: '100%', width: '100%', top: 0 }}>
         <TabBar
@@ -129,7 +133,7 @@ export default class clerkPage extends Component {
               });
             }}
           >
-          <ViewPersonalPage />
+          <ViewPersonalPage onLogout={this.handleLogout}/>
           </TabBar.Item>
         </TabBar>
       </div>

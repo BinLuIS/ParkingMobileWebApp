@@ -5,18 +5,14 @@ import ReactDOM from 'react-dom';
 
 
 export default class viewPersonalPage extends Component {
-    constructor(props) {
-        super(props);    
-    }
-
-    handleSubmit() {
-        //this.props.onLogout();
+  
+    handleSubmit=()=> {
+      console.log(this.props);
+       this.props.onLogout();
     }
 
     render() {
       return (
-          
-          
         <div>
               <div><List renderHeader={() => <span><h1 style={{textAlign:"center", color: "white"}}>申請停車</h1></span>}/></div>
               <Button type="primary" onClick={this.handleSubmit}>登出</Button><WhiteSpace />
