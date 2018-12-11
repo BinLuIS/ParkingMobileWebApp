@@ -10,7 +10,10 @@ export default class SloganPage extends React.Component {
     // simulate img loading
     setTimeout(() => {
       this.setState({
-        data: ['全國最大的首家線上泊車系統上線啦', '過千個泊車仔女任你揀選', '由偉大的Master JOE親自研發'],
+        data: ['全國最大的首家線上泊車系統上線啦', 
+                '過千位泊車美女任你選擇', 
+                '由BinLuIS - MasterJOE親自研發', 
+                '包你一試難忘:P'],
       });
     }, 100);
   }
@@ -19,14 +22,15 @@ export default class SloganPage extends React.Component {
       <WingBlank>
         <Carousel className="space-carousel"
           frameOverflow="visible"
-          cellSpacing={10}
-          slideWidth={0.8}
+          cellSpacing={20}
+          slideWidth={1}
           autoplay
+          dots={false}
           infinite
-          beforeChange={(from, to) => console.log(`slide from ${from} to ${to}`)}
+        //   beforeChange={(from, to) => console.log(`slide from ${from} to ${to}`)}
           afterChange={index => this.setState({ slideIndex: index })}
         >
-          {this.state.data.map((val, index) => (<div><h4>{val}</h4></div>))}
+          {this.state.data.map((val, index) => (<div><h3 style={{textAlign:"center", color: "white"}}>{val}</h3></div>))}
         </Carousel>
       </WingBlank>
     );
