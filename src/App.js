@@ -10,7 +10,6 @@ import viewAcceptedOrderPage from './components/viewAcceptedOrderPage';
 import Login from './components/Login'
 import { getCurrentUser } from './util/APIUtils';
 import { ACCESS_TOKEN } from './constants';
-import WelcomeWrapper from './components/Welcome'
 
 const { Header, Sider, Content } = Layout;
 class App extends Component {
@@ -48,7 +47,7 @@ class App extends Component {
     this.loadCurrentUser();
   }
 
-  handleLogout(redirectTo="/clerkPage") {
+  handleLogout(redirectTo="/") {
     localStorage.removeItem(ACCESS_TOKEN);
 
     this.setState({
@@ -60,10 +59,9 @@ class App extends Component {
     
   }
 
-  handleLogin=()=> {
+  handleLogin=(history)=> {
     this.loadCurrentUser();
-    console.log(this.props);
-    this.props.history.push('/');
+    history.push('/clerkPage');
   }
 
   render() {
@@ -80,7 +78,6 @@ class App extends Component {
             <Route path="/pickAcceptedOrderCarPage/:id" component={pickAcceptedOrderCarPage}></Route>
             <Route path="/pickAcceptedOrderCarPage" component={pickAcceptedOrderCarPage}></Route>
             <Route path="/login" render={(props) => <Login onLogin={this.handleLogin} {...props} />}></Route>
-            <Route path="/welcome" component={WelcomeWrapper}></Route>
           </Switch>
         </Content>
       </Layout>

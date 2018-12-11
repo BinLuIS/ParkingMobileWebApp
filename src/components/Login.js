@@ -6,10 +6,11 @@ import { ACCESS_TOKEN } from '../constants';
 
 class Login extends Component {
     render() {
+        console.log(this.props)
         const LoginWrapper = createForm()(LoginForm);
         return (
             <div>
-                <LoginWrapper onLogin={this.props.onLogin}/>
+                <LoginWrapper onLogin={() =>this.props.onLogin(this.props.history)}/>
             </div>
         );
       }
