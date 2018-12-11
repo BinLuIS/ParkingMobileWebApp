@@ -50,7 +50,17 @@ export default class viewAcceptedOrderPage extends Component {
     }
     })
 
-    }    
+    } 
+    
+    getParkingLot=(order)=>{
+        console.log(order)
+        if(order.status=='pendingFetching'){
+            return <div>停車場: {order.parkingLot.name}</div>
+        }else{
+            return <div></div>
+        }
+
+    }
 
     getAction=(order)=>{
         if(order.status=='accepted'){
@@ -72,6 +82,7 @@ export default class viewAcceptedOrderPage extends Component {
                 <div style={{ lineHeight: 1, padding: '10px 0'}}>
                     <div style={{ marginBottom: '8px', fontWeight: 'bold' }}>{each.carNumber}</div>
                     {/* <div>停車時間: 17:00</div> */}
+                    {this.getParkingLot(each)}
                 </div>
                 </div>
                 {this.getAction(each)}
