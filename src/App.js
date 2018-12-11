@@ -32,7 +32,7 @@ class App extends Component {
     getCurrentUser()
     .then(response => {
       this.setState({
-        currentUser: response.name,
+        currentUser: response.username,
         isAuthenticated: true,
         isLoading: false
       });
@@ -47,7 +47,7 @@ class App extends Component {
     this.loadCurrentUser();
   }
 
-  handleLogout(redirectTo="/") {
+  handleLogout(redirectTo="/login") {
     localStorage.removeItem(ACCESS_TOKEN);
 
     this.setState({
@@ -69,9 +69,9 @@ class App extends Component {
       <Layout>
         <Content>
           <Switch>
-            <Route path="/" exact component={()=><h1>home page</h1>}></Route>
+            <Route path="/" exact render={(props) => <Login onLogin={this.handleLogin} {...props} />}></Route>
             <Route path="/requestFormPage" component={requestFormPage}></Route>
-            <Route path="/clerkPage" component={clerkPage}></Route>
+            <Route path="/clerkPage" component={clerkPage} onLogout={this.handleLogout}></Route>
             <Route path="/viewAcceptedOrderPage" component={viewAcceptedOrderPage}></Route>
             <Route path="/pickAcceptedOrderCarPage/pickAcceptedOrderParkingLocationPage" component={pickAcceptedOrderParkingLocationPage}></Route>
             <Route path="/pickAcceptedOrderParkingLocationPage" component={pickAcceptedOrderParkingLocationPage}></Route>
