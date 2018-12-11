@@ -1,5 +1,5 @@
 import { TabBar, ListView } from 'antd-mobile';
-import { Icon } from 'antd';
+import {Layout, Icon } from 'antd';
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom';
 import '../css/clerkPage.css';
@@ -7,7 +7,12 @@ import ViewAllOrderPage from './viewAllOrderPage';
 import ViewAcceptedOrderPage from './viewAcceptedOrderPage';
 import ViewHistoryOrderPage from './viewHistoryOrderPage';
 import ViewPersonalPage from './viewPersonalPage';
+import pickAcceptedOrderParkingLocationPage from './pickAcceptedOrderParkingLocationPage';
+import pickAcceptedOrderCarPage from './pickAcceptedOrderCarPage';
+import {Route, Link,Switch} from 'react-router-dom'
 
+
+const { Header, Sider, Content } = Layout;
 
 export default class clerkPage extends Component {
   constructor(props) {
@@ -76,6 +81,18 @@ export default class clerkPage extends Component {
             data-seed="logId1"
           >
           <ViewAcceptedOrderPage />
+
+          <Layout>
+          <Content>
+          <Switch>
+            <Link path="/" exact component={ViewAcceptedOrderPage}></Link>
+            <Link path="/pickAcceptedOrderParkingLocationPage" component={pickAcceptedOrderParkingLocationPage}></Link>
+            <Link path="/pickAcceptedOrderCarPage/:id" component={pickAcceptedOrderCarPage}></Link>
+            <Link path="/pickAcceptedOrderCarPage" component={pickAcceptedOrderCarPage}></Link>
+
+          </Switch>
+          </Content>
+          </Layout>
           </TabBar.Item>
           <TabBar.Item
             icon={

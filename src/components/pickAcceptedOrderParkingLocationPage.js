@@ -34,7 +34,7 @@ class pickAcceptedOrderParkingLocationPage extends React.Component {
     console.log(this.state.data);
     return (
       <div>
-          <div className="am-list-header"><span><h1 style={{textAlign: "center",color: "white"}}><Icon type="left" style={{float: "left"}} onClick={()=>this.passLotID("")}/>停車地點</h1></span></div>
+          <div className="am-list-header"><span><h1 style={{textAlign: "center",color: "white"}}><Icon type="left" style={{float: "left", fontSize: "20px", paddingTop: "5px"}} onClick={()=>this.passLotID("")}/>停車地點</h1></span></div>
           <List component="nav" className={this.props.classes.root}>
           {
             this.state.data.map(each=><div>

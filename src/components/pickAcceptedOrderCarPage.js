@@ -8,44 +8,8 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import {Route, Link,Switch} from 'react-router-dom';
 import '../css/pickAcceptedOrderCarPage.css';
-// const styles = theme => ({
-//     root: {
-//       backgroundColor: theme.palette.background.paper,
-//     },
-//   });
-  
-//   function ListDividers(props) {
-//     const { classes } = props;
-//     return (
-//     <div>
-//         <div class="am-list-header"><span><h1 style={{textAlign: "center",color: "white"}}>停車地點</h1></span></div>
-// 	    <List>
-//             <List component="nav" className={classes.root}>
-//                 <ListItem button>
-//                     if(this.props.lotID != "")
-//                         <ListItemText primary={this.props.match.params.lotID} />
-//                     else
-//                         <ListItemText primary="選擇停車場" />
-//                 </ListItem>
-//             </List>
-//         </List>
-//         <br />
-//         <br />
-//         <br />
-//         <br />
-//         <br />
-//         <div>
-//             <Button type="primary" >完成訂單</Button><WhiteSpace />
-//         </div>
-//     </div>
-//     );
-//   }
-  
-//   ListDividers.propTypes = {
-//     classes: PropTypes.object.isRequired,
-//   };
-  
-//   export default withStyles(styles)(ListDividers)
+import viewAllOrderPage from './viewAllOrderPage';
+
 
   const styles = theme => ({
     root: {
@@ -54,19 +18,41 @@ import '../css/pickAcceptedOrderCarPage.css';
   });
   class pickAcceptedOrderCarPage extends React.Component {
     state = {
-      data: []
-    
+      lotID: [],
+      orderID: 6
     }
-    routeChange = (user) => {
-          this.props.history.push('/pickAcceptedOrderParkingLocationPage');
-      }
+    componentDidMount() {
+      this.setState({lotID: this.props.match.params.id});
+    }
+    routeChange = () => {
+      this.props.history.push('/pickAcceptedOrderCarPage/pickAcceptedOrderParkingLocationPage');
+    }
+    checkOrder = (orderID) => {
+        if(this.state.lotID > 0) {
+          fetch('https://parkingsystem.herokuapp.com/parkinglots/1/orders',{
+          mode: 'cors',
+          method: 'POST',
+          body: JSON.stringify({
+          "parkingOrderId" : orderID
+          }),
+          headers: new Headers({ 'Content-Type': 'application/json'})
+          })
+          .then(results => results.json())
+          .then(res => {
+          });
+          alert("完成泊車");
+          this.props.history.push('/viewAcceptedOrderPage');
+        }
+        else {
+          alert("請先選擇停車場");
+        }
+    }
+
     render() {
       
       let listItem;
-      console.log("****" + this.props.match.params.id);
-      let data = this.props.match.params.id;
-      if(data != undefined) {
-        listItem = <ListItemText primary={"選擇了: " + data} />
+      if(this.state.lotID != undefined) {
+        listItem = <ListItemText primary={"選擇了: " + this.state.lotID} />
         }
         else {
         listItem =<ListItemText primary="選擇停車場" />
@@ -96,7 +82,7 @@ import '../css/pickAcceptedOrderCarPage.css';
         <br />
         <br />
         <div>
-            <Button type="primary" >完成訂單</Button><WhiteSpace />
+            <Button type="primary" onClick={()=>{this.checkOrder(this.state.orderID)}}>完成訂單</Button><WhiteSpace />
         </div>
         </div>
       );
