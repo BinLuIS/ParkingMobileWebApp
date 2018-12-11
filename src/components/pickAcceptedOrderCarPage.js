@@ -9,7 +9,8 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import {Route, Link,Switch} from 'react-router-dom';
 import '../css/pickAcceptedOrderCarPage.css';
-import viewAllOrderPage from './viewAllOrderPage';
+import Typography from '@material-ui/core/Typography';
+import Divider from '@material-ui/core/Divider';
 
 
   const styles = theme => ({
@@ -57,36 +58,35 @@ import viewAllOrderPage from './viewAllOrderPage';
         listItem =<ListItemText primary="選擇停車場" />
         }
       return (
-        <div>
-        <div className="am-list-header"><span><h1 style={{textAlign: "center",color: "white"}}><Icon type="left" style={{float: "left", fontSize: "20px", paddingTop: "5px"}} onClick={()=>this.props.onChangePage("viewAcceptedOrderPage")}/>停車地點</h1></span></div>
-        {/* <Layout>
-        <Content>
-          <Switch>
-            <Route path="/" exact component={pickAcceptedOrderCarPage}></Route>
-            <Route path="/pickAcceptedOrderParkingLocationPage" component={pickAcceptedOrderParkingLocationPage}></Route>
-          </Switch>
-        </Content>
-      </Layout> */}
+      //   <div>
+      //   <div className="am-list-header">
+      //   <span><h1 style={{textAlign: "center",color: "white"}}><Icon type="left" style={{float: "left", fontSize: "20px", paddingTop: "5px"}} onClick={()=>this.props.onChangePage("viewAcceptedOrderPage")}/>停車地點</h1></span></div>
 
-	    <List>
-            <List component="nav" className={this.props.classes.root}>
+        <div>
+          <Typography variant="h5" className={this.props.title} style={{background:"#1B82D2"}}>
+              <h5 style={{textAlign:"center", color: "white", padding: "20px 20px", margin: "0px 0px 0px 0px"}}><Icon type="left" style={{float: "left", fontSize: "20px", paddingTop: "5px"}} onClick={()=>this.props.onChangePage("viewAcceptedOrderPage")}/>停車地點</h5>
+          </Typography>
+            <List>
+              <List component="nav" className={this.props.classes.root}>
                 <ListItem button onClick={this.routeChange} >
                     {listItem}
                 </ListItem>
+                <Divider />
+              </List>
             </List>
-        </List>
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <div>
-            <Button type="primary" onClick={()=>{this.checkOrder(this.props.orderID)}}>完成訂單</Button><WhiteSpace />
-        </div>
+            <br />
+           <br />
+            <br />
+           <br />
+           <br />
+            <div>
+             <Button type="primary" onClick={()=>{this.checkOrder(this.props.orderID)}}>完成訂單</Button><WhiteSpace />
+            </div>
         </div>
       );
     }
   }
+            
   
   
   export default withStyles(styles)(pickAcceptedOrderCarPage)
