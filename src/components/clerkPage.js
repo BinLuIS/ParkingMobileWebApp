@@ -7,8 +7,8 @@ import ViewAllOrderPage from './viewAllOrderPage';
 import ViewAcceptedOrderPage from './viewAcceptedOrderPage';
 import ViewHistoryOrderPage from './viewHistoryOrderPage';
 import ViewPersonalPage from './viewPersonalPage';
-import pickAcceptedOrderParkingLocationPage from './pickAcceptedOrderParkingLocationPage';
-import pickAcceptedOrderCarPage from './pickAcceptedOrderCarPage';
+import PickAcceptedOrderParkingLocationPage from './pickAcceptedOrderParkingLocationPage';
+import PickAcceptedOrderCarPage from './pickAcceptedOrderCarPage';
 import {Route, Link,Switch} from 'react-router-dom'
 
 
@@ -20,11 +20,23 @@ export default class clerkPage extends Component {
     this.state = {
       selectedTab: 'blueTab',
       hidden: false,
+      secondTabPage: "viewAcceptedOrderPage",
+      lotID: -1,
+      orderID: -1
     };
     
   }
   
-
+  renderContent(pageName) {
+    switch (pageName) {
+      case "viewAcceptedOrderPage":
+        return <ViewAcceptedOrderPage onChangeOrderID={(id) => {this.setState({orderID: id})}} onChangePage={(page) => {this.setState({secondTabPage: page})}}/>
+      case "pickAcceptedOrderCarPage":
+        return <PickAcceptedOrderCarPage lotID={this.state.lotID} orderID={this.state.orderID} onChangePage={(page) => {this.setState({secondTabPage: page})}}/>
+      case "pickAcceptedOrderParkingLocationPage":
+        return <PickAcceptedOrderParkingLocationPage onChangeLotID={(id) => {this.setState({lotID: id})}} onChangePage={(page) => {this.setState({secondTabPage: page})}}/>
+    }
+  }
   render() {
     return (
       <div style={{ position: 'fixed', height: '100%', width: '100%', top: 0 }}>
@@ -80,19 +92,10 @@ export default class clerkPage extends Component {
             }}
             data-seed="logId1"
           >
-          <ViewAcceptedOrderPage />
-
-          <Layout>
-          <Content>
-          <Switch>
-            <Link path="/" exact component={ViewAcceptedOrderPage}></Link>
-            <Link path="/pickAcceptedOrderParkingLocationPage" component={pickAcceptedOrderParkingLocationPage}></Link>
-            <Link path="/pickAcceptedOrderCarPage/:id" component={pickAcceptedOrderCarPage}></Link>
-            <Link path="/pickAcceptedOrderCarPage" component={pickAcceptedOrderCarPage}></Link>
-
-          </Switch>
-          </Content>
-          </Layout>
+          
+          {/* <ViewAcceptedOrderPage /> */}
+          {this.renderContent(this.state.secondTabPage)}
+          {/* <ViewAcceptedOrderPage showPage={this.state.secondTabPage} onChangePage={(page) => {this.setState({secondTabPage: page})}}/> */}
           </TabBar.Item>
           <TabBar.Item
             icon={

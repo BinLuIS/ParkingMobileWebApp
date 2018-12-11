@@ -51,10 +51,17 @@ export default class viewAcceptedOrderPage extends Component {
     })
 
        }    
+    // renderComponent(comp) {
+    //     return {comp}
+    // }
 
+    // renderPage = () => {
+
+    //     renderComponent(this.props.showPage)
+    // }
     getAction=(order)=>{
         if(order.status=='accepted'){
-            return <div style={{marginTop: '40px', fontSize: '20px'}}>泊車 <Icon type="right" width ="20px" height ="20px" /></div>
+            return <div style={{marginTop: '40px', fontSize: '20px'}} onClick={()=>{this.props.onChangePage("pickAcceptedOrderCarPage");this.props.onChangeOrderID(order.id);}}>泊車 <Icon type="right" width ="20px" height ="20px" /></div>
         }else if(order.status=='pendingFetching'){
             return <div style={{marginTop: '40px', fontSize: '20px'}} onClick={()=>this.fetchCar(order)}>取車 <Icon type="right" width ="20px" height ="20px" /></div>
         }
@@ -64,7 +71,7 @@ export default class viewAcceptedOrderPage extends Component {
   
       return (
           <List renderHeader={() => <span><h1 style={{textAlign:"center", color: "white"}}>處理訂單</h1></span>}>
-          {this.state.data.map(each=>
+            {this.state.data.map(each=>
             <List.Item>
                 <div style={{ padding: '0 15px', display: "flex", justifyContent: 'space-between'}}>
                 <div style={{ display: 'flex', padding: '15px 0' }}>
@@ -78,7 +85,6 @@ export default class viewAcceptedOrderPage extends Component {
             </div>
             </List.Item>
             )}
-            
           </List>
       );
     }

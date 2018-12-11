@@ -1,6 +1,7 @@
 // import React, { Component } from 'react';
 import {WhiteSpace, Button } from 'antd-mobile';
 import React from 'react';
+import { Icon } from 'antd';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
@@ -18,17 +19,13 @@ import viewAllOrderPage from './viewAllOrderPage';
   });
   class pickAcceptedOrderCarPage extends React.Component {
     state = {
-      lotID: [],
-      orderID: 6
-    }
-    componentDidMount() {
-      this.setState({lotID: this.props.match.params.id});
     }
     routeChange = () => {
-      this.props.history.push('/pickAcceptedOrderCarPage/pickAcceptedOrderParkingLocationPage');
+      // this.props.history.push('/pickAcceptedOrderCarPage/pickAcceptedOrderParkingLocationPage');
+      this.props.onChangePage("pickAcceptedOrderParkingLocationPage");
     }
     checkOrder = (orderID) => {
-        if(this.state.lotID > 0) {
+        if(this.props.lotID > 0) {
           fetch('https://parkingsystem.herokuapp.com/parkinglots/1/orders',{
           mode: 'cors',
           method: 'POST',
@@ -51,15 +48,16 @@ import viewAllOrderPage from './viewAllOrderPage';
     render() {
       
       let listItem;
-      if(this.state.lotID != undefined) {
-        listItem = <ListItemText primary={"選擇了: " + this.state.lotID} />
+      console.log(this.props.lotID);
+      if(this.props.lotID != -1 && this.props.lotID !== undefined) {
+        listItem = <ListItemText primary={"選擇了: " + this.props.lotID} />
         }
         else {
         listItem =<ListItemText primary="選擇停車場" />
         }
       return (
         <div>
-        <div className="am-list-header"><span><h1 style={{textAlign: "center",color: "white"}}>停車地點</h1></span></div>
+        <div className="am-list-header"><span><h1 style={{textAlign: "center",color: "white"}}><Icon type="left" style={{float: "left", fontSize: "20px", paddingTop: "5px"}} onClick={()=>this.props.onChangePage("viewAcceptedOrderPage")}/>停車地點</h1></span></div>
         {/* <Layout>
         <Content>
           <Switch>
@@ -82,7 +80,7 @@ import viewAllOrderPage from './viewAllOrderPage';
         <br />
         <br />
         <div>
-            <Button type="primary" onClick={()=>{this.checkOrder(this.state.orderID)}}>完成訂單</Button><WhiteSpace />
+            <Button type="primary" onClick={()=>{this.checkOrder(this.props.orderID)}}>完成訂單</Button><WhiteSpace />
         </div>
         </div>
       );
