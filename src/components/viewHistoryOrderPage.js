@@ -8,14 +8,17 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Divider from '@material-ui/core/Divider';
-
+import {PullToRefresh, PullDownContent, ReleaseContent, RefreshContent} from "react-js-pull-to-refresh";
 export default class viewHistoryOrderPage extends Component {
     state={
         data:[]
     }
     
     componentDidMount() {
-        fetch('https://parkingsystem.herokuapp.com/parkingclerks/1/orders?status=completed')
+        this.getHistoryOrder();
+    }
+    getHistoryOrder=()=>{
+      fetch('https://parkingsystem.herokuapp.com/parkingclerks/1/orders?status=completed')
         .then(results => results.json())
         .then(res => {
           this.setState({data:res})
@@ -23,7 +26,12 @@ export default class viewHistoryOrderPage extends Component {
           console.log(this.state.data);
         });
     }
-
+    onPullList=()=> {
+      return new Promise((resolve) => {
+          setTimeout(this.getHistoryOrder(), 2000);
+          resolve();
+      });
+    }
     render() {
   
       return (
@@ -48,6 +56,15 @@ export default class viewHistoryOrderPage extends Component {
             <Typography variant="h5" className={this.props.title} style={{background:"#1B82D2"}}>
                 <h5 style={{textAlign:"center", color: "white", padding: "20px 20px", margin: "0px 0px 0px 0px"}}>歷史訂單</h5>
             </Typography>
+            <PullToRefresh
+                pullDownContent={<PullDownContent />}
+                releaseContent={<ReleaseContent />}
+                refreshContent={<RefreshContent />}
+                pullDownThreshold={150}
+                onRefresh={this.onPullList} 
+                triggerHeight={300}
+                backgroundColor='white'
+                >
             <List dense className={this.props.root}>
               {this.state.data.map(each => (
                   <div>
@@ -64,6 +81,7 @@ export default class viewHistoryOrderPage extends Component {
                 </div>
               ))}
             </List>
+            </PullToRefresh>
         </div>
       );
     }

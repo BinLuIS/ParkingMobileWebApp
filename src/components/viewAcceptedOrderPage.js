@@ -8,17 +8,17 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Divider from '@material-ui/core/Divider';
-
+import {PullToRefresh, PullDownContent, ReleaseContent, RefreshContent} from "react-js-pull-to-refresh";
 export default class viewAcceptedOrderPage extends Component {
     state={
         data:[]
     }
     
     componentDidMount() {
-        this.getOrder();
+        this.getAcceptedOrder();
     }
 
-    getOrder=()=>{
+    getAcceptedOrder=()=>{
         fetch('https://parkingsystem.herokuapp.com/parkingclerks/1/orders?status=accepted,parked,pendingFetching')
         .then(results => results.json())
         .then(res => {
@@ -50,13 +50,18 @@ export default class viewAcceptedOrderPage extends Component {
             }).then(res => res.json())
      .then(res => {
         Toast.success('完成訂單', 1.5);
-      this.getOrder();
+      this.getAcceptedOrder();
      })
     }
     })
 
     } 
-    
+    onPullList=()=> {
+        return new Promise((resolve) => {
+            setTimeout(this.getAcceptedOrder(), 2000);
+            resolve();
+        });
+    }
     getParkingLot=(order)=>{
         console.log(order)
         if(order.status=='pendingFetching'){
@@ -99,6 +104,15 @@ export default class viewAcceptedOrderPage extends Component {
             <Typography variant="h5" className={this.props.title} style={{background:"#1B82D2"}}>
                 <h5 style={{textAlign:"center", color: "white", padding: "20px 20px", margin: "0px 0px 0px 0px"}}>處理訂單</h5>
             </Typography>
+            <PullToRefresh
+                pullDownContent={<PullDownContent />}
+                releaseContent={<ReleaseContent />}
+                refreshContent={<RefreshContent />}
+                pullDownThreshold={150}
+                onRefresh={this.onPullList} 
+                triggerHeight={300}
+                backgroundColor='white'
+                >
             <List dense className={this.props.root}>
               {this.state.data.map(each => (<div>
                 <ListItem key={each} button style={{background: "white"}}>
@@ -117,6 +131,7 @@ export default class viewAcceptedOrderPage extends Component {
                 </div>
               ))}
             </List>
+            </PullToRefresh>
         </div>
       );
     }
