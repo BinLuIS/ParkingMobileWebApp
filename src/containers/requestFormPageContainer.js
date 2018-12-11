@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Toast } from 'antd-mobile';
 import { connect } from "react-redux"
 import requestFormPage from '../components/requestFormPage'
 
@@ -19,7 +20,7 @@ const mapDispatchToProps =(dispatch) => ({
      body: JSON.stringify(newOrderRequestItem)
    }).then(res => res.json())
    .then(res => {
-    alert("成功申請")
+    Toast.success("成功申請泊車",1.5);
      dispatch({
        type: "ADD_NEW_ORDER_REQUEST",
        payload: {
@@ -52,7 +53,7 @@ const mapDispatchToProps =(dispatch) => ({
    body: JSON.stringify(newOrderRequestItem)
  }).then(res => res.json())
  .then(res => {
-  alert("成功申請")
+  Toast.success("成功申請取車",1.5);
    dispatch({
      type: "ADD_NEW_ORDER_REQUEST",
      payload: {
@@ -65,7 +66,7 @@ const mapDispatchToProps =(dispatch) => ({
  })
 }
 else{
-  alert("車子不在停車場")
+  Toast.fail("車子不在停車場",1.5);
 }
 })
    }

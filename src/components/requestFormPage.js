@@ -2,7 +2,6 @@ import { List, InputItem, WhiteSpace, Button,Toast } from 'antd-mobile';
 import React, { Component } from 'react';
 import  { Router } from 'react-router';
 import SloganPage from './sloganPage';
-// import ToastComponent from './toastComponent';
 
 export default class requestFormPage extends Component {
   
@@ -13,8 +12,7 @@ export default class requestFormPage extends Component {
     this.props.addNewOrderRequest(carnum.state.value)
     carnum.setState({value: ''});
     name.setState({value: ''});
-    Toast.success("success",100);
-    // <toastComponent type="success" alertText="Yes" />
+    
   }
   onFetch = () => {
     const {name,carnum} = this.refs
@@ -23,7 +21,6 @@ export default class requestFormPage extends Component {
     this.props.addNewFetchRequest(carnum.state.value)
     carnum.setState({value: ''});
     name.setState({value: ''});
-    // <toastComponent type="success" alertText="Yes" />
   }
   render() {
 
