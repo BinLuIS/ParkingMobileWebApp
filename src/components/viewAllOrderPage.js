@@ -14,24 +14,30 @@ import Checkbox from '@material-ui/core/Checkbox';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
+import {PullToRefresh, PullDownContent, ReleaseContent, RefreshContent} from "react-js-pull-to-refresh";
 
 export default class viewAllOrderPage extends Component {
-    state={
-        data:[]
+    constructor() {
+        super();
+        this.state={
+            data:[]
+        }
     }
+    
     
     componentDidMount() {
         this.getAllOrder()
     }
 
     getAllOrder=()=>{
-        fetch('https://parkingsystem.herokuapp.com/orders?status=pendingParking')
+            fetch('https://parkingsystem.herokuapp.com/orders?status=pendingParking')
         .then(results => results.json())
         .then(res => {
           this.setState({data:res})
           console.log(res);
           console.log(this.state.data);
         });
+        
     }
     grabOrder=(order)=>{
         fetch('https://parkingsystem.herokuapp.com/parkingclerks/1/orders',{
@@ -49,18 +55,36 @@ export default class viewAllOrderPage extends Component {
         });
     }
     
+    onPullList=()=> {
+        return new Promise((resolve) => {
+            setTimeout(this.getAllOrder(), 2000);
+            resolve();
+        });
+    }
+        
 
     render() {
         
         return (
             <div>
+            
             <Typography variant="h5" className={this.props.title} style={{background:"#1B82D2"}}>
                 <h5 style={{textAlign:"center", color: "white", padding: "20px 20px", margin: "0px 0px 0px 0px"}}>訂單</h5>
             </Typography>
+            <PullToRefresh
+                pullDownContent={<PullDownContent />}
+                releaseContent={<ReleaseContent />}
+                refreshContent={<RefreshContent />}
+                pullDownThreshold={150}
+                onRefresh={this.onPullList} 
+                triggerHeight={300}
+                backgroundColor='white'
+                >
             <List dense className={this.props.root}>
               {this.state.data.map(each => (
                 <div>
-                <ListItem key={each} button style={{background: "white"}} onClick={()=>this.grabOrder(each)}>
+                <ListItem 
+                key={each} button style={{background: "white"}} onClick={()=>this.grabOrder(each)}>
                   <ListItemAvatar>
                     <Avatar
                       src={require('../icon/caricon.png')}
@@ -74,6 +98,7 @@ export default class viewAllOrderPage extends Component {
                 </div>
               ))}
             </List>
+            </PullToRefresh>
             </div>
     
       );
