@@ -1,5 +1,5 @@
 import { TabBar, ListView } from 'antd-mobile';
-import { Icon } from 'antd';
+import {Layout, Icon } from 'antd';
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom';
 import '../css/clerkPage.css';
@@ -7,19 +7,34 @@ import ViewAllOrderPage from './viewAllOrderPage';
 import ViewAcceptedOrderPage from './viewAcceptedOrderPage';
 import ViewHistoryOrderPage from './viewHistoryOrderPage';
 import ViewPersonalPage from './viewPersonalPage';
+import PickAcceptedOrderParkingLocationPage from './pickAcceptedOrderParkingLocationPage';
+import PickAcceptedOrderCarPage from './pickAcceptedOrderCarPage';
 
 
 export default class clerkPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedTab: 'blueTab',
+      selectedPage: 'viewAllOrderPage',
       hidden: false,
+      secondTabSelectedPage: "viewAcceptedOrderPage",
+      lotID: -1,
+      orderID: -1,
+      lotName: ""
     };
     
   }
   
-
+  renderContent(pageName) {
+    switch (pageName) {
+      case "viewAcceptedOrderPage":
+        return <ViewAcceptedOrderPage onChangeOrderID={(id) => {this.setState({orderID: id})}} onChangePage={(page) => {this.setState({secondTabSelectedPage: page})}}/>
+      case "pickAcceptedOrderCarPage":
+        return <PickAcceptedOrderCarPage lotName={this.state.lotName} lotID={this.state.lotID} orderID={this.state.orderID} onChangePage={(page) => {this.setState({secondTabSelectedPage: page})}}/>
+      case "pickAcceptedOrderParkingLocationPage":
+        return <PickAcceptedOrderParkingLocationPage onChangeLotID={(id,name) => {this.setState({lotID: id,lotName:name})}} onChangePage={(page) => {this.setState({secondTabSelectedPage: page})}}/>
+    }
+  }
   render() {
     return (
       <div style={{ position: 'fixed', height: '100%', width: '100%', top: 0 }}>
@@ -46,11 +61,11 @@ export default class clerkPage extends Component {
             selectedIcon={
               <Icon type="profile" theme="filled" />
             }
-            selected={this.state.selectedTab === 'blueTab'}
+            selected={this.state.selectedPage === 'viewAllOrderPage'}
             // badge={1}
             onPress={() => {
               this.setState({
-                selectedTab: 'blueTab',
+                selectedPage: 'viewAllOrderPage',
               });
             }}
             data-seed="logId"
@@ -67,15 +82,17 @@ export default class clerkPage extends Component {
             title="停取"
             key="getOrder"
             // badge={'123'}
-            selected={this.state.selectedTab === 'redTab'}
+            selected={this.state.selectedPage === 'viewAcceptedOrderPage'}
             onPress={() => {
               this.setState({
-                selectedTab: 'redTab',
+                selectedPage: 'viewAcceptedOrderPage',
               });
             }}
             data-seed="logId1"
           >
-          <ViewAcceptedOrderPage />
+          
+          {this.renderContent(this.state.secondTabSelectedPage)}
+
           </TabBar.Item>
           <TabBar.Item
             icon={
@@ -87,10 +104,10 @@ export default class clerkPage extends Component {
             title="歷史"
             key="history"
             // dot
-            selected={this.state.selectedTab === 'greenTab'}
+            selected={this.state.selectedPage === 'viewHistoryOrderPage'}
             onPress={() => {
               this.setState({
-                selectedTab: 'greenTab',
+                selectedPage: 'viewHistoryOrderPage',
               });
             }}
           >
@@ -105,10 +122,10 @@ export default class clerkPage extends Component {
             }
             title="個人"
             key="personal"
-            selected={this.state.selectedTab === 'yellowTab'}
+            selected={this.state.selectedPage === 'viewPersonalPage'}
             onPress={() => {
               this.setState({
-                selectedTab: 'yellowTab',
+                selectedPage: 'viewPersonalPage',
               });
             }}
           >

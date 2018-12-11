@@ -1,6 +1,7 @@
 import { List, InputItem, WhiteSpace, Button } from 'antd-mobile';
 import React, { Component } from 'react';
 import  { Router } from 'react-router';
+import SloganPage from './sloganPage';
 
 export default class requestFormPage extends Component {
   
@@ -26,19 +27,24 @@ export default class requestFormPage extends Component {
 
     return (
       <div>
-        <List renderHeader={() => <span><h1 style={{textAlign:"center", color: "white"}}>申請停車</h1></span>}>
-          <InputItem ref='name' style={{ padding: "50px" }}>
-          <p style={{ color: "#1890ff" }}>姓名 </p>
-          </InputItem>
-          <InputItem ref='carnum' style={{ padding: "50px" }}>
-          <p style={{ color: "#1890ff" }}>車牌號碼 </p>
-          </InputItem>
-        </List>
-        <br />
+        <div style={{background: 'black'}}>
+          <SloganPage />
+        </div>
         <div>
-          <Button type="primary" onClick={this.onAdded}>泊車</Button><WhiteSpace />
-          <Button type="primary" onClick={this.onFetch}>取車</Button><WhiteSpace />
-        
+          <List renderHeader={() => <span><h1 style={{textAlign:"center", color: "white"}}>申請停車</h1></span>}>
+            <InputItem ref='name' style={{ padding: "50px" }}>
+            <p style={{ color: "#1890ff" }}>姓名 </p>
+            </InputItem>
+            <InputItem ref='carnum' style={{ padding: "50px" }}>
+            <p style={{ color: "#1890ff" }}>車牌號碼 </p>
+            </InputItem>
+          </List>
+          <br />
+          <div>
+            <Button type="primary" onClick={this.onAdded}>泊車</Button><WhiteSpace />
+            <Button type="primary" onClick={this.onFetch}>取車</Button><WhiteSpace />
+          
+          </div>
         </div>
       </div>
     );

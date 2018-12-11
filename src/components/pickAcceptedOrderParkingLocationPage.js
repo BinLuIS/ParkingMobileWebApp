@@ -19,14 +19,19 @@ class pickAcceptedOrderParkingLocationPage extends React.Component {
     data: []
 
   }
-  passLotID = (lotID)=>{
-    this.props.history.push('/pickAcceptedOrderCarPage/'+lotID);
+
+
+  passLotID = (lotID,name)=>{
+    // this.props.history.push('/pickAcceptedOrderCarPage/'+lotID);
+    this.props.onChangePage("pickAcceptedOrderCarPage");
+    this.props.onChangeLotID(lotID,name);
   }
   componentDidMount(){
 		fetch('https://parkingsystem.herokuapp.com/parkingclerks/'+"1"+"/parkinglots")
 		.then(results => results.json())
 		.then(res => {
-      this.setState({data:res});
+      let lots=res.filter(each=> each.availableCapacity>0)
+      this.setState({data:lots});
     });
 
 	}
@@ -34,11 +39,11 @@ class pickAcceptedOrderParkingLocationPage extends React.Component {
     console.log(this.state.data);
     return (
       <div>
-          <div className="am-list-header"><span><h1 style={{textAlign: "center",color: "white"}}><Icon type="left" style={{float: "left"}} onClick={()=>this.passLotID("")}/>停車地點</h1></span></div>
+          <div className="am-list-header"><span><h1 style={{textAlign: "center",color: "white"}}><Icon type="left" style={{float: "left", fontSize: "20px", paddingTop: "5px"}} onClick={()=>this.passLotID(this.props.lotID,this.props.lotName)}/>停車地點</h1></span></div>
           <List component="nav" className={this.props.classes.root}>
           {
             this.state.data.map(each=><div>
-          <ListItem button onClick={()=>this.passLotID(each.id)}> 
+          <ListItem button onClick={()=>this.passLotID(each.id,each.name)}> 
               <ListItemText primary= {each.name + " (" + each.availableCapacity + ")" }/>
           </ListItem>
           <Divider />

@@ -6,7 +6,7 @@ import clerkPage from './components/clerkPage';
 import requestFormPage from './containers/requestFormPageContainer';
 import pickAcceptedOrderParkingLocationPage from './components/pickAcceptedOrderParkingLocationPage';
 import pickAcceptedOrderCarPage from './components/pickAcceptedOrderCarPage';
-
+import viewAcceptedOrderPage from './components/viewAcceptedOrderPage';
 
 const { Header, Sider, Content } = Layout;
 class App extends Component {
@@ -19,7 +19,9 @@ class App extends Component {
             <Route path="/" exact component={()=><h1>home page</h1>}></Route>
             <Route path="/requestFormPage" component={requestFormPage}></Route>
             <Route path="/clerkPage" component={clerkPage}></Route>
-            <Route path="/pickAcceptedOrderParkingLocationPage" component={pickAcceptedOrderParkingLocationPage}></Route>
+            <Route path="/viewAcceptedOrderPage" component={viewAcceptedOrderPage}></Route>
+            <Route path="/pickAcceptedOrderCarPage/pickAcceptedOrderParkingLocationPage" component={pickAcceptedOrderParkingLocationPage}></Route>
+            
             <Route path="/pickAcceptedOrderCarPage/:id" component={pickAcceptedOrderCarPage}></Route>
             <Route path="/pickAcceptedOrderCarPage" component={pickAcceptedOrderCarPage}></Route>
 
