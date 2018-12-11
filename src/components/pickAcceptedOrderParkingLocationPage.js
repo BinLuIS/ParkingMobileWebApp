@@ -7,7 +7,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
 import '../css/pickAcceptedOrderParkingLocationPage.css';
-
+import Typography from '@material-ui/core/Typography';
 
 const styles = theme => ({
   root: {
@@ -30,6 +30,7 @@ class pickAcceptedOrderParkingLocationPage extends React.Component {
 		fetch('https://parkingsystem.herokuapp.com/parkingclerks/'+"1"+"/parkinglots")
 		.then(results => results.json())
 		.then(res => {
+      console.log(res);
       let lots=res.filter(each=> each.availableCapacity>0)
       this.setState({data:lots});
     });
@@ -39,23 +40,23 @@ class pickAcceptedOrderParkingLocationPage extends React.Component {
     console.log(this.state.data);
     return (
       <div>
-          <div className="am-list-header"><span><h1 style={{textAlign: "center",color: "white"}}><Icon type="left" style={{float: "left", fontSize: "20px", paddingTop: "5px"}} onClick={()=>this.passLotID(this.props.lotID,this.props.lotName)}/>停車地點</h1></span></div>
-          <List component="nav" className={this.props.classes.root}>
-          {
-            this.state.data.map(each=><div>
-          <ListItem button onClick={()=>this.passLotID(each.id,each.name)}> 
-              <ListItemText primary= {each.name + " (" + each.availableCapacity + ")" }/>
-          </ListItem>
-          <Divider />
-          </div>)
-          }
-          <Divider light />
-          </List>
-      </div> 
+          <Typography variant="h5" className={this.props.title} style={{background:"#1B82D2"}}>
+              <h5 style={{textAlign:"center", color: "white", padding: "20px 20px", margin: "0px 0px 0px 0px"}}><Icon type="left" style={{float: "left", fontSize: "20px", paddingTop: "5px"}} onClick={()=>this.passLotID(this.props.lotID,this.props.lotName)}/>停車地點</h5>
+          </Typography>
+            <List>
+            {
+              this.state.data.map(each=><div>
+              <ListItem style={{background: "white"}} button onClick={()=>this.passLotID(each.id,each.name)}> 
+                  <ListItemText primary= {each.name + " (" + each.availableCapacity + ")" }/>
+              </ListItem>
+              <Divider />
+              </div>)
+            }
+            </List>
+        </div>
     );
   }
 }
-
 
 export default withStyles(styles)(pickAcceptedOrderParkingLocationPage)
 
