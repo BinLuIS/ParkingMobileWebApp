@@ -1,4 +1,4 @@
-import { TabBar, ListView,List } from 'antd-mobile';
+import { List, Toast} from 'antd-mobile';
 import { Icon } from 'antd';
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom';
@@ -44,7 +44,7 @@ export default class viewAcceptedOrderPage extends Component {
             body: JSON.stringify(fetchCarItem)
             }).then(res => res.json())
      .then(res => {
-      alert("訂單完成")
+        Toast.success('完成訂單', 1.5);
       this.getOrder();
      })
     }

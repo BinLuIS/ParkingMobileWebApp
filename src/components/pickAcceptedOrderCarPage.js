@@ -1,5 +1,5 @@
-// import React, { Component } from 'react';
-import {WhiteSpace, Button } from 'antd-mobile';
+
+import {InputItem, WhiteSpace, Button,Toast } from 'antd-mobile';
 import React from 'react';
 import { Icon } from 'antd';
 import PropTypes from 'prop-types';
@@ -37,11 +37,11 @@ import viewAllOrderPage from './viewAllOrderPage';
           .then(results => results.json())
           .then(res => {
           });
-          alert("完成泊車");
+          Toast.success('完成泊車', 1.5);
           this.props.onChangePage("viewAcceptedOrderPage");
         }
         else {
-          alert("請先選擇停車場");
+          Toast.info("請先選擇停車場",1.5);
         }
     }
 
