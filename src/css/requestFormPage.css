@@ -8,4 +8,6 @@
   padding-left: 15px;
   padding-bottom: -15px;
 }
-
+.am-whitespace.am-whitespace-lg {
+  height: 0px;
+}

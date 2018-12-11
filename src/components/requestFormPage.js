@@ -26,11 +26,8 @@ export default class requestFormPage extends Component {
   render() {
 
     return (
-      <div>
-        <div style={{background: 'black'}}>
-          <SloganPage />
-        </div>
         <div>
+          <SloganPage />
           <List renderHeader={() => <span><h1 style={{textAlign:"center", color: "white"}}>申請停車</h1></span>}>
             <InputItem ref='name' style={{ padding: "50px" }}>
             <p style={{ color: "#1890ff" }}>姓名 </p>
@@ -43,10 +40,9 @@ export default class requestFormPage extends Component {
           <div>
             <Button type="primary" onClick={this.onAdded}>泊車</Button><WhiteSpace />
             <Button type="primary" onClick={this.onFetch}>取車</Button><WhiteSpace />
-          
           </div>
         </div>
-      </div>
     );
   }
 }
+
