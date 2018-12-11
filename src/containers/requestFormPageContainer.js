@@ -20,7 +20,7 @@ const mapDispatchToProps =(dispatch) => ({
      body: JSON.stringify(newOrderRequestItem)
    }).then(res => res.json())
    .then(res => {
-    Toast.success("成功申請泊車",1.5);
+    Toast.success("成功申請泊車",3);
      dispatch({
        type: "ADD_NEW_ORDER_REQUEST",
        payload: {
@@ -30,7 +30,11 @@ const mapDispatchToProps =(dispatch) => ({
          status: res.status
        }
      })
-   }) 
+   })
+   .catch((error) => {
+    console.log('error: ' + error);
+    Toast.fail("未能申請泊車, 請向管理員查詢",3);
+  }); 
    },
    addNewFetchRequest: newOrderRequest => {
     const newOrderRequestItem ={
@@ -53,7 +57,7 @@ const mapDispatchToProps =(dispatch) => ({
    body: JSON.stringify(newOrderRequestItem)
  }).then(res => res.json())
  .then(res => {
-  Toast.success("成功申請取車",1.5);
+  Toast.success("成功申請取車",3);
    dispatch({
      type: "ADD_NEW_ORDER_REQUEST",
      payload: {
@@ -64,9 +68,11 @@ const mapDispatchToProps =(dispatch) => ({
      }
    })
  })
+ 
+ 
 }
 else{
-  Toast.fail("車子不在停車場",1.5);
+  Toast.fail("車子不在停車場",3);
 }
 })
    }

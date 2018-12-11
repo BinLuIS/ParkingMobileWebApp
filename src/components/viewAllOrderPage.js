@@ -50,9 +50,13 @@ export default class viewAllOrderPage extends Component {
         })
         .then(results => results.json())
         .then(res => {
-            Toast.success('成功搶單', 1.5);
+            Toast.success('成功搶單', 3);
           this.getAllOrder();
-        });
+        })
+        .catch((error) => {
+            console.log('error: ' + error);
+            Toast.fail("搶單失敗, 請向管理員查詢",3);
+         });
     }
     
     onPullList=()=> {

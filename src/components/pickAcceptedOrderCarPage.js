@@ -38,11 +38,11 @@ import Divider from '@material-ui/core/Divider';
           .then(results => results.json())
           .then(res => {
           });
-          Toast.success('完成泊車', 1.5);
+          Toast.success('完成泊車', 3);
           this.props.onChangePage("viewAcceptedOrderPage");
         }
         else {
-          Toast.info("請先選擇停車場",1.5);
+          Toast.info("請先選擇停車場",3);
         }
     }
 

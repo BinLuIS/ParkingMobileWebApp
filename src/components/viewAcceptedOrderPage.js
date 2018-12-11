@@ -49,8 +49,12 @@ export default class viewAcceptedOrderPage extends Component {
             body: JSON.stringify(fetchCarItem)
             }).then(res => res.json())
      .then(res => {
-        Toast.success('完成訂單', 1.5);
+        Toast.success('完成訂單', 3);
       this.getAcceptedOrder();
+     })
+     .catch((error) => {
+        console.log('error: ' + error);
+        Toast.fail("未能完成訂單, 請向管理員查詢",3);
      })
     }
     })
@@ -79,7 +83,17 @@ export default class viewAcceptedOrderPage extends Component {
             return <div onClick={()=>this.fetchCar(order)}><span style={{verticalAlign: "baseline", fontSize: '15px'}}>取車 ></span></div>
         }
     }
-
+    getIcon = (order) => {
+        if(order.status=="parked"){
+            return <Avatar
+            src={require('../icon/parkicon.png')}
+            />
+        }else {
+            return <Avatar
+            src={require('../icon/caricon.png')}
+            />
+        }
+    }
     render() {
   
       return (
@@ -117,9 +131,10 @@ export default class viewAcceptedOrderPage extends Component {
               {this.state.data.map(each => (<div>
                 <ListItem key={each} button style={{background: "white"}}>
                   <ListItemAvatar>
-                    <Avatar
-                      src={require('../icon/caricon.png')}
-                    />
+                    {/* <Avatar
+                        src={require('../icon/caricon.png')}
+                    /> */}
+                    {this.getIcon(each)}
                   </ListItemAvatar>
                   <ListItemText style={{verticalAlign: "baseline" , fontSize: '15px'}} primary={each.carNumber} />
                   {/* <div onClick={()=>this.grabOrder(each)}><span style={{verticalAlign: "baseline", fontSize: '15px'}}>搶單 ></span></div> */}

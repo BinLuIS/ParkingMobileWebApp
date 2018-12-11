@@ -74,7 +74,7 @@ export default class viewHistoryOrderPage extends Component {
                       src={require('../icon/likeicon.png')}
                     />
                   </ListItemAvatar>
-                  <ListItemText style={{verticalAlign: "baseline" , fontSize: '15px'}} primary={each.carNumber} />
+                  <ListItemText style={{verticalAlign: "baseline" , fontSize: '15px'}} primary={"ID: " + each.id + " / Car No.: " + each.carNumber } />
                   {/* <div>停車時間: 17:00</div> */}
                 </ListItem>
                 <Divider />
