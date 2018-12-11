@@ -11,6 +11,7 @@ import {Route, Link,Switch} from 'react-router-dom';
 import '../css/pickAcceptedOrderCarPage.css';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
+import {checkParkingLotParkingOrder} from '../util/APIUtils'
 
 
   const styles = theme => ({
@@ -27,15 +28,16 @@ import Divider from '@material-ui/core/Divider';
     }
     checkOrder = (orderID) => {
         if(this.props.lotID > 0) {
-          fetch('https://parkingsystem.herokuapp.com/parkinglots/'+this.props.lotID+'/orders',{
-          mode: 'cors',
-          method: 'POST',
-          body: JSON.stringify({
-          "parkingOrderId" : orderID
-          }),
-          headers: new Headers({ 'Content-Type': 'application/json'})
-          })
-          .then(results => results.json())
+          // fetch('https://parkingsystem.herokuapp.com/parkinglots/'+this.props.lotID+'/orders',{
+          // mode: 'cors',
+          // method: 'POST',
+          // body: JSON.stringify({
+          // "parkingOrderId" : orderID
+          // }),
+          // headers: new Headers({ 'Content-Type': 'application/json'})
+          // })
+          // .then(results => results.json())
+          checkParkingLotParkingOrder(this.props.lotID,{"parkingOrderId" : orderID})
           .then(res => {
           });
           Toast.success('完成泊車', 1.5);

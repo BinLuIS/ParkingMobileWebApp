@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Toast } from 'antd-mobile';
 import { connect } from "react-redux"
 import requestFormPage from '../components/requestFormPage'
+import { addParkOrder, getOrderByCarNumber, changeOrderStatus } from '../util/APIUtils';
 
 const mapDispatchToProps =(dispatch) => ({
     addNewOrderRequest: newOrderRequest => {
@@ -11,14 +12,16 @@ const mapDispatchToProps =(dispatch) => ({
       }
       console.log(newOrderRequestItem)
      console.log(JSON.stringify(newOrderRequestItem))
-     fetch("https://parkingsystem.herokuapp.com/orders", {
-       method: 'POST', 
-       headers: new Headers({
-       'Content-Type': 'application/json'
-     }), 
-     mode: 'cors', 
-     body: JSON.stringify(newOrderRequestItem)
-   }).then(res => res.json())
+  //    fetch("https://parkingsystem.herokuapp.com/orders", {
+  //      method: 'POST', 
+  //      headers: new Headers({
+  //      'Content-Type': 'application/json'
+  //    }), 
+  //    mode: 'cors', 
+  //    body: JSON.stringify(newOrderRequestItem)
+  //  })
+  // .then(res => res.json())
+   addParkOrder(newOrderRequestItem)
    .then(res => {
     Toast.success("成功申請泊車",1.5);
      dispatch({
@@ -38,20 +41,22 @@ const mapDispatchToProps =(dispatch) => ({
       status: 'pendingFetching'
     }
     console.log(newOrderRequestItem)
-    fetch("https://parkingsystem.herokuapp.com/orders?carNumber="+newOrderRequest, {
-    mode: 'cors', 
-  }).then(res => res.json())
+  //   fetch("https://parkingsystem.herokuapp.com/orders?carNumber="+newOrderRequest, {
+  //   mode: 'cors', 
+  // }).then(res => res.json())
+  getOrderByCarNumber(newOrderRequest)
   .then(resp => {
     console.log(resp[0].status)
     if(resp.length>0 && resp[0].status=='parked'){
-    fetch("https://parkingsystem.herokuapp.com/orders/"+resp[0].id, {
-     method: 'PATCH', 
-     headers: new Headers({
-     'Content-Type': 'application/json'
-   }), 
-   mode: 'cors', 
-   body: JSON.stringify(newOrderRequestItem)
- }).then(res => res.json())
+//     fetch("https://parkingsystem.herokuapp.com/orders/"+resp[0].id, {
+//      method: 'PATCH', 
+//      headers: new Headers({
+//      'Content-Type': 'application/json'
+//    }), 
+//    mode: 'cors', 
+//    body: JSON.stringify(newOrderRequestItem)
+//  }).then(res => res.json())
+changeOrderStatus(resp[0].id,newOrderRequestItem)
  .then(res => {
   Toast.success("成功申請取車",1.5);
    dispatch({
