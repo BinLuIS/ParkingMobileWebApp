@@ -8,6 +8,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
 import '../css/pickAcceptedOrderParkingLocationPage.css';
 import Typography from '@material-ui/core/Typography';
+import {getParkingClerksParkinglot} from '../util/APIUtils'
 
 const styles = theme => ({
   root: {
@@ -27,8 +28,9 @@ class pickAcceptedOrderParkingLocationPage extends React.Component {
     this.props.onChangeLotID(lotID,name);
   }
   componentDidMount(){
-		fetch('https://parkingsystem.herokuapp.com/parkingclerks/'+"1"+"/parkinglots")
-		.then(results => results.json())
+    // fetch('https://parkingsystem.herokuapp.com/parkingclerks/'+"1"+"/parkinglots")
+		// .then(results => results.json())
+    getParkingClerksParkinglot("1")
 		.then(res => {
       console.log(res);
       let lots=res.filter(each=> each.availableCapacity>0)

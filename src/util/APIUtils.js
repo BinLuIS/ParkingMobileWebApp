@@ -1,4 +1,4 @@
-import { API_BASE_URL, POLL_LIST_SIZE, ACCESS_TOKEN } from '../constants';
+import { BASE_URL, API_BASE_URL, POLL_LIST_SIZE, ACCESS_TOKEN } from '../constants';
 
 const request = (options) => {
     const headers = new Headers({
@@ -63,4 +63,81 @@ export function getCurrentUser() {
         url: API_BASE_URL + "/user/me",
         method: 'GET'
     });
+}
+
+//requestFormPage
+export function addParkOrder(order){
+    return request({
+        url: BASE_URL + "/orders",
+        method: 'POST',
+        mode: 'cors', 
+        body: JSON.stringify(order)
+    });
+}
+
+//pickAcceptedOrderCarPage
+export function checkParkingLotParkingOrder(lotId,order){
+    return request({
+        url: BASE_URL + '/parkinglots/'+lotId+'/orders',
+        method: 'POST',
+        mode: 'cors', 
+        body: JSON.stringify(order)
+    });
+}
+
+//pickAcceptedOrderParkingLocationPage
+export function getParkingClerksParkinglot(parkingClerkId){
+    return request({
+        url: BASE_URL + '/parkingclerks/'+parkingClerkId+"/parkinglots",
+        method: 'GET'
+    });
+}
+
+//viewAcceptedOrderPage
+export function getClerksprocessingOrders(parkingClerkId){
+    return request({
+        url: BASE_URL + '/parkingclerks/'+parkingClerkId+"/orders?status=accepted,parked,pendingFetching",
+        method: 'GET'
+    });
+}
+
+export function getOrderByCarNumber(carNumber){
+    return request({
+        url: BASE_URL + "/orders?carNumber="+carNumber,
+        method: 'GET'
+    });
+}
+
+export function changeOrderStatus(orderId,changeStatusRequest){
+    return request({
+        url: BASE_URL + "/orders/"+orderId,
+        method: 'PATCH',
+        mode: 'cors', 
+        body: JSON.stringify(changeStatusRequest)
+    });
+}
+
+//viewAllOrderPage
+export function getUngrabedOrder(){
+    return request({
+        url: BASE_URL + "/orders?status=pendingParking",
+        method: 'GET'
+    });   
+}
+
+export function grabPendingOrder(parkingClerkId,changeStatusRequest){
+    return request({
+        url: BASE_URL + "/parkingclerks/"+parkingClerkId+"/orders",
+        method: 'POST',
+        mode: 'cors', 
+        body: JSON.stringify(changeStatusRequest)
+    });
+}
+
+//viewHistoryOrderPage
+export function getCompletedOrder(parkingClerkId){
+    return request({
+        url: BASE_URL + '/parkingclerks/'+parkingClerkId+'/orders?status=completed',
+        method: 'GET'
+    }); 
 }
