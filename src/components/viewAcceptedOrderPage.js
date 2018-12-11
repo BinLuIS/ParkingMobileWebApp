@@ -9,6 +9,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Divider from '@material-ui/core/Divider';
 import {PullToRefresh, PullDownContent, ReleaseContent, RefreshContent} from "react-js-pull-to-refresh";
+import { getClerksprocessingOrders, getOrderByCarNumber, changeOrderStatus } from '../util/APIUtils';
 export default class viewAcceptedOrderPage extends Component {
     state={
         data:[]
@@ -19,8 +20,9 @@ export default class viewAcceptedOrderPage extends Component {
     }
 
     getAcceptedOrder=()=>{
-        fetch('https://parkingsystem.herokuapp.com/parkingclerks/1/orders?status=accepted,parked,pendingFetching')
-        .then(results => results.json())
+        getClerksprocessingOrders("1")
+        // fetch('https://parkingsystem.herokuapp.com/parkingclerks/1/orders?status=accepted,parked,pendingFetching')
+        // .then(results => results.json())
         .then(res => {
           this.setState({data:res})
           console.log(res);
@@ -34,20 +36,22 @@ export default class viewAcceptedOrderPage extends Component {
           status: 'completed'
         }
         console.log(fetchCarItem)
-        fetch("https://parkingsystem.herokuapp.com/orders?carNumber="+order.carNumber, {
-            mode: 'cors', 
-        }).then(res => res.json())
+        // fetch("https://parkingsystem.herokuapp.com/orders?carNumber="+order.carNumber, {
+        //     mode: 'cors', 
+        // }).then(res => res.json())
+        getOrderByCarNumber(order.carNumber)
             .then(resp => {
                 console.log(resp[0].status)
                 if(resp.length>0 && resp[0].status=='pendingFetching'){
-                fetch("https://parkingsystem.herokuapp.com/orders/"+resp[0].id, {
-                method: 'PATCH', 
-                headers: new Headers({
-                'Content-Type': 'application/json'
-            }), 
-            mode: 'cors', 
-            body: JSON.stringify(fetchCarItem)
-            }).then(res => res.json())
+            //     fetch("https://parkingsystem.herokuapp.com/orders/"+resp[0].id, {
+            //     method: 'PATCH', 
+            //     headers: new Headers({
+            //     'Content-Type': 'application/json'
+            // }), 
+            // mode: 'cors', 
+            // body: JSON.stringify(fetchCarItem)
+            // }).then(res => res.json())
+            changeOrderStatus(resp[0].id,fetchCarItem)
      .then(res => {
         Toast.success('完成訂單', 1.5);
       this.getAcceptedOrder();

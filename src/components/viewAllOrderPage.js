@@ -15,6 +15,8 @@ import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import {PullToRefresh, PullDownContent, ReleaseContent, RefreshContent} from "react-js-pull-to-refresh";
+import { getUngrabedOrder,grabPendingOrder } from '../util/APIUtils';
+
 
 export default class viewAllOrderPage extends Component {
     constructor() {
@@ -30,8 +32,9 @@ export default class viewAllOrderPage extends Component {
     }
 
     getAllOrder=()=>{
-            fetch('https://parkingsystem.herokuapp.com/orders?status=pendingParking')
-        .then(results => results.json())
+      getUngrabedOrder()
+        //     fetch('https://parkingsystem.herokuapp.com/orders?status=pendingParking')
+        // .then(results => results.json())
         .then(res => {
           this.setState({data:res})
           console.log(res);
@@ -40,15 +43,16 @@ export default class viewAllOrderPage extends Component {
         
     }
     grabOrder=(order)=>{
-        fetch('https://parkingsystem.herokuapp.com/parkingclerks/1/orders',{
-            mode: 'cors',
-            method: 'POST', 
-            body: JSON.stringify({
-            "parkingOrderId" : order.id
-            }),
-            headers: new Headers({ 'Content-Type': 'application/json'})
-        })
-        .then(results => results.json())
+        // fetch('https://parkingsystem.herokuapp.com/parkingclerks/1/orders',{
+        //     mode: 'cors',
+        //     method: 'POST', 
+        //     body: JSON.stringify({
+        //     "parkingOrderId" : order.id
+        //     }),
+        //     headers: new Headers({ 'Content-Type': 'application/json'})
+        // })
+        // .then(results => results.json())
+        grabPendingOrder("1",{"parkingOrderId" : order.id})
         .then(res => {
             Toast.success('成功搶單', 1.5);
           this.getAllOrder();

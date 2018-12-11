@@ -9,6 +9,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Divider from '@material-ui/core/Divider';
 import {PullToRefresh, PullDownContent, ReleaseContent, RefreshContent} from "react-js-pull-to-refresh";
+import {getCompletedOrder} from '../util/APIUtils';
 export default class viewHistoryOrderPage extends Component {
     state={
         data:[]
@@ -18,8 +19,9 @@ export default class viewHistoryOrderPage extends Component {
         this.getHistoryOrder();
     }
     getHistoryOrder=()=>{
-      fetch('https://parkingsystem.herokuapp.com/parkingclerks/1/orders?status=completed')
-        .then(results => results.json())
+      // fetch('https://parkingsystem.herokuapp.com/parkingclerks/1/orders?status=completed')
+      //   .then(results => results.json())
+      getCompletedOrder("1")
         .then(res => {
           this.setState({data:res})
           console.log(res);
