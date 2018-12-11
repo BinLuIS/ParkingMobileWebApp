@@ -30,7 +30,8 @@ class pickAcceptedOrderParkingLocationPage extends React.Component {
 		fetch('https://parkingsystem.herokuapp.com/parkingclerks/'+"1"+"/parkinglots")
 		.then(results => results.json())
 		.then(res => {
-      this.setState({data:res});
+      let lots=res.filter(each=> each.availableCapacity>0)
+      this.setState({data:lots});
     });
 
 	}

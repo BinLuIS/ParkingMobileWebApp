@@ -26,7 +26,7 @@ import viewAllOrderPage from './viewAllOrderPage';
     }
     checkOrder = (orderID) => {
         if(this.props.lotID > 0) {
-          fetch('https://parkingsystem.herokuapp.com/parkinglots/1/orders',{
+          fetch('https://parkingsystem.herokuapp.com/parkinglots/'+this.props.lotID+'/orders',{
           mode: 'cors',
           method: 'POST',
           body: JSON.stringify({
