@@ -38,7 +38,7 @@ import viewAllOrderPage from './viewAllOrderPage';
           .then(res => {
           });
           alert("完成泊車");
-          this.props.history.push('/viewAcceptedOrderPage');
+          this.props.onChangePage("viewAcceptedOrderPage");
         }
         else {
           alert("請先選擇停車場");

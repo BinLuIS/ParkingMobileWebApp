@@ -9,18 +9,15 @@ import ViewHistoryOrderPage from './viewHistoryOrderPage';
 import ViewPersonalPage from './viewPersonalPage';
 import PickAcceptedOrderParkingLocationPage from './pickAcceptedOrderParkingLocationPage';
 import PickAcceptedOrderCarPage from './pickAcceptedOrderCarPage';
-import {Route, Link,Switch} from 'react-router-dom'
 
-
-const { Header, Sider, Content } = Layout;
 
 export default class clerkPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedTab: 'blueTab',
+      selectedPage: 'viewAllOrderPage',
       hidden: false,
-      secondTabPage: "viewAcceptedOrderPage",
+      secondTabSelectedPage: "viewAcceptedOrderPage",
       lotID: -1,
       orderID: -1
     };
@@ -30,11 +27,11 @@ export default class clerkPage extends Component {
   renderContent(pageName) {
     switch (pageName) {
       case "viewAcceptedOrderPage":
-        return <ViewAcceptedOrderPage onChangeOrderID={(id) => {this.setState({orderID: id})}} onChangePage={(page) => {this.setState({secondTabPage: page})}}/>
+        return <ViewAcceptedOrderPage onChangeOrderID={(id) => {this.setState({orderID: id})}} onChangePage={(page) => {this.setState({secondTabSelectedPage: page})}}/>
       case "pickAcceptedOrderCarPage":
-        return <PickAcceptedOrderCarPage lotID={this.state.lotID} orderID={this.state.orderID} onChangePage={(page) => {this.setState({secondTabPage: page})}}/>
+        return <PickAcceptedOrderCarPage lotID={this.state.lotID} orderID={this.state.orderID} onChangePage={(page) => {this.setState({secondTabSelectedPage: page})}}/>
       case "pickAcceptedOrderParkingLocationPage":
-        return <PickAcceptedOrderParkingLocationPage onChangeLotID={(id) => {this.setState({lotID: id})}} onChangePage={(page) => {this.setState({secondTabPage: page})}}/>
+        return <PickAcceptedOrderParkingLocationPage onChangeLotID={(id) => {this.setState({lotID: id})}} onChangePage={(page) => {this.setState({secondTabSelectedPage: page})}}/>
     }
   }
   render() {
@@ -63,11 +60,11 @@ export default class clerkPage extends Component {
             selectedIcon={
               <Icon type="profile" theme="filled" />
             }
-            selected={this.state.selectedTab === 'blueTab'}
+            selected={this.state.selectedPage === 'viewAllOrderPage'}
             // badge={1}
             onPress={() => {
               this.setState({
-                selectedTab: 'blueTab',
+                selectedPage: 'viewAllOrderPage',
               });
             }}
             data-seed="logId"
@@ -84,18 +81,17 @@ export default class clerkPage extends Component {
             title="停取"
             key="getOrder"
             // badge={'123'}
-            selected={this.state.selectedTab === 'redTab'}
+            selected={this.state.selectedPage === 'viewAcceptedOrderPage'}
             onPress={() => {
               this.setState({
-                selectedTab: 'redTab',
+                selectedPage: 'viewAcceptedOrderPage',
               });
             }}
             data-seed="logId1"
           >
           
-          {/* <ViewAcceptedOrderPage /> */}
-          {this.renderContent(this.state.secondTabPage)}
-          {/* <ViewAcceptedOrderPage showPage={this.state.secondTabPage} onChangePage={(page) => {this.setState({secondTabPage: page})}}/> */}
+          {this.renderContent(this.state.secondTabSelectedPage)}
+
           </TabBar.Item>
           <TabBar.Item
             icon={
@@ -107,10 +103,10 @@ export default class clerkPage extends Component {
             title="歷史"
             key="history"
             // dot
-            selected={this.state.selectedTab === 'greenTab'}
+            selected={this.state.selectedPage === 'viewHistoryOrderPage'}
             onPress={() => {
               this.setState({
-                selectedTab: 'greenTab',
+                selectedPage: 'viewHistoryOrderPage',
               });
             }}
           >
@@ -125,10 +121,10 @@ export default class clerkPage extends Component {
             }
             title="個人"
             key="personal"
-            selected={this.state.selectedTab === 'yellowTab'}
+            selected={this.state.selectedPage === 'viewPersonalPage'}
             onPress={() => {
               this.setState({
-                selectedTab: 'yellowTab',
+                selectedPage: 'viewPersonalPage',
               });
             }}
           >

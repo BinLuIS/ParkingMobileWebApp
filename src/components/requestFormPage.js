@@ -1,6 +1,7 @@
 import { List, InputItem, WhiteSpace, Button } from 'antd-mobile';
 import React, { Component } from 'react';
 import  { Router } from 'react-router';
+import SloganPage from './sloganPage';
 
 export default class requestFormPage extends Component {
   
@@ -26,6 +27,9 @@ export default class requestFormPage extends Component {
 
     return (
       <div>
+      <SloganPage />
+      <div>
+        
         <List renderHeader={() => <span><h1 style={{textAlign:"center", color: "white"}}>申請停車</h1></span>}>
           <InputItem ref='name' style={{ padding: "50px" }}>
           <p style={{ color: "#1890ff" }}>姓名 </p>
@@ -40,6 +44,7 @@ export default class requestFormPage extends Component {
           <Button type="primary" onClick={this.onFetch}>取車</Button><WhiteSpace />
         
         </div>
+      </div>
       </div>
     );
   }

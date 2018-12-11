@@ -53,7 +53,7 @@ export default class viewAllOrderPage extends Component {
                     {/* <div>停車時間: 17:00</div> */}
                 </div>
                 </div>
-                <div style={{marginTop: '40px', fontSize: '20px'}} onClick={()=>this.grabOrder(each)}>搶單 <Icon type="right" width ="20px" height ="20px" /></div>
+                <div style={{marginTop: '35px', fontSize: '20px'}} onClick={()=>this.grabOrder(each)}>搶單 <Icon type="right" width ="20px" height ="20px" /></div>
                 
             </div>
             </List.Item>
