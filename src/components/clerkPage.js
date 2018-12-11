@@ -19,7 +19,8 @@ export default class clerkPage extends Component {
       hidden: false,
       secondTabSelectedPage: "viewAcceptedOrderPage",
       lotID: -1,
-      orderID: -1
+      orderID: -1,
+      lotName: ""
     };
     
   }
@@ -29,9 +30,9 @@ export default class clerkPage extends Component {
       case "viewAcceptedOrderPage":
         return <ViewAcceptedOrderPage onChangeOrderID={(id) => {this.setState({orderID: id})}} onChangePage={(page) => {this.setState({secondTabSelectedPage: page})}}/>
       case "pickAcceptedOrderCarPage":
-        return <PickAcceptedOrderCarPage lotID={this.state.lotID} orderID={this.state.orderID} onChangePage={(page) => {this.setState({secondTabSelectedPage: page})}}/>
+        return <PickAcceptedOrderCarPage lotName={this.state.lotName} lotID={this.state.lotID} orderID={this.state.orderID} onChangePage={(page) => {this.setState({secondTabSelectedPage: page})}}/>
       case "pickAcceptedOrderParkingLocationPage":
-        return <PickAcceptedOrderParkingLocationPage onChangeLotID={(id) => {this.setState({lotID: id})}} onChangePage={(page) => {this.setState({secondTabSelectedPage: page})}}/>
+        return <PickAcceptedOrderParkingLocationPage onChangeLotID={(id,name) => {this.setState({lotID: id,lotName:name})}} onChangePage={(page) => {this.setState({secondTabSelectedPage: page})}}/>
     }
   }
   render() {

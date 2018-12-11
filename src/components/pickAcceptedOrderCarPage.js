@@ -49,8 +49,9 @@ import viewAllOrderPage from './viewAllOrderPage';
       
       let listItem;
       console.log(this.props.lotID);
+      console.log(this.props.lotName);
       if(this.props.lotID != -1 && this.props.lotID !== undefined) {
-        listItem = <ListItemText primary={"選擇了: " + this.props.lotID} />
+        listItem = <ListItemText primary={"選擇了: " + this.props.lotName} />
         }
         else {
         listItem =<ListItemText primary="選擇停車場" />
