@@ -39,7 +39,7 @@ export default class clerkPage extends Component {
     }
   }
   render() {
-    console.log(this.props);
+    console.log(`IDnew ${this.props.parkingClerkId}`);
     return (
       <div style={{ position: 'fixed', height: '100%', width: '100%', top: 0 }}>
         <TabBar
@@ -133,7 +133,7 @@ export default class clerkPage extends Component {
               });
             }}
           >
-          <ViewPersonalPage onLogout={this.handleLogout}/>
+          <ViewPersonalPage onLogout={this.handleLogout} parkingClerkId={this.props.parkingClerkId}/>
           </TabBar.Item>
         </TabBar>
       </div>

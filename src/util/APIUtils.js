@@ -54,7 +54,12 @@ export function checkEmailAvailability(email) {
     });
 }
 
-
+//return
+// {
+//     "id": 1,
+//     "username": "connie",
+//     "name": "connie"
+// }
 export function getCurrentUser() {
     if(!localStorage.getItem(ACCESS_TOKEN)) {
         console.log("No access token")
@@ -69,6 +74,24 @@ export function getCurrentUser() {
     });
 }
 
+// return
+// {
+//     "createdAt": "2018-12-12T06:26:21.901Z",
+//     "updatedAt": "2018-12-12T06:26:21.901Z",
+//     "id": 1,
+//     "name": "connie",
+//     "username": "connie",
+//     "email": "connie@gmail.com",
+//     "password": "$2a$10$Udcl7.pvsPmYycTELeMdLeNPByTyVG8LfRtzW3K551P0wWtBFTz06",
+//     "roles": [
+//         {
+//             "id": 5,
+//             "name": "ROLE_PARKINGCLERK"
+//         }
+//     ],
+//     "phoneNumber": "12343768",
+//     "idInRole": 1
+// }
 export function getCurrentParkingClerk(userid) {
     if(!localStorage.getItem(ACCESS_TOKEN)) {
         return Promise.reject("No access token set.");
@@ -101,6 +124,14 @@ export function checkParkingLotParkingOrder(lotId,order){
 }
 
 //pickAcceptedOrderParkingLocationPage
+// return
+// {
+//     "id": 3,
+//     "name": "lot3",
+//     "capacity": 45,
+//     "availableCapacity": 45,
+//     "parkingBoy": null
+// }
 export function getParkingClerksParkinglot(parkingClerkId){
     return request({
         // url: BASE_URL + '/parkingclerks/'+parkingClerkId+"/parkinglots",

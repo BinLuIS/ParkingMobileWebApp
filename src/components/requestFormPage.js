@@ -22,6 +22,14 @@ export default class requestFormPage extends Component {
     carnum.setState({value: ''});
     name.setState({value: ''});
   }
+  onInquire = () => {
+    const {name,carnum} = this.refs
+    console.log(carnum)
+    console.log(name)
+    this.props.getStatusRequest(carnum.state.value)
+    carnum.setState({value: ''});
+    name.setState({value: ''});
+  }
   render() {
 
     return (
@@ -39,6 +47,7 @@ export default class requestFormPage extends Component {
           <div>
             <Button type="primary" onClick={this.onAdded}>泊車</Button><WhiteSpace />
             <Button type="primary" onClick={this.onFetch}>取車</Button><WhiteSpace />
+            <Button type="primary" onClick={this.onInquire}>查詢</Button><WhiteSpace />
           </div>
         </div>
     );
