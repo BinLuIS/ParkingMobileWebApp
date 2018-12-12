@@ -11,11 +11,7 @@
     padding-top: 0px;
     padding-bottom: 0px;
 }
-.MuiList-root-147.MuiList-padding-148 {
-    padding-top: 0px;
-    padding-bottom: 0px;
-}
-.MuiList-padding-37 {
+*[class*='MuiList-root'] {
     padding-top: 0px !important; 
     padding-bottom: 0px !important;
 }

@@ -70,6 +70,32 @@ export default class viewAllOrderPage extends Component {
         });
     }
         
+    getListItem = () => {
+        
+        if(this.state.data.length > 0) {
+            return (<List dense className={this.props.root}>
+            {this.state.data.map(each => (
+              <div>
+              <ListItem 
+              key={each} button style={{background: "white"}} onClick={()=>this.grabOrder(each)}>
+                <ListItemAvatar>
+                  <Avatar
+                    src={require('../icon/caricon.png')}
+                  />
+                </ListItemAvatar>
+                <ListItemText style={{verticalAlign: "baseline" , fontSize: '15px'}} primary={each.carNumber} />
+                <div><span style={{verticalAlign: "baseline", fontSize: '15px'}}>搶單 ></span></div>
+                {/* <div>停車時間: 17:00</div> */}
+              </ListItem>
+              <Divider />
+              </div>
+            ))}
+          </List>);
+        }
+        else {
+            return (<div style={{background:"#F5F4F9", verticalAlign: "baseline", textAlign: "center", fontSize: '15px', padding: "5px"}}>現在沒有任何訂單</div>);
+        }
+    }
 
     render() {
         
@@ -88,24 +114,7 @@ export default class viewAllOrderPage extends Component {
                 triggerHeight={300}
                 backgroundColor='white'
                 >
-            <List dense className={this.props.root}>
-              {this.state.data.map(each => (
-                <div>
-                <ListItem 
-                key={each} button style={{background: "white"}} onClick={()=>this.grabOrder(each)}>
-                  <ListItemAvatar>
-                    <Avatar
-                      src={require('../icon/caricon.png')}
-                    />
-                  </ListItemAvatar>
-                  <ListItemText style={{verticalAlign: "baseline" , fontSize: '15px'}} primary={each.carNumber} />
-                  <div><span style={{verticalAlign: "baseline", fontSize: '15px'}}>搶單 ></span></div>
-                  {/* <div>停車時間: 17:00</div> */}
-                </ListItem>
-                <Divider />
-                </div>
-              ))}
-            </List>
+            {this.getListItem()}
             </PullToRefresh>
             </div>
     
