@@ -1,4 +1,4 @@
-import { List, InputItem, WhiteSpace, Button,Toast } from 'antd-mobile';
+import { List, InputItem, WhiteSpace, Button,Toast,Carousel, WingBlank } from 'antd-mobile';
 import React, { Component } from 'react';
 import  { Router } from 'react-router';
 import SloganPage from './sloganPage';
@@ -35,7 +35,7 @@ export default class requestFormPage extends Component {
     return (
         <div>
           <SloganPage />
-          <List renderHeader={() => <span><h1 style={{textAlign:"center", color: "white"}}>申請停車</h1></span>}>
+          <List renderHeader={() => <span><h1 style={{textAlign:"center", color: "white"}}>冰露泊車 BinLu</h1></span>}>
             <InputItem ref='name' style={{ padding: "50px" }}>
             <p style={{ color: "#1890ff" }}>姓名 </p>
             </InputItem>

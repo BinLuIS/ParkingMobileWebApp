@@ -82,7 +82,7 @@ export default class viewPersonalPage extends Component {
     }
     getParkingClerkLotString = () => {
       console.log(this.state.parkingClerkLots.length);
-        if(this.state.parkingClerkLots.length >= 0) {
+        if(this.state.parkingClerkLots.length > 0) {
             let tempstr = "";
             this.state.parkingClerkLots.map(e => {
             // ["lot1", "lot2", "lot3", "lot1", "lot2", "lot3", "lot1", "lot2", "lot3", "lot3", "lot1", "lot2", "lot3"].map(e => {
