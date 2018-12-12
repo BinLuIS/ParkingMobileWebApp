@@ -64,6 +64,11 @@ class App extends Component {
 
   handleLogin=(history)=> {
     this.loadCurrentUser();
+    setTimeout(getCurrentUser()
+    .then(response => {
+        Toast.success(<div>歡迎你 <b>{response.name}</b>!!!</div>,2);
+        console.log("now2")
+    }), 2000);
     history.push('/clerkPage');
   }
 

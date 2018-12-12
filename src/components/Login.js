@@ -36,12 +36,12 @@ class LoginForm extends Component {
                     
                     localStorage.setItem(ACCESS_TOKEN, response.accessToken);
                     console.log(ACCESS_TOKEN);
-                    setTimeout(getCurrentUser()
-                    .then(response => {
-                        Toast.success(`歡迎你 ${response.name}!!!`,2);
-                        console.log("now2")
-                    }), 2000);
-                    setTimeout(this.props.onLogin(), 2000);
+                    // setTimeout(getCurrentUser()
+                    // .then(response => {
+                    //     Toast.success(`歡迎你 ${response.name}!!!`,2);
+                    //     console.log("now2")
+                    // }), 2000);
+                    // setTimeout(this.props.onLogin(), 2000);
                     // return new Promise((resolve) => {
                     //     setTimeout(getCurrentUser()
                     //     .then(response => {
@@ -50,7 +50,7 @@ class LoginForm extends Component {
                     //     }), 3000);
                     //     resolve();
                     // });
-                    // this.props.onLogin();
+                    this.props.onLogin();
                 }).catch(error => {
                     if(error.status === 401) {
                         Toast.fail("用戶名稱或密碼有錯, 請重新輸入",3);                    
