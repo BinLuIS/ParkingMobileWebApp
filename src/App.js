@@ -9,7 +9,7 @@ import pickAcceptedOrderParkingLocationPage from './components/pickAcceptedOrder
 import pickAcceptedOrderCarPage from './components/pickAcceptedOrderCarPage';
 import viewAcceptedOrderPage from './components/viewAcceptedOrderPage';
 import Login from './components/Login'
-import { getCurrentUser } from './util/APIUtils';
+import { getCurrentUser, getCurrentParkingClerk } from './util/APIUtils';
 import { ACCESS_TOKEN } from './constants';
 import clerkPage from './components/clerkPage';
 
@@ -21,7 +21,8 @@ class App extends Component {
       currentUser: null,
       isAuthenticated: false,
       isLoading: false,
-      parkingclerkId: null
+      userId: null,
+      parkingClerkId: null
     }
     this.handleLogout = this.handleLogout.bind(this);
     this.loadCurrentUser = this.loadCurrentUser.bind(this);
@@ -32,14 +33,25 @@ class App extends Component {
     this.setState({
       isLoading: true
     });
-    
+
+    getCurrentParkingClerk(this.state.userId)
+    .then(response => {
+      this.setState({
+        parkingClerkId: response.idInRole
+      });
+    }).catch(error => {
+      this.setState({
+        isLoading: false
+      });  
+    });
+
     getCurrentUser()
     .then(response => {
       this.setState({
         currentUser: response.username,
         isAuthenticated: true,
         isLoading: false,
-        parkingclerkId: response.id
+        userId: response.id
       });
     }).catch(error => {
       this.setState({
@@ -58,7 +70,7 @@ class App extends Component {
       currentUser: null,
       isAuthenticated: false
     });
-    history.push('/');
+    history.push('/login');
     Toast.success("成功登出.",3);
   }
 
@@ -75,7 +87,7 @@ class App extends Component {
           <Switch>
             <Route path="/" exact render={(props) => <Login onLogin={this.handleLogin} {...props} />}></Route>
             <Route path="/requestFormPage" component={requestFormPage}></Route>
-            <Route path="/clerkPage" render={(props) => <ClerkPage onLogout={this.handleLogout} {...props} />}/>
+            <Route path="/clerkPage" render={(props) => <ClerkPage parkingClerkId={this.state.parkingClerkId} onLogout={this.handleLogout} {...props} />}/>
             <Route path="/viewAcceptedOrderPage" component={viewAcceptedOrderPage}></Route>
             <Route path="/pickAcceptedOrderCarPage/pickAcceptedOrderParkingLocationPage" component={pickAcceptedOrderParkingLocationPage}></Route>
             <Route path="/pickAcceptedOrderParkingLocationPage" component={pickAcceptedOrderParkingLocationPage}></Route>

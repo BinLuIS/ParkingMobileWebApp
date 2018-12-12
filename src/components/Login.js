@@ -47,7 +47,7 @@ class LoginForm extends Component {
                         Toast.fail(description,3);                           
                     }
                 });
-            }
+            }   
         });
     }
 
