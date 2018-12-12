@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './css/App.css';
 import { Layout, Menu, Icon } from 'antd';
+import { Toast } from 'antd-mobile';
 import {Route, Link,Switch} from 'react-router-dom'
 import ClerkPage from './components/clerkPage';
 import requestFormPage from './containers/requestFormPageContainer';
@@ -55,6 +56,7 @@ class App extends Component {
       isAuthenticated: false
     });
     history.push('/');
+    Toast.success("You're successfully logged out.",3);
   }
 
   handleLogin=(history)=> {
