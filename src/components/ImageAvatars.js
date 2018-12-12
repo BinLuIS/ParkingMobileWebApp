@@ -28,6 +28,4 @@ ImageAvatars.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-const Comp1 = withStyles(styles)(ImageAvatars);
-
-export {Comp1};
+export default withStyles(styles)(ImageAvatars);

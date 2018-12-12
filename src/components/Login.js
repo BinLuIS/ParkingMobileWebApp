@@ -3,6 +3,8 @@ import { login } from '../util/APIUtils';
 import { Toast, Input, List, InputItem, WhiteSpace, Button , Icon} from 'antd-mobile';
 import { createForm } from 'rc-form';
 import { ACCESS_TOKEN } from '../constants';
+import {getCurrentUser} from '../util/APIUtils';
+import Typography from '@material-ui/core/Typography';
 
 class Login extends Component {
     render() {
@@ -30,13 +32,18 @@ class LoginForm extends Component {
                 const loginRequest = Object.assign({}, values);
                 login(loginRequest)
                 .then(response => {
+                    getCurrentUser()
+                    .then(response => {
+                        Toast.success(`歡迎!!${response.username}`,2);
+                    })
+                    
                     localStorage.setItem(ACCESS_TOKEN, response.accessToken);
                     this.props.onLogin();
                 }).catch(error => {
                     if(error.status === 401) {
-                        Toast.fail("Your Username or Password is incorrect. Please try again!",3);                    
+                        Toast.fail("用戶名稱或密碼有錯, 請重新輸入",3);                    
                     } else {
-                        const description =  error.message || 'Sorry! Something went wrong. Please try again!'
+                        const description =  error.message || '登入失敗, 請重新登入'
                         Toast.fail(description,3);                           
                     }
                 });
@@ -52,7 +59,10 @@ class LoginForm extends Component {
         const { getFieldProps } = this.props.form;
         return (
           <div>
-            <List renderHeader={() => <span><h1 style={{textAlign:"center", color: "white"}}>停車系統(停車員操作平台)登錄介面</h1></span>}>
+            <Typography variant="h5" className={this.props.title} style={{background:"#1B82D2"}}>
+                <h5 style={{textAlign:"center", color: "white", padding: "20px 20px", margin: "0px 0px 0px 0px"}}>停車系統(停車員操作平台)登錄介面</h5>
+            </Typography>
+            <List>
             <InputItem
             {...getFieldProps('usernameOrEmail', {
                 rules: [{ required: true, message: 'Please input your username or email!' }],
@@ -67,7 +77,7 @@ class LoginForm extends Component {
             })}
             type="password"
             placeholder="******"
-          >密码</InputItem>
+          >密碼</InputItem>
         </List>
         <div>
           <Button type="primary" onClick={this.handleSubmit}>登錄</Button><WhiteSpace />
