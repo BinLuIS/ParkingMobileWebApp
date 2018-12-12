@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { login } from '../util/APIUtils';
-import { Input, List, InputItem, WhiteSpace, Button , Icon} from 'antd-mobile';
+import { Toast, Input, List, InputItem, WhiteSpace, Button , Icon} from 'antd-mobile';
 import { createForm } from 'rc-form';
 import { ACCESS_TOKEN } from '../constants';
 
@@ -32,6 +32,13 @@ class LoginForm extends Component {
                 .then(response => {
                     localStorage.setItem(ACCESS_TOKEN, response.accessToken);
                     this.props.onLogin();
+                }).catch(error => {
+                    if(error.status === 401) {
+                        Toast.fail("Your Username or Password is incorrect. Please try again!",3);                    
+                    } else {
+                        const description =  error.message || 'Sorry! Something went wrong. Please try again!'
+                        Toast.fail(description,3);                           
+                    }
                 });
             }
         });
