@@ -20,7 +20,8 @@ class App extends Component {
     this.state = {
       currentUser: null,
       isAuthenticated: false,
-      isLoading: false
+      isLoading: false,
+      parkingclerkId: null
     }
     this.handleLogout = this.handleLogout.bind(this);
     this.loadCurrentUser = this.loadCurrentUser.bind(this);
@@ -31,12 +32,14 @@ class App extends Component {
     this.setState({
       isLoading: true
     });
+    
     getCurrentUser()
     .then(response => {
       this.setState({
         currentUser: response.username,
         isAuthenticated: true,
-        isLoading: false
+        isLoading: false,
+        parkingclerkId: response.id
       });
     }).catch(error => {
       this.setState({
