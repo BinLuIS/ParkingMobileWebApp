@@ -35,8 +35,13 @@ const mapDispatchToProps =(dispatch) => ({
      })
    })
    .catch((error) => {
-    console.log('error: ' + error);
-    Toast.fail("未能申請泊車, 請向管理員查詢",3);
+    if(error.status === 409) {
+      Toast.fail("你的車子已被申請，請勿重覆",3);                    
+    } else {
+      console.log('error: ' + error);
+      Toast.fail("未能申請泊車, 請向管理員查詢",3);                         
+    }
+    
   }); 
    },
    addNewFetchRequest: newOrderRequest => {

@@ -50,6 +50,7 @@ class App extends Component {
       });
       localStorage.setItem(CLERK_ID, response.idInRole);
       console.log("goToClerkPage")
+      Toast.success(`歡迎你 ${response.name}!!!`,2);
       history.push('/clerkPage');
     }).catch(error => {
       console.log('error of getcurrentuser')
