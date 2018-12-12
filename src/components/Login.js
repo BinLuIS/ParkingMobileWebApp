@@ -32,11 +32,11 @@ class LoginForm extends Component {
                 const loginRequest = Object.assign({}, values);
                 login(loginRequest)
                 .then(response => {
+                    
                     getCurrentUser()
                     .then(response => {
                         Toast.success(`歡迎!!${response.username}`,2);
                     })
-                    
                     localStorage.setItem(ACCESS_TOKEN, response.accessToken);
                     this.props.onLogin();
                 }).catch(error => {
