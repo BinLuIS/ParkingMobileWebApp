@@ -18,8 +18,8 @@ const styles = {
 function ImageAvatars(props) {
   const { classes } = props;
   return (
-    <Grid container justify="center" alignItems="center">
-      <Avatar alt="usericon" src={require('../icon/user_male.png')} className={classes.bigAvatar} />
+    <Grid container justify="center" alignItems="center" >
+      <Avatar size={50} alt="usericon" src={require('../icon/usericon.jpg')} className={classes.bigAvatar} />
     </Grid>
   );
 }
