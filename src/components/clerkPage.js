@@ -9,6 +9,7 @@ import ViewHistoryOrderPage from './viewHistoryOrderPage';
 import ViewPersonalPage from './viewPersonalPage';
 import PickAcceptedOrderParkingLocationPage from './pickAcceptedOrderParkingLocationPage';
 import PickAcceptedOrderCarPage from './pickAcceptedOrderCarPage';
+import { CLERK_ID } from '../constants';
 
 
 export default class clerkPage extends Component {
@@ -39,7 +40,7 @@ export default class clerkPage extends Component {
     }
   }
   render() {
-    console.log(`IDnew ${this.props.parkingClerkId}`);
+    console.log(`IDnew ${localStorage.getItem(CLERK_ID)}`);
     return (
       <div style={{ position: 'fixed', height: '100%', width: '100%', top: 0 }}>
         <TabBar

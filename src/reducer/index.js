@@ -3,7 +3,7 @@ const initialState ={
 };
 export default (state = initialState, {type, payload}) => {
     switch (type){
-        case "ADD_NEW_ORDER_REQUEST":
+        case "":
         return {orders: state.orders.concat(payload)};
 
        
