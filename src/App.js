@@ -34,17 +34,6 @@ class App extends Component {
       isLoading: true
     });
 
-    getCurrentParkingClerk(this.state.userId)
-    .then(response => {
-      this.setState({
-        parkingClerkId: response.idInRole
-      });
-    }).catch(error => {
-      this.setState({
-        isLoading: false
-      });  
-    });
-
     getCurrentUser()
     .then(response => {
       this.setState({
@@ -81,6 +70,18 @@ class App extends Component {
         Toast.success(<div>歡迎你 <b>{response.name}</b>!!!</div>,2);
         console.log("now2")
     }), 2000);
+    
+    getCurrentParkingClerk(this.state.userId)
+    .then(response => {
+      this.setState({
+        parkingClerkId: response.idInRole
+      });
+    }).catch(error => {
+      this.setState({
+        isLoading: false
+      });  
+    });
+
     history.push('/clerkPage');
   }
 

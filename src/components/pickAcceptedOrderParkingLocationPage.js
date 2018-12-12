@@ -8,7 +8,8 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
 import '../css/pickAcceptedOrderParkingLocationPage.css';
 import Typography from '@material-ui/core/Typography';
-import {getParkingClerksParkinglot} from '../util/APIUtils'
+import {getParkingClerksParkinglot} from '../util/APIUtils';
+import {getCurrentUser} from '../util/APIUtils';
 
 const styles = theme => ({
   root: {
@@ -17,8 +18,8 @@ const styles = theme => ({
 });
 class pickAcceptedOrderParkingLocationPage extends React.Component {
   state = {
-    data: []
-
+    data: [],
+    parkingClerkId: 0
   }
 
 
@@ -29,13 +30,26 @@ class pickAcceptedOrderParkingLocationPage extends React.Component {
   }
   componentDidMount(){
     // fetch('https://parkingsystem.herokuapp.com/parkingclerks/'+"1"+"/parkinglots")
-		// .then(results => results.json())
-    getParkingClerksParkinglot("1")
-		.then(res => {
-      console.log(res);
-      let lots=res.filter(each=> each.availableCapacity>0)
-      this.setState({data:lots});
-    });
+    // .then(results => results.json())
+    
+    getCurrentUser()
+        .then(response => {
+          this.setState({parkingClerkId: response.id});
+          getParkingClerksParkinglot(response.id)
+          .then(res => {
+            console.log(res);
+            let lots=res.filter(each=> each.availableCapacity>0)
+            this.setState({data:lots});
+          });
+        })
+
+    
+    // getParkingClerksParkinglot("1")
+		// .then(res => {
+    //   console.log(res);
+    //   let lots=res.filter(each=> each.availableCapacity>0)
+    //   this.setState({data:lots});
+    // });
 
   }
   getListItem = () => {
