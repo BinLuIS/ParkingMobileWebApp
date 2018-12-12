@@ -61,7 +61,7 @@ class pickAcceptedOrderParkingLocationPage extends React.Component {
     return (
       <div>
           <Typography variant="h5" className={this.props.title} style={{background:"#1B82D2"}}>
-              <h5 style={{textAlign:"center", color: "white", padding: "20px 20px", margin: "0px 0px 0px 0px"}}><Icon type="left" style={{float: "left", fontSize: "20px", paddingTop: "5px"}} onClick={()=>this.passLotID(this.props.lotID,this.props.lotName)}/>停車地點</h5>
+              <h4 style={{textAlign:"center", color: "white", padding: "20px 20px", margin: "0px 0px 0px 0px"}}><Icon type="left" style={{float: "left", fontSize: "20px", paddingTop: "5px"}} onClick={()=>this.passLotID(this.props.lotID,this.props.lotName)}/>停車地點</h4>
           </Typography>
             {this.getListItem()}
         </div>

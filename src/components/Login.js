@@ -73,7 +73,7 @@ class LoginForm extends Component {
         return (
           <div>
             <Typography variant="h5" className={this.props.title} style={{background:"#1B82D2"}}>
-                <h5 style={{textAlign:"center", color: "white", padding: "20px 20px", margin: "0px 0px 0px 0px"}}>停車系統(停車員操作平台)登錄介面</h5>
+                <h5 style={{textAlign:"center", color: "white", padding: "20px 20px", margin: "0px 0px 0px 0px"}}>停車系統(停車員操作平台)<br/>登錄介面</h5>
             </Typography>
             <List>
             <InputItem

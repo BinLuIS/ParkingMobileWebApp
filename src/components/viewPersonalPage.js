@@ -16,17 +16,18 @@ export default class viewPersonalPage extends Component {
     }
 
     render() {
+      console.log(`IDnew ${this.props.parkingClerkId}`);
       return (
         <div>
               <Typography variant="h5" className={this.props.title} style={{background:"#1B82D2"}}>
-                <h5 style={{textAlign:"center", color: "white", padding: "20px 20px", margin: "0px 0px 0px 0px"}}>個人頁面</h5>
+                <h4 style={{textAlign:"center", color: "white", padding: "20px 20px", margin: "0px 0px 0px 0px"}}>個人頁面</h4>
               </Typography>
               <br/>
               <br/>
               <ImageAvatars />
               <br/>
               <br/>
-              <List dense className={this.props.root}>
+              <List className={this.props.root}>
               <div>
                 <ListItem button style={{background: "white"}}>
                   <ListItemText style={{width: "25%", verticalAlign: "baseline" , fontSize: '15px'}} primary={"用戶名稱:"} />

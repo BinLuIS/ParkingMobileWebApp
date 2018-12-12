@@ -73,7 +73,7 @@ export default class viewAllOrderPage extends Component {
     getListItem = () => {
         
         if(this.state.data.length > 0) {
-            return (<List dense className={this.props.root}>
+            return (<List className={this.props.root}>
             {this.state.data.map(each => (
               <div>
               <ListItem 
@@ -103,7 +103,7 @@ export default class viewAllOrderPage extends Component {
             <div>
             
             <Typography variant="h5" className={this.props.title} style={{background:"#1B82D2"}}>
-                <h5 style={{textAlign:"center", color: "white", padding: "20px 20px", margin: "0px 0px 0px 0px"}}>訂單</h5>
+                <h4 style={{textAlign:"center", color: "white", padding: "20px 20px", margin: "0px 0px 0px 0px"}}>訂單</h4>
             </Typography>
             <PullToRefresh
                 pullDownContent={<PullDownContent />}
