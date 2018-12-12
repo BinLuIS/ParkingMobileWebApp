@@ -4,6 +4,7 @@ import Typography from '@material-ui/core/Typography';
 import Avatar from '@material-ui/core/Avatar';
 import Grid from '@material-ui/core/Grid';
 import '../css/viewPersonalPage.css';
+import comp1 from './ImageAvatars';
 
 export default class viewPersonalPage extends Component {
   
@@ -21,7 +22,7 @@ export default class viewPersonalPage extends Component {
               <br/>
               <br/>
               <Grid container justify="center" alignItems="center">
-                <Avatar alt="usericon" src={require('../icon/user_male.png')} className="bigAvatar" />
+                <Avatar alt="usericon" src={require('../icon/user_male.png')} width="100" height="100" className="bigAvatar" />
               </Grid>
               <br/>
               <br/>
