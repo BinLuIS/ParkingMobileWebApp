@@ -35,7 +35,7 @@ export default class requestFormPage extends Component {
     return (
         <div>
           <SloganPage />
-          <List renderHeader={() => <span><h1 style={{textAlign:"center", color: "white"}}>冰露泊車 BinLu</h1></span>}>
+          <List renderHeader={() => <span><h1 style={{textAlign:"center", color: "white"}}>冰露泊車</h1></span>}>
             <InputItem ref='name' style={{ padding: "50px" }}>
             <p style={{ color: "#1890ff" }}>姓名 </p>
             </InputItem>

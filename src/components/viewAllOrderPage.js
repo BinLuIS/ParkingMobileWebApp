@@ -114,7 +114,9 @@ export default class viewAllOrderPage extends Component {
                 triggerHeight={300}
                 backgroundColor='white'
                 >
+            <div style={{background:"#F5F4F9", height: "100vh"}}>
             {this.getListItem()}
+            </div>
             </PullToRefresh>
             </div>
     

@@ -74,7 +74,9 @@ export default class viewHistoryOrderPage extends Component {
                 triggerHeight={300}
                 backgroundColor='white'
                 >
+            <div style={{background:"#F5F4F9", background:"#F5F4F9", height: "100vh"}}>
             {this.getListItem()}
+            </div>
             </PullToRefresh>
         </div>
       );

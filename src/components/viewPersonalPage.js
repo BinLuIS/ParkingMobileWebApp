@@ -8,11 +8,12 @@ import ImageAvatars from './ImageAvatars';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
-import {getCurrentUser,getParkingClerksParkinglot,getCurrentParkingClerk} from '../util/APIUtils';
+import {PullToRefresh, PullDownContent, ReleaseContent, RefreshContent} from "react-js-pull-to-refresh";
+import {getParkingClerksParkinglot,getParkingClerkDetail} from '../util/APIUtils';
 
 export default class viewPersonalPage extends Component {
     state ={
-      parkingClerkEId: 0,
+      // parkingClerkEId: 0,
       parkingClerkPId: 0,
       parkingClerkName: "",
       parkingClerkLots: [],
@@ -22,14 +23,34 @@ export default class viewPersonalPage extends Component {
        this.props.onLogout();
        
     }
-    componentWillMount() {
+    getPersonalInfo=()=>{
+      let temp_pId = 0;
+      getParkingClerkDetail()
+      .then(response => {
+          this.setState({parkingClerkName: response.name, parkingClerkPId: response.id});
+          temp_pId = response.id;
+          getParkingClerksParkinglot(temp_pId)
+          .then(response => {
+              this.setState({parkingClerkLots: response});
+          });
+      });
+      this.getParkingClerkLotString();
+    }
+    onPullList=()=> {
+      return new Promise((resolve) => {
+          setTimeout(this.getPersonalInfo(), 2000);
+          resolve();
+      });
+    }
+    componentDidMount() {
+      this.getPersonalInfo();
       // console.log(`ID prop: ${this.props.parkingClerkId}`);
       // const temp = this.props.parkingClerkId;
       // this.setState({parkingClerkId: temp});
       // console.log(`ID state: ${this.state.parkingClerkId}`);
 
-      let employeeId = 0;
-      let temp_pId = 0;
+      // let employeeId = 0;
+      
       // let tempLots = [];
       // let tempLotName = [];
 
@@ -62,22 +83,11 @@ export default class viewPersonalPage extends Component {
       //     tempstr += `${tempLots[i].name} `;
       //   }
       //   this.setState({parkingClerkLotString: tempstr});
-          getCurrentUser()
-            .then(response => {
-              this.setState({parkingClerkName: response.name, parkingClerkEId: response.id});
-                employeeId = response.id;
-                getCurrentParkingClerk(employeeId)
-                .then(response => {
-                    this.setState({parkingClerkPId: response.idInRole});
-                    temp_pId = response.idInRole;
-                    getParkingClerksParkinglot(temp_pId)
-                    .then(response => {
-                        this.setState({parkingClerkLots: response});
-                    });
-                });
+          // getCurrentUser()
+            // .then(response => {
+              // this.setState({parkingClerkName: response.name, parkingClerkEId: response.id});
+                // employeeId = response.id;
 
-            });
-            this.getParkingClerkLotString();
             
     }
     getParkingClerkLotString = () => {
@@ -102,7 +112,7 @@ export default class viewPersonalPage extends Component {
         }
     }
     render() {
-      {console.log(`EID state: ${this.state.parkingClerkEId}`)}
+      // {console.log(`EID state: ${this.state.parkingClerkEId}`)}
           {console.log(`PID state: ${this.state.parkingClerkPId}`)}
           {console.log(`Name state: ${this.state.parkingClerkName}`)}
           {console.log(`Lot state: ${this.state.parkingClerkLots}`)}
@@ -114,6 +124,16 @@ export default class viewPersonalPage extends Component {
               <Typography variant="h5" className={this.props.title} style={{background:"#1B82D2"}}>
                 <h4 style={{textAlign:"center", color: "white", padding: "20px 20px", margin: "0px 0px 0px 0px"}}>個人頁面</h4>
               </Typography>
+              <PullToRefresh
+                pullDownContent={<PullDownContent />}
+                releaseContent={<ReleaseContent />}
+                refreshContent={<RefreshContent />}
+                pullDownThreshold={150}
+                onRefresh={this.onPullList} 
+                triggerHeight={300}
+                backgroundColor='white'
+                >
+              <div style={{background:"#F5F4F9", height: "100vh"}}>
               <br/>
               <br/>
               <ImageAvatars />
@@ -123,7 +143,7 @@ export default class viewPersonalPage extends Component {
               <div>
                 <ListItem button style={{background: "white"}}>
                   <ListItemText style={{width: "25%", verticalAlign: "baseline" , fontSize: '15px'}} primary={"員工編號:"} />
-                  <ListItemText style={{display: "inline-block", verticalAlign: "baseline" , fontSize: '15px'}} primary={<div style={{float: "right"}}>{this.state.parkingClerkEId}</div>} />
+                  <ListItemText style={{display: "inline-block", verticalAlign: "baseline" , fontSize: '15px'}} primary={<div style={{float: "right"}}>{this.state.parkingClerkPId}</div>} />
                 </ListItem>
                 <Divider />
                 <ListItem button style={{background: "white"}}>
@@ -141,7 +161,10 @@ export default class viewPersonalPage extends Component {
               <br/>
               <br/>
               <Button type="primary" onClick={this.handleSubmit}>登出</Button><WhiteSpace />
+              </div>
+              </PullToRefresh>
         </div>
+        
       );
     }
   }

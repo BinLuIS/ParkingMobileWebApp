@@ -193,7 +193,7 @@ export function getCompletedOrder(parkingClerkId){
 }
 
 //viewPersonalPage
-export function getParkingClerkDetail(parkingClerkId){
+export function getParkingClerkDetail(){
     return request({
         // url: BASE_URL + '/parkingclerks/'+parkingClerkId+'/orders?status=completed',
         url: BASE_URL + '/parkingclerks/'+localStorage.getItem(CLERK_ID),

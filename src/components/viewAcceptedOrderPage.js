@@ -141,7 +141,9 @@ export default class viewAcceptedOrderPage extends Component {
                 triggerHeight={300}
                 backgroundColor='white'
                 >
-            {this.getListItem()}
+                <div style={{background:"#F5F4F9", height: "100vh"}}>
+                    {this.getListItem()}
+                </div>
             </PullToRefresh>
         </div>
       );
