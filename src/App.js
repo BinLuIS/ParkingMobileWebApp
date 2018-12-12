@@ -59,7 +59,7 @@ class App extends Component {
       isAuthenticated: false
     });
     history.push('/');
-    Toast.success("You're successfully logged out.",3);
+    Toast.success("成功登出.",3);
   }
 
   handleLogin=(history)=> {

@@ -4,7 +4,7 @@ import Typography from '@material-ui/core/Typography';
 import Avatar from '@material-ui/core/Avatar';
 import Grid from '@material-ui/core/Grid';
 import '../css/viewPersonalPage.css';
-import comp1 from './ImageAvatars';
+import {withStyles} from './ImageAvatars';
 
 export default class viewPersonalPage extends Component {
   
