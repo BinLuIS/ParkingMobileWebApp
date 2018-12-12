@@ -70,12 +70,17 @@ class App extends Component {
       currentUser: null,
       isAuthenticated: false
     });
-    history.push('/login');
-    Toast.success("成功登出.",3);
+    history.push('/');
+    Toast.success("你已成功登出",3);
   }
 
   handleLogin=(history)=> {
     this.loadCurrentUser();
+    setTimeout(getCurrentUser()
+    .then(response => {
+        Toast.success(<div>歡迎你 <b>{response.name}</b>!!!</div>,2);
+        console.log("now2")
+    }), 2000);
     history.push('/clerkPage');
   }
 

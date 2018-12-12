@@ -34,26 +34,33 @@ export default class viewHistoryOrderPage extends Component {
           resolve();
       });
     }
+    getListItem = () => {
+        
+      if(this.state.data.length > 0) {
+          return (<List dense className={this.props.root}>
+            {this.state.data.map(each => (
+                <div>
+              <ListItem key={each} button style={{background: "white"}}>
+                <ListItemAvatar>
+                  <Avatar
+                    src={require('../icon/likeicon.png')}
+                  />
+                </ListItemAvatar>
+                <ListItemText style={{verticalAlign: "baseline" , fontSize: '15px'}} primary={"ID: " + each.id + " / Car No.: " + each.carNumber } />
+                {/* <div>停車時間: 17:00</div> */}
+              </ListItem>
+              <Divider />
+              </div>
+            ))}
+          </List>);
+      }
+      else {
+          return (<div style={{background:"#F5F4F9", verticalAlign: "baseline", textAlign: "center", fontSize: '15px', padding: "5px"}}>你沒有任何已完成的訂單</div>);
+      }
+    }
     render() {
   
       return (
-        //   <List renderHeader={() => <span><h1 style={{textAlign:"center", color: "white"}}>歷史訂單</h1></span>}>
-        //   {this.state.data.map(each=>
-        //     <List.Item>
-        //         <div style={{ padding: '0 15px', display: "flex", justifyContent: 'space-between'}}>
-        //         <div style={{ display: 'flex', padding: '15px 0' }}>
-        //         <img style={{ width:'54px', height: '64px', marginRight: '15px' }} src={require('../icon/caricon.png')} alt="" />
-        //         <div style={{ lineHeight: 1, padding: '10px 0'}}>
-        //             <div style={{ marginBottom: '8px', fontWeight: 'bold' }}>{each.carNumber}</div>
-        //             {/* <div>停車時間: 17:00</div> */}
-        //         </div>
-        //         </div>
-                
-        //     </div>
-        //     </List.Item>
-        //     )}
-            
-        //   </List>
         <div>
             <Typography variant="h5" className={this.props.title} style={{background:"#1B82D2"}}>
                 <h5 style={{textAlign:"center", color: "white", padding: "20px 20px", margin: "0px 0px 0px 0px"}}>歷史訂單</h5>
@@ -67,22 +74,7 @@ export default class viewHistoryOrderPage extends Component {
                 triggerHeight={300}
                 backgroundColor='white'
                 >
-            <List dense className={this.props.root}>
-              {this.state.data.map(each => (
-                  <div>
-                <ListItem key={each} button style={{background: "white"}}>
-                  <ListItemAvatar>
-                    <Avatar
-                      src={require('../icon/likeicon.png')}
-                    />
-                  </ListItemAvatar>
-                  <ListItemText style={{verticalAlign: "baseline" , fontSize: '15px'}} primary={"ID: " + each.id + " / Car No.: " + each.carNumber } />
-                  {/* <div>停車時間: 17:00</div> */}
-                </ListItem>
-                <Divider />
-                </div>
-              ))}
-            </List>
+            {this.getListItem()}
             </PullToRefresh>
         </div>
       );
