@@ -8,9 +8,7 @@ import ImageAvatars from './ImageAvatars';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
-import {getCurrentUser} from '../util/APIUtils';
-import {getParkingClerksParkinglot} from '../util/APIUtils';
-import {getCurrentParkingClerk} from '../util/APIUtils';
+import {getCurrentUser,getParkingClerksParkinglot,getCurrentParkingClerk} from '../util/APIUtils';
 
 export default class viewPersonalPage extends Component {
     state ={
@@ -24,7 +22,7 @@ export default class viewPersonalPage extends Component {
        this.props.onLogout();
        
     }
-    componentDidMount() {
+    componentWillMount() {
       // console.log(`ID prop: ${this.props.parkingClerkId}`);
       // const temp = this.props.parkingClerkId;
       // this.setState({parkingClerkId: temp});
@@ -80,34 +78,38 @@ export default class viewPersonalPage extends Component {
 
             });
             this.getParkingClerkLotString();
+            
     }
     getParkingClerkLotString = () => {
       console.log(this.state.parkingClerkLots.length);
-        if(this.state.parkingClerkLots.length > 0) {
+        if(this.state.parkingClerkLots.length >= 0) {
             let tempstr = "";
             this.state.parkingClerkLots.map(e => {
-            tempstr += e.name;
-            tempstr += "<br/>";
+            // ["lot1", "lot2", "lot3", "lot1", "lot2", "lot3", "lot1", "lot2", "lot3", "lot3", "lot1", "lot2", "lot3"].map(e => {
+              if(this.state.parkingClerkLots[this.state.parkingClerkLots.length-1].name == e.name)
+                tempstr += `${e.name}`;
+              else
+                tempstr += `${e.name}, `;
             });
             console.log(tempstr);
             // this.setState({parkingClerkLotString: tempstr});
             
-            return (<ListItemText style={{display: "inline-block" , fontSize: '15px'}} primary={tempstr} />);
+          return (<ListItemText style={{width: "70%", display: "inline-block" , fontSize: '15px', float: "right"}} primary={<div style={{ float: "right"}}>{tempstr}</div>} />);
             
         }
         else {
-            return (<ListItemText style={{display: "inline-block" , fontSize: '15px'}} primary={"No Parking Lots for you."} />);
+            return (<ListItemText style={{display: "inline-block" , fontSize: '15px'}} primary={<div style={{float: "right"}}>沒有所屬的停車場</div>} />);
         }
     }
     render() {
-      
-      return (
-        
-        <div>
-          {console.log(`EID state: ${this.state.parkingClerkEId}`)}
+      {console.log(`EID state: ${this.state.parkingClerkEId}`)}
           {console.log(`PID state: ${this.state.parkingClerkPId}`)}
           {console.log(`Name state: ${this.state.parkingClerkName}`)}
           {console.log(`Lot state: ${this.state.parkingClerkLots}`)}
+      return (
+        
+        <div>
+          
           {/* {console.log(`Lot String state: ${this.state.parkingClerkLotString}`)} */}
               <Typography variant="h5" className={this.props.title} style={{background:"#1B82D2"}}>
                 <h4 style={{textAlign:"center", color: "white", padding: "20px 20px", margin: "0px 0px 0px 0px"}}>個人頁面</h4>
@@ -120,8 +122,13 @@ export default class viewPersonalPage extends Component {
               <List className={this.props.root}>
               <div>
                 <ListItem button style={{background: "white"}}>
-                  <ListItemText style={{width: "25%", verticalAlign: "baseline" , fontSize: '15px'}} primary={"用戶名稱:"} />
-                  <ListItemText style={{display: "inline-block", verticalAlign: "baseline" , fontSize: '15px'}} primary={this.state.parkingClerkName} />
+                  <ListItemText style={{width: "25%", verticalAlign: "baseline" , fontSize: '15px'}} primary={"員工編號:"} />
+                  <ListItemText style={{display: "inline-block", verticalAlign: "baseline" , fontSize: '15px'}} primary={<div style={{float: "right"}}>{this.state.parkingClerkEId}</div>} />
+                </ListItem>
+                <Divider />
+                <ListItem button style={{background: "white"}}>
+                  <ListItemText style={{width: "25%", verticalAlign: "baseline" , fontSize: '15px'}} primary={"員工名稱:"} />
+                  <ListItemText style={{display: "inline-block", verticalAlign: "baseline" , fontSize: '15px'}} primary={<div style={{float: "right"}}>{this.state.parkingClerkName}</div>} />
                 </ListItem>
                 <Divider />
                 <ListItem button style={{background: "white"}}>

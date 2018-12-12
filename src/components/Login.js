@@ -3,7 +3,7 @@ import { login } from '../util/APIUtils';
 import { Toast, Input, List, InputItem, WhiteSpace, Button , Icon} from 'antd-mobile';
 import { createForm } from 'rc-form';
 import { ACCESS_TOKEN } from '../constants';
-import {getCurrentUser} from '../util/APIUtils';
+
 import Typography from '@material-ui/core/Typography';
 
 class Login extends Component {
