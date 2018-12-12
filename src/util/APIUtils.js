@@ -1,4 +1,4 @@
-import { BASE_URL, API_BASE_URL, POLL_LIST_SIZE, ACCESS_TOKEN } from '../constants';
+import { BASE_URL, API_BASE_URL, POLL_LIST_SIZE, ACCESS_TOKEN, CLERK_ID } from '../constants';
 
 const request = (options) => {
     const headers = new Headers({
@@ -24,6 +24,7 @@ const request = (options) => {
 };
 
 export function login(loginRequest) {
+    console.log("login /auth/signin")
     return request({
         url: API_BASE_URL + "/auth/signin",
         method: 'POST',
@@ -56,9 +57,12 @@ export function checkEmailAvailability(email) {
 
 export function getCurrentUser() {
     if(!localStorage.getItem(ACCESS_TOKEN)) {
+        console.log("No access token")
         return Promise.reject("No access token set.");
     }
-
+    console.log('getAccessToken')
+    console.log(localStorage.getItem(ACCESS_TOKEN))
+    console.log("getCurrentUser call api /user/me")
     return request({
         url: API_BASE_URL + "/user/me",
         method: 'GET'
@@ -99,7 +103,8 @@ export function checkParkingLotParkingOrder(lotId,order){
 //pickAcceptedOrderParkingLocationPage
 export function getParkingClerksParkinglot(parkingClerkId){
     return request({
-        url: BASE_URL + '/parkingclerks/'+parkingClerkId+"/parkinglots",
+        // url: BASE_URL + '/parkingclerks/'+parkingClerkId+"/parkinglots",
+        url: BASE_URL + '/parkingclerks/'+localStorage.getItem(CLERK_ID)+"/parkinglots",
         method: 'GET'
     });
 }
@@ -107,7 +112,8 @@ export function getParkingClerksParkinglot(parkingClerkId){
 //viewAcceptedOrderPage
 export function getClerksprocessingOrders(parkingClerkId){
     return request({
-        url: BASE_URL + '/parkingclerks/'+parkingClerkId+"/orders?status=accepted,parked,pendingFetching",
+        // url: BASE_URL + '/parkingclerks/'+parkingClerkId+"/orders?status=accepted,parked,pendingFetching",
+        url: BASE_URL + '/parkingclerks/'+localStorage.getItem(CLERK_ID)+"/orders?status=accepted,parked,pendingFetching",
         method: 'GET'
     });
 }
@@ -138,7 +144,8 @@ export function getUngrabedOrder(){
 
 export function grabPendingOrder(parkingClerkId,changeStatusRequest){
     return request({
-        url: BASE_URL + "/parkingclerks/"+parkingClerkId+"/orders",
+        // url: BASE_URL + "/parkingclerks/"+parkingClerkId+"/orders",
+        url: BASE_URL + "/parkingclerks/"+localStorage.getItem(CLERK_ID)+"/orders",
         method: 'POST',
         mode: 'cors', 
         body: JSON.stringify(changeStatusRequest)
@@ -148,7 +155,17 @@ export function grabPendingOrder(parkingClerkId,changeStatusRequest){
 //viewHistoryOrderPage
 export function getCompletedOrder(parkingClerkId){
     return request({
-        url: BASE_URL + '/parkingclerks/'+parkingClerkId+'/orders?status=completed',
+        // url: BASE_URL + '/parkingclerks/'+parkingClerkId+'/orders?status=completed',
+        url: BASE_URL + '/parkingclerks/'+localStorage.getItem(CLERK_ID)+'/orders?status=completed',
+        method: 'GET'
+    }); 
+}
+
+//viewPersonalPage
+export function getParkingClerkDetail(parkingClerkId){
+    return request({
+        // url: BASE_URL + '/parkingclerks/'+parkingClerkId+'/orders?status=completed',
+        url: BASE_URL + '/parkingclerks/'+localStorage.getItem(CLERK_ID),
         method: 'GET'
     }); 
 }

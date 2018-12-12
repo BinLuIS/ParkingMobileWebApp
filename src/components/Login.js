@@ -32,10 +32,10 @@ class LoginForm extends Component {
                 const loginRequest = Object.assign({}, values);
                 login(loginRequest)
                 .then(response => {
-                    console.log("now1")
-                    
+                    console.log("response of /auth/signin")
+                    console.log(response)
                     localStorage.setItem(ACCESS_TOKEN, response.accessToken);
-                    console.log(ACCESS_TOKEN);
+                    console.log("set accesstoken");
                     // setTimeout(getCurrentUser()
                     // .then(response => {
                     //     Toast.success(`歡迎你 ${response.name}!!!`,2);
