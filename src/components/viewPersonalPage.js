@@ -1,8 +1,9 @@
-import { TabBar, ListView,List,Button, WhiteSpace } from 'antd-mobile';
-import { Icon } from 'antd';
+import { Button, WhiteSpace } from 'antd-mobile';
 import React, { Component } from 'react'
-import ReactDOM from 'react-dom';
-
+import Typography from '@material-ui/core/Typography';
+import Avatar from '@material-ui/core/Avatar';
+import Grid from '@material-ui/core/Grid';
+import '../css/viewPersonalPage.css';
 
 export default class viewPersonalPage extends Component {
   
@@ -14,7 +15,16 @@ export default class viewPersonalPage extends Component {
     render() {
       return (
         <div>
-              <div><List renderHeader={() => <span><h1 style={{textAlign:"center", color: "white"}}>申請停車</h1></span>}/></div>
+              <Typography variant="h5" className={this.props.title} style={{background:"#1B82D2"}}>
+                <h5 style={{textAlign:"center", color: "white", padding: "20px 20px", margin: "0px 0px 0px 0px"}}>個人頁面</h5>
+              </Typography>
+              <br/>
+              <br/>
+              <Grid container justify="center" alignItems="center">
+                <Avatar alt="usericon" src={require('../icon/user_male.png')} className="bigAvatar" />
+              </Grid>
+              <br/>
+              <br/>
               <Button type="primary" onClick={this.handleSubmit}>登出</Button><WhiteSpace />
         </div>
       );

@@ -8,7 +8,7 @@ export default class SloganPage extends React.Component {
     return (
         <div>
             <WhiteSpace size="lg" />
-            <NoticeBar marqueeProps={{ loop: true, leading: 800, trailing: 800, fps: 40}}>
+            <NoticeBar marqueeProps={{ loop: true, leading: 800, trailing: 800, fps: 40}} icon={null}>
             <span style={{color: "red"}}>全國最大的首家線上泊車系統上線啦   </span>
             <span style={{color: "orange"}}>過千位泊車美女任你選擇    </span>
             <span style={{color: "green"}}>由BinLuIS - MasterJOE親自研發 </span>    
