@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import  { Router } from 'react-router';
 import SloganPage from './sloganPage';
 import Sound from 'react-sound';
-import soundfile from '../music/Welcome.mp3';
+import soundfile from '../music/welcome_customer.mp3';
 
 export default class requestFormPage extends Component {
   
@@ -40,9 +40,21 @@ export default class requestFormPage extends Component {
     carnum.setState({value: ''});
     captcha.setState({value: ''});
   }
-  
+  onVoice = () => {
+    return (<Sound
+        url={soundfile}
+        playStatus={Sound.status.PLAYING}
+        onLoading={this.handleSongLoading}
+        onPlaying={this.handleSongPlaying}
+        onFinishedPlaying={this.handleSongFinishedPlaying}
+        volume={100}
+        autoLoad={true}
+        // loop ={true}
+      />);
+  }
   componentDidMount() {
     // simulate img loading
+    // this.onVoice()
     setTimeout(() => {
       this.setState({
         data: ['https://holland.pk/uptow/i4/570d4c6cdf6ec2d403a36614e55ebae2.jpg', 'https://holland.pk/uptow/i4/2cf8023e2fec3b0b679efb01794f7810.jpg'],
@@ -92,14 +104,14 @@ export default class requestFormPage extends Component {
 
     return (
         <div>
-
-          <Sound
+          {this.onVoice()}
+          {/* <Sound
           url={soundfile}
           playStatus={Sound.status.PLAYING}
           onLoading={this.handleSongLoading}
           onPlaying={this.handleSongPlaying}
           onFinishedPlaying={this.handleSongFinishedPlaying}
-          />
+          /> */}
           <SloganPage />
           <List renderHeader={() => <span><h1 style={{textAlign:"center", color: "white"}}>冰露泊車</h1></span>}>
             <InputItem ref='carnum' style={{ padding: "50px" }}>

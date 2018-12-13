@@ -13,6 +13,8 @@ import { getCurrentUser, getCurrentParkingClerk } from './util/APIUtils';
 import { ACCESS_TOKEN, CLERK_ID } from './constants';
 import clerkPage from './components/clerkPage';
 import PrivateRoute from './components/PrivateRoute';
+import Sound from 'react-sound';
+import soundfile from './music/welcome_employee.mp3';
 
 const { Header, Sider, Content } = Layout;
 class App extends Component {
@@ -50,6 +52,7 @@ class App extends Component {
       });
       localStorage.setItem(CLERK_ID, response.idInRole);
       console.log("goToClerkPage")
+      
       Toast.success(`歡迎你 ${response.name}!!!`,2);
       history.push('/clerkPage');
     }).catch(error => {
@@ -75,6 +78,20 @@ class App extends Component {
     history.push('/login');
     window.location.reload();
     Toast.success("你已成功登出",3);
+  }
+
+  onVoice = () => {
+    if(this.state.isAuthenticated == true)
+      return (<Sound
+          url={soundfile}
+          playStatus={Sound.status.PLAYING}
+          onLoading={this.handleSongLoading}
+          onPlaying={this.handleSongPlaying}
+          onFinishedPlaying={this.handleSongFinishedPlaying}
+          volume={100}
+          autoLoad={true}
+          // loop ={true}
+        />);
   }
 
   handleLogin=(history)=> {
@@ -118,9 +135,11 @@ class App extends Component {
   }
 
   render() {
+    
     console.log("Auth"+this.state.isAuthenticated)
     return (
       <Layout>
+        {this.onVoice()}
         <Content>
           <Switch>
             <Route path="/" exact render={(props) => <Login onLogin={this.handleLogin} {...props} />}></Route>
