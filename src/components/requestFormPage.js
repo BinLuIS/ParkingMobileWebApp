@@ -114,12 +114,12 @@ export default class requestFormPage extends Component {
           /> */}
           <SloganPage />
           <List renderHeader={() => <span><h1 style={{textAlign:"center", color: "white"}}>冰露泊車</h1></span>}>
-            <InputItem ref='carnum' style={{ padding: "50px" }}>
+            {/* <InputItem ref='carnum' style={{ padding: "50px" }}>
             <p>車牌號碼 </p>
             </InputItem>
             <InputItem ref='captcha' style={{ padding: "50px" }}>
             <p>個人驗證碼 </p>
-            </InputItem>
+            </InputItem> */}
           </List>
           <br />
           <div>
