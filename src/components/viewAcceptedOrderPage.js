@@ -10,6 +10,10 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Divider from '@material-ui/core/Divider';
 import {PullToRefresh, PullDownContent, ReleaseContent, RefreshContent} from "react-js-pull-to-refresh";
 import { getClerksprocessingOrders, getOrderByCarNumber, changeOrderStatus } from '../util/APIUtils';
+import { Modal, Button, WhiteSpace, WingBlank} from 'antd-mobile';
+
+const alert = Modal.alert;
+
 export default class viewAcceptedOrderPage extends Component {
     state={
         data:[]
@@ -84,7 +88,10 @@ export default class viewAcceptedOrderPage extends Component {
         if(order.status=='accepted'){
             return <div onClick={()=>{this.props.onChangePage("pickAcceptedOrderCarPage");this.props.onChangeOrderID(order.id);}}><span style={{verticalAlign: "baseline", fontSize: '15px'}}>泊車 ></span></div>
         }else if(order.status=='pendingFetching'){
-            return <div onClick={()=>this.fetchCar(order)}><span style={{verticalAlign: "baseline", fontSize: '15px'}}>取車 ></span></div>
+            return <div onClick={()=>{ {alert('確認取車', '請確認是否完成取車', [
+                { text: '取消', onPress: () => console.log('cancel') },
+                { text: '確認', onPress: () => {{this.fetchCar(order)}; console.log('ok')} },
+              ])}} }><span style={{verticalAlign: "baseline", fontSize: '15px'}}>取車 ></span></div>
         }
     }
     getIcon = (order) => {
@@ -103,7 +110,7 @@ export default class viewAcceptedOrderPage extends Component {
         if(this.state.data.length > 0) {
             return (<List className={this.props.root}>
                 {this.state.data.map(each => (<div>
-                  <ListItem key={each} button style={{background: "white"}}>
+                  <ListItem key={each} button style={{background: "white"}} >
                     <ListItemAvatar>
                       {/* <Avatar
                           src={require('../icon/caricon.png')}
