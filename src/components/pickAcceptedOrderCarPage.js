@@ -82,7 +82,7 @@ import {checkParkingLotParkingOrder} from '../util/APIUtils'
            <br />
            <br />
             <div>
-             <Button type="primary" onClick={()=>{this.checkOrder(this.props.orderID)}}>完成訂單</Button><WhiteSpace />
+             <Button type="primary" onClick={()=>{this.checkOrder(this.props.orderID)}}>完成泊車</Button><WhiteSpace />
             </div>
         </div>
       );
