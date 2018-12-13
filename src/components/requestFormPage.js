@@ -31,7 +31,7 @@ export default class requestFormPage extends Component {
     const {name,carnum} = this.refs
     console.log(carnum)
     console.log(name)
-    if(carnum == undefined) {
+    if(carnum == "") {
       Toast.info("請先輸入車牌號碼",3);
     }
     this.props.getStatusRequest(carnum.state.value)
@@ -90,6 +90,7 @@ export default class requestFormPage extends Component {
 
     return (
         <div>
+          
           <SloganPage />
           <List renderHeader={() => <span><h1 style={{textAlign:"center", color: "white"}}>冰露泊車</h1></span>}>
             <InputItem ref='name' style={{ padding: "50px" }}>
