@@ -59,51 +59,59 @@ export default class viewPersonalPage extends Component {
       resolve();
     });
   }
-  componentDidMount() {
-
+  componentWillReceiveProps() {
+      
     this.getPersonalInfo();
-
+          
   }
-  getParkingClerkId = () => {
-    if (this.state.parkingClerkLots.length == 0) {
-      return (<ListItemText style={{ display: "inline-block", verticalAlign: "baseline", fontSize: '15px' }} primary={<div style={{ float: "right" }}>下載中...</div>} />);
-    }
-    else {
-      return (<ListItemText style={{ display: "inline-block", verticalAlign: "baseline", fontSize: '15px' }} primary={<div style={{ float: "right" }}>{this.state.parkingClerkPId}</div>} />);
-    }
-  }
-  getParkingClerkName = () => {
-    if (this.state.parkingClerkLots.length == "") {
-      return (<ListItemText style={{ display: "inline-block", verticalAlign: "baseline", fontSize: '15px' }} primary={<div style={{ float: "right" }}>下載中...</div>} />);
-    }
-    else {
-      return (<ListItemText style={{ display: "inline-block", verticalAlign: "baseline", fontSize: '15px' }} primary={<div style={{ float: "right" }}>{this.state.parkingClerkName}</div>} />);
-    }
+  componentDidMount() {
+    
+    this.getPersonalInfo();
+          
   }
 
-  getParkingClerkLotString = () => {
-    if (this.state.parkingClerkLots.length == 0) {
-      return (<ListItemText style={{ display: "inline-block", fontSize: '15px' }} primary={<div style={{ float: "right" }}>下載中...</div>} />);
+ getParkingClerkId = () => {
+      if(this.state.parkingClerkPId == 0) {          
+        return (<ListItemText style={{display: "inline-block", verticalAlign: "baseline" , fontSize: '15px'}} primary={<div style={{float: "right"}}>下載中...</div>} />);
+      }
+      else {
+          return (<ListItemText style={{display: "inline-block", verticalAlign: "baseline" , fontSize: '15px'}} primary={<div style={{float: "right"}}>{this.state.parkingClerkPId}</div>} />);
+      }
     }
-    if (this.state.parkingClerkLots.length > 0) {
-      let tempstr = "";
-      this.state.parkingClerkLots.map(e => {
-        // ["lot1", "lot2", "lot3", "lot1", "lot2", "lot3", "lot1", "lot2", "lot3", "lot3", "lot1", "lot2", "lot3"].map(e => {
-        if (this.state.parkingClerkLots[this.state.parkingClerkLots.length - 1].name == e.name)
-          tempstr += `${e.name}`;
-        else
-          tempstr += `${e.name}, `;
-      });
-      console.log(tempstr);
-      // this.setState({parkingClerkLotString: tempstr});
+    getParkingClerkName = () => {
+      if(this.state.parkingClerkPId == 0) {          
+        return (<ListItemText style={{display: "inline-block", verticalAlign: "baseline" , fontSize: '15px'}} primary={<div style={{float: "right"}}>下載中...</div>} />);
+      }
+      else {
+          return (<ListItemText style={{display: "inline-block", verticalAlign: "baseline" , fontSize: '15px'}} primary={<div style={{float: "right"}}>{this.state.parkingClerkName}</div>} />);
+      }
+    }
 
-      return (<ListItemText style={{ width: "70%", display: "inline-block", fontSize: '15px', float: "right" }} primary={<div style={{ float: "right" }}>{tempstr}</div>} />);
-
+    getParkingClerkLotString = () => {
+        if(this.state.parkingClerkPId == 0) {
+            return (<ListItemText style={{display: "inline-block" , fontSize: '15px'}} primary={<div style={{float: "right"}}>下載中...</div>} />);
+        }
+        else {
+          if(this.state.parkingClerkLots.length > 0) {
+            let tempstr = "";
+            this.state.parkingClerkLots.map(e => {
+            // ["lot1", "lot2", "lot3", "lot1", "lot2", "lot3", "lot1", "lot2", "lot3", "lot3", "lot1", "lot2", "lot3"].map(e => {
+              if(this.state.parkingClerkLots[this.state.parkingClerkLots.length-1].name == e.name)
+                tempstr += `${e.name}`;
+              else
+                tempstr += `${e.name}, `;
+            });
+            console.log(tempstr);
+            // this.setState({parkingClerkLotString: tempstr});
+            
+          return (<ListItemText style={{width: "70%", display: "inline-block" , fontSize: '15px', float: "right"}} primary={<div style={{ float: "right"}}>{tempstr}</div>} />);
+            
+          }
+          else {
+              return (<ListItemText style={{display: "inline-block" , fontSize: '15px'}} primary={<div style={{float: "right"}}>沒有所屬的停車場</div>} />);
+          }
+        }
     }
-    else if (this.state.parkingClerkLots.length == 0) {
-      return (<ListItemText style={{ display: "inline-block", fontSize: '15px' }} primary={<div style={{ float: "right" }}>沒有所屬的停車場</div>} />);
-    }
-  }
   render() {
     // {console.log(`EID state: ${this.state.parkingClerkEId}`)}
     { console.log(`PID state: ${this.state.parkingClerkPId}`) }
@@ -164,14 +172,6 @@ export default class viewPersonalPage extends Component {
         >
           <DialogTitle id="form-dialog-title">更改密碼</DialogTitle>
           <DialogContent>
-            <TextField
-              autoFocus
-              margin="dense"
-              id="username"
-              label="用戶名稱"
-              type="username"
-              fullWidth
-            />
             <TextField
               margin="dense"
               id="password"

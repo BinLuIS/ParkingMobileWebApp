@@ -15,7 +15,7 @@ const PrivateRoute = ({ component: Component, authenticated, ...rest }) => (
             console.log("go to component")
             return <Component {...rest} {...props} />
           }else{
-            Toast.info('沒有權限進入頁面，請先登入', 3);
+            Toast.fail('沒有權限進入頁面，請先登入', 3);
             return <Redirect
             to={{
               pathname: '/login',
