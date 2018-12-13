@@ -67,20 +67,21 @@ const mapDispatchToProps =(dispatch) => ({
     
   }); 
    },
-   addNewFetchRequest: newOrderRequest => {
+   addNewFetchRequest: (newOrderRequestCarNum,newOrderRequestOrderId) => {
     const newOrderRequestItem ={
-      carNumber: newOrderRequest,
+      carNumber: newOrderRequestCarNum,
+      orderId: newOrderRequestOrderId,
       status: 'pendingFetching'
     }
-    console.log(newOrderRequestItem)
+    console.log(`${newOrderRequestCarNum}, ${newOrderRequestOrderId}`)
   //   fetch("https://parkingsystem.herokuapp.com/orders?carNumber="+newOrderRequest, {
   //   mode: 'cors', 
   // }).then(res => res.json())
-  getOrderByCarNumber(newOrderRequest)
+  getOrderByCarNumber(newOrderRequestCarNum)
   .then(resp => {
     // console.log(resp[0].status)
     if(resp.length==0){
-      Toast.fail("沒有此車子的申請",3);
+      Toast.fail("沒有符合的訂單編號及車牌號碼",3);
     }else {
         let order=getLatestCarOrderOfCar(resp)
         if(order.status=='parked'){
@@ -92,7 +93,7 @@ const mapDispatchToProps =(dispatch) => ({
     //    mode: 'cors', 
     //    body: JSON.stringify(newOrderRequestItem)
     //  }).then(res => res.json())
-    changeOrderStatus(order.id,newOrderRequestItem)
+    changeOrderStatus(newOrderRequestOrderId,newOrderRequestItem)
     .then(res => {
       Toast.success("成功申請取車",4);
       dispatch({
@@ -104,12 +105,19 @@ const mapDispatchToProps =(dispatch) => ({
           // status: res.status
         }
       })
-    })
+    }).catch((error) => {
+      if(error.status === 404) {
+        Toast.fail("沒有符合的訂單編號及車牌號碼",3);                    
+      } else {
+        console.log('error: ' + error);
+        Toast.fail("未能申請取車, 請向管理員查詢",3);                         
+      }
+       })
   }else{
       Toast.fail("車子不在停車場",3);
   }
 }
-    })
+})
    },
     getStatusRequest: getOrderRequest => {
     const newOrderRequestItem ={

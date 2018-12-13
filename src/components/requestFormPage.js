@@ -58,8 +58,10 @@ export default class requestFormPage extends Component {
 
     if(carnum == "") {
       Toast.info("請先輸入車牌號碼",3);
+    } 
+    else {
+      this.props.addNewOrderRequest(carnum);
     }
-    this.props.addNewOrderRequest(carnum);
     this.setState({carnum: ""});
     this.handleparkButtonClose();
   }
@@ -78,7 +80,9 @@ export default class requestFormPage extends Component {
     if(carnum == "" || orderid == "") {
       Toast.info("請先輸入訂單編號及車牌號碼",3);
     }
-    this.props.addNewFetchRequest(carnum);
+    else {
+      this.props.addNewFetchRequest(carnum, orderid);
+    }
     this.setState({carnum: "", orderid: ""});
     this.handlefetchButtonClose();
   }
@@ -88,15 +92,15 @@ export default class requestFormPage extends Component {
 
     if(carnum == "") {
       Toast.info("請先輸入車牌號碼",3);
+    }else {
+      this.props.getStatusRequest(carnum);
     }
-    this.props.getStatusRequest(carnum);
     this.setState({carnum: ""});
   }
   
   componentDidMount() {
     // simulate img loading
 
-    console.log("OKOK")
     this.setState({ voiceComponent: (<Sound
       url={soundfile}
       playStatus={Sound.status.PLAYING}
