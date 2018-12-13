@@ -17,7 +17,6 @@ import Divider from '@material-ui/core/Divider';
 import {PullToRefresh, PullDownContent, ReleaseContent, RefreshContent} from "react-js-pull-to-refresh";
 import { getUngrabedOrder,grabPendingOrder } from '../util/APIUtils';
 
-
 export default class viewAllOrderPage extends Component {
     constructor() {
         super();
@@ -30,7 +29,9 @@ export default class viewAllOrderPage extends Component {
     componentDidMount() {
         this.getAllOrder()
     }
-
+    componentWillReceiveProps() {
+        this.getAllOrder();
+    }
     getAllOrder=()=>{
       getUngrabedOrder()
         //     fetch('https://parkingsystem.herokuapp.com/orders?status=pendingParking')

@@ -22,6 +22,9 @@ export default class viewAcceptedOrderPage extends Component {
     componentDidMount() {
         this.getAcceptedOrder();
     }
+    componentWillReceiveProps() {
+        this.getAcceptedOrder();
+    }
 
     getAcceptedOrder=()=>{
         getClerksprocessingOrders("1")

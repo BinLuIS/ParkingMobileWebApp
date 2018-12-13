@@ -2,6 +2,8 @@ import { List, InputItem, WhiteSpace, Button,Toast,Carousel, WingBlank } from 'a
 import React, { Component } from 'react';
 import  { Router } from 'react-router';
 import SloganPage from './sloganPage';
+import Sound from 'react-sound';
+import soundfile from '../music/welcome_customer.mp3';
 
 export default class requestFormPage extends Component {
   
@@ -11,36 +13,48 @@ export default class requestFormPage extends Component {
     slideIndex: 2,
   }
   onAdded = () => {
-    const {name,carnum} = this.refs
+    const {captcha,carnum} = this.refs
     console.log(carnum)
-    console.log(name)
+    console.log(captcha)
     this.props.addNewOrderRequest(carnum.state.value)
     carnum.setState({value: ''});
-    name.setState({value: ''});
+    captcha.setState({value: ''});
     
   }
   onFetch = () => {
-    const {name,carnum} = this.refs
+    const {captcha,carnum} = this.refs
     console.log(carnum)
-    console.log(name)
+    console.log(captcha)
     this.props.addNewFetchRequest(carnum.state.value)
     carnum.setState({value: ''});
-    name.setState({value: ''});
+    captcha.setState({value: ''});
   }
   onInquire = () => {
-    const {name,carnum} = this.refs
+    const {captcha,carnum} = this.refs
     console.log(carnum)
-    console.log(name)
+    console.log(captcha)
     if(carnum == "") {
       Toast.info("請先輸入車牌號碼",3);
     }
     this.props.getStatusRequest(carnum.state.value)
     carnum.setState({value: ''});
-    name.setState({value: ''});
+    captcha.setState({value: ''});
   }
-  
+  onVoice = () => {
+    return (<Sound
+        url={soundfile}
+        playStatus={Sound.status.PLAYING}
+        onLoading={this.handleSongLoading}
+        onPlaying={this.handleSongPlaying}
+        onFinishedPlaying={this.handleSongFinishedPlaying}
+        volume={100}
+        autoLoad={true}
+        // loop ={true}
+      />);
+  }
   componentDidMount() {
     // simulate img loading
+    // this.onVoice()
     setTimeout(() => {
       this.setState({
         data: ['https://holland.pk/uptow/i4/570d4c6cdf6ec2d403a36614e55ebae2.jpg', 'https://holland.pk/uptow/i4/2cf8023e2fec3b0b679efb01794f7810.jpg'],
@@ -57,8 +71,8 @@ export default class requestFormPage extends Component {
           dots={false}
           infinite
           selectedIndex={this.state.slideIndex}
-          beforeChange={(from, to) => console.log(`slide from ${from} to ${to}`)}
-          afterChange={index => console.log('slide to', index)}
+          // beforeChange={(from, to) => console.log(`slide from ${from} to ${to}`)}
+          // afterChange={index => console.log('slide to', index)}
           autoplayInterval={5000}
         >
           {this.state.data.map((val, index) => (
@@ -90,14 +104,21 @@ export default class requestFormPage extends Component {
 
     return (
         <div>
-          
+          {this.onVoice()}
+          {/* <Sound
+          url={soundfile}
+          playStatus={Sound.status.PLAYING}
+          onLoading={this.handleSongLoading}
+          onPlaying={this.handleSongPlaying}
+          onFinishedPlaying={this.handleSongFinishedPlaying}
+          /> */}
           <SloganPage />
           <List renderHeader={() => <span><h1 style={{textAlign:"center", color: "white"}}>冰露泊車</h1></span>}>
-            <InputItem ref='name' style={{ padding: "50px" }}>
-            <p style={{ color: "#1890ff" }}>姓名 </p>
-            </InputItem>
             <InputItem ref='carnum' style={{ padding: "50px" }}>
-            <p style={{ color: "#1890ff" }}>車牌號碼 </p>
+            <p>車牌號碼 </p>
+            </InputItem>
+            <InputItem ref='captcha' style={{ padding: "50px" }}>
+            <p>個人驗證碼 </p>
             </InputItem>
           </List>
           <br />
