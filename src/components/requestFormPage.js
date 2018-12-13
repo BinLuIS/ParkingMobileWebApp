@@ -4,6 +4,12 @@ import  { Router } from 'react-router';
 import SloganPage from './sloganPage';
 import Sound from 'react-sound';
 import soundfile from '../music/welcome_customer.mp3';
+import TextField from '@material-ui/core/TextField';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import DialogContentText from '@material-ui/core/DialogContentText';
 
 export default class requestFormPage extends Component {
   
@@ -11,50 +17,77 @@ export default class requestFormPage extends Component {
     data: ['1', '2', '3'],
     imgHeight: 176,
     slideIndex: 2,
+    voiceComponent: null,
+    parkButtonStatus: false,
+    fetchButtonStatus: false,
+    queryButtonStatus: false
   }
+  handleparkButtonOpen = () => {
+    this.setState({ parkButtonStatus: true });
+  };
+
+  handleparkButtonClose = () => {
+    this.setState({ parkButtonStatus: false });
+  };
+
+  handlefetchButtonOpen = () => {
+    this.setState({ fetchButtonStatus: true });
+  };
+  handlefetchButtonClose = () => {
+    this.setState({ fetchButtonStatus: false });
+  };
+
+  handlequeryButtonOpen = () => {
+    this.setState({ queryButtonStatus: true });
+  };
+  handlequeryButtonClose = () => {
+    this.setState({ queryButtonStatus: false });
+  };
+
   onAdded = () => {
-    const {captcha,carnum} = this.refs
-    console.log(carnum)
-    console.log(captcha)
-    this.props.addNewOrderRequest(carnum.state.value)
-    carnum.setState({value: ''});
-    captcha.setState({value: ''});
-    
+    {this.handleparkButtonOpen()}
+  //   const {captcha,carnum} = this.refs
+  //   console.log(carnum)
+  //   console.log(captcha)
+  //   this.props.addNewOrderRequest(carnum.state.value)
+  //   carnum.setState({value: ''});
+  //   captcha.setState({value: ''}); 
   }
   onFetch = () => {
-    const {captcha,carnum} = this.refs
-    console.log(carnum)
-    console.log(captcha)
-    this.props.addNewFetchRequest(carnum.state.value)
-    carnum.setState({value: ''});
-    captcha.setState({value: ''});
+    {this.handlefetchButtonOpen()}
+  //   const {captcha,carnum} = this.refs
+  //   console.log(carnum)
+  //   console.log(captcha)
+  //   this.props.addNewFetchRequest(carnum.state.value)
+  //   carnum.setState({value: ''});
+  //   captcha.setState({value: ''});
   }
   onInquire = () => {
-    const {captcha,carnum} = this.refs
-    console.log(carnum)
-    console.log(captcha)
-    if(carnum == "") {
-      Toast.info("請先輸入車牌號碼",3);
-    }
-    this.props.getStatusRequest(carnum.state.value)
-    carnum.setState({value: ''});
-    captcha.setState({value: ''});
+    {this.handlequeryButtonOpen()}
+    // const {carnum} = this.refs
+    // console.log(carnum)
+
+    // if(carnum == "") {
+    //   Toast.info("請先輸入車牌號碼",3);
+    // }
+    // this.props.getStatusRequest(carnum.state.value)
+    // carnum.setState({value: ''});
   }
-  onVoice = () => {
-    return (<Sound
-        url={soundfile}
-        playStatus={Sound.status.PLAYING}
-        onLoading={this.handleSongLoading}
-        onPlaying={this.handleSongPlaying}
-        onFinishedPlaying={this.handleSongFinishedPlaying}
-        volume={100}
-        autoLoad={true}
-        // loop ={true}
-      />);
-  }
+  
   componentDidMount() {
     // simulate img loading
-    // this.onVoice()
+
+    console.log("OKOK")
+    this.setState({ voiceComponent: (<Sound
+      url={soundfile}
+      playStatus={Sound.status.PLAYING}
+      onLoading={this.handleSongLoading}
+      onPlaying={this.handleSongPlaying}
+      onFinishedPlaying={this.handleSongFinishedPlaying}
+      volume={100}
+      autoLoad={true}
+      // loop ={true}
+    />) });
     setTimeout(() => {
       this.setState({
         data: ['https://holland.pk/uptow/i4/570d4c6cdf6ec2d403a36614e55ebae2.jpg', 'https://holland.pk/uptow/i4/2cf8023e2fec3b0b679efb01794f7810.jpg'],
@@ -100,18 +133,113 @@ export default class requestFormPage extends Component {
         </Carousel>
       </WingBlank>);
   }
+  getParkingDialog = () => {
+    return (<Dialog
+      open={this.state.parkButtonStatus}
+      onClose={this.handleparkButtonClose}
+      // fullScreen={fullScreen}
+      aria-labelledby="form-dialog-title"
+    >
+      <DialogTitle id="form-dialog-title">創建泊車請求</DialogTitle>
+      
+      <DialogContent>
+        <TextField
+          autoFocus
+          fullwidth={this.state.fullWidth}
+          maxwidth={this.state.maxWidth}
+          margin="dense"
+          id="carnum"
+          label="車牌號碼"
+          type="carnum"
+          ref="carnum"
+        />
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={this.handleparkButtonClose} type="secondary" size='small' >
+        取消
+        </Button>
+        <Button onClick={this.handleparkButtonClose} type="primary" size='small'  >
+        提交
+        </Button>
+      </DialogActions>
+    </Dialog>);
+  }
+  getFetchingDialog = () => {
+    return (<Dialog
+      open={this.state.fetchButtonStatus}
+      onClose={this.handlefetchButtonClose}
+      // fullScreen={fullScreen}
+      aria-labelledby="form-dialog-title"
+    >
+      <DialogTitle id="form-dialog-title">創建取車請求</DialogTitle>
+      
+      <DialogContent>
+        <TextField
+          autoFocus
+          fullwidth={this.state.fullWidth}
+          maxwidth={this.state.maxWidth}
+          margin="dense"
+          id="orderid"
+          label="訂單編號"
+          type="orderid"
+          ref="orderid"
+        />
+        <TextField
+          fullwidth={this.state.fullWidth}
+          maxwidth={this.state.maxWidth}
+          margin="dense"
+          id="carnum"
+          label="車牌號碼"
+          type="carnum"
+          ref="carnum"
+        />
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={this.handlefetchButtonClose} type="secondary" size='small' >
+        取消
+        </Button>
+        <Button onClick={this.handlefetchButtonClose} type="primary" size='small'  >
+        提交
+        </Button>
+      </DialogActions>
+    </Dialog>);
+  }
+  getQueryDialog = () => {
+    return (<Dialog
+          open={this.state.queryButtonStatus}
+          onClose={this.handlequeryButtonClose}
+          // fullScreen={fullScreen}
+          aria-labelledby="form-dialog-title"
+        >
+          <DialogTitle id="form-dialog-title">創建泊車請求</DialogTitle>
+          
+          <DialogContent>
+            <TextField
+              autoFocus
+              fullwidth={this.state.fullWidth}
+              maxwidth={this.state.maxWidth}
+              margin="dense"
+              id="carnum"
+              label="車牌號碼"
+              type="carnum"
+              ref="carnum"
+            />
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={this.handlequeryButtonClose} type="secondary" size='small' >
+            取消
+            </Button>
+            <Button onClick={this.handlequeryButtonClose} type="primary" size='small'  >
+            查詢
+            </Button>
+          </DialogActions>
+        </Dialog>);
+  }
   render() {
 
     return (
         <div>
-          {this.onVoice()}
-          {/* <Sound
-          url={soundfile}
-          playStatus={Sound.status.PLAYING}
-          onLoading={this.handleSongLoading}
-          onPlaying={this.handleSongPlaying}
-          onFinishedPlaying={this.handleSongFinishedPlaying}
-          /> */}
+          {this.state.voiceComponent}
           <SloganPage />
           <List renderHeader={() => <span><h1 style={{textAlign:"center", color: "white"}}>冰露泊車</h1></span>}>
             {/* <InputItem ref='carnum' style={{ padding: "50px" }}>
@@ -124,8 +252,11 @@ export default class requestFormPage extends Component {
           <br />
           <div>
             <Button type="primary" onClick={this.onAdded}>泊車</Button><WhiteSpace />
+            {this.getParkingDialog()}
             <Button type="primary" onClick={this.onFetch}>取車</Button><WhiteSpace />
+            {this.getFetchingDialog()}
             <Button type="primary" onClick={this.onInquire}>查詢</Button><WhiteSpace />
+            {this.getQueryDialog()}
           </div>
           {this.getAdvertisement()}
         </div>
