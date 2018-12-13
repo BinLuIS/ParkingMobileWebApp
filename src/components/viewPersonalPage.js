@@ -29,6 +29,7 @@ export default class viewPersonalPage extends Component {
       .then(response => {
           this.setState({parkingClerkName: response.name, parkingClerkPId: response.id});
           temp_pId = response.id;
+          console.log(`ppppp state: ${response.id}`);
           getParkingClerksParkinglot(temp_pId)
           .then(response => {
               this.setState({parkingClerkLots: response});
@@ -43,55 +44,31 @@ export default class viewPersonalPage extends Component {
       });
     }
     componentDidMount() {
-      this.getPersonalInfo();
-      // console.log(`ID prop: ${this.props.parkingClerkId}`);
-      // const temp = this.props.parkingClerkId;
-      // this.setState({parkingClerkId: temp});
-      // console.log(`ID state: ${this.state.parkingClerkId}`);
-
-      // let employeeId = 0;
       
-      // let tempLots = [];
-      // let tempLotName = [];
-
-      // getCurrentUser()
-      //   .then(response => {
-      //     this.setState({parkingClerkName: response.name, parkingClerkEId: response.id});
-      //       employeeId = response.id;
-
-      //   });
-      //   console.log(employeeId);
-      //   getCurrentParkingClerk(employeeId)
-      //   .then(response => {
-      //     console.log(response.idInRole);
-      //       this.setState({parkingClerkPId: response.idInRole});
-      //       temp_pId = response.idInRole;
-
-      //   });
-        
-      //   let tempLots = [];
-
-      //   getParkingClerksParkinglot(temp_pId)
-      //   .then(response => {
-      //       this.setState({parkingClerkLots: response});
-      //       tempLots = response;
-      //   });
-        
-      //   let tempstr = "";
-      //   for(var i=0; i<tempLots.length; i++) {
-      //     // `${this.state.parkingClerkLots[0].name}`
-      //     tempstr += `${tempLots[i].name} `;
-      //   }
-      //   this.setState({parkingClerkLotString: tempstr});
-          // getCurrentUser()
-            // .then(response => {
-              // this.setState({parkingClerkName: response.name, parkingClerkEId: response.id});
-                // employeeId = response.id;
-
+      this.getPersonalInfo();
             
     }
+    getParkingClerkId = () => {
+      if(this.state.parkingClerkLots.length == 0) {          
+        return (<ListItemText style={{display: "inline-block", verticalAlign: "baseline" , fontSize: '15px'}} primary={<div style={{float: "right"}}>下載中...</div>} />);
+      }
+      else {
+          return (<ListItemText style={{display: "inline-block", verticalAlign: "baseline" , fontSize: '15px'}} primary={<div style={{float: "right"}}>{this.state.parkingClerkPId}</div>} />);
+      }
+    }
+    getParkingClerkName = () => {
+      if(this.state.parkingClerkLots.length == "") {          
+        return (<ListItemText style={{display: "inline-block", verticalAlign: "baseline" , fontSize: '15px'}} primary={<div style={{float: "right"}}>下載中...</div>} />);
+      }
+      else {
+          return (<ListItemText style={{display: "inline-block", verticalAlign: "baseline" , fontSize: '15px'}} primary={<div style={{float: "right"}}>{this.state.parkingClerkName}</div>} />);
+      }
+    }
+
     getParkingClerkLotString = () => {
-      console.log(this.state.parkingClerkLots.length);
+        if(this.state.parkingClerkLots.length == 0) {
+          return (<ListItemText style={{display: "inline-block" , fontSize: '15px'}} primary={<div style={{float: "right"}}>下載中...</div>} />);
+        }
         if(this.state.parkingClerkLots.length > 0) {
             let tempstr = "";
             this.state.parkingClerkLots.map(e => {
@@ -107,7 +84,7 @@ export default class viewPersonalPage extends Component {
           return (<ListItemText style={{width: "70%", display: "inline-block" , fontSize: '15px', float: "right"}} primary={<div style={{ float: "right"}}>{tempstr}</div>} />);
             
         }
-        else {
+        else if (this.state.parkingClerkLots.length == 0) {
             return (<ListItemText style={{display: "inline-block" , fontSize: '15px'}} primary={<div style={{float: "right"}}>沒有所屬的停車場</div>} />);
         }
     }
@@ -142,13 +119,15 @@ export default class viewPersonalPage extends Component {
               <List className={this.props.root}>
               <div>
                 <ListItem button style={{background: "white"}}>
-                  <ListItemText style={{width: "25%", verticalAlign: "baseline" , fontSize: '15px'}} primary={"員工編號:"} />
-                  <ListItemText style={{display: "inline-block", verticalAlign: "baseline" , fontSize: '15px'}} primary={<div style={{float: "right"}}>{this.state.parkingClerkPId}</div>} />
+                  <ListItemText style={{width: "25%", verticalAlign: "baseline" , fontSize: '15px'}} primary={"停車員編號:"} />
+                  {/* <ListItemText style={{display: "inline-block", verticalAlign: "baseline" , fontSize: '15px'}} primary={<div style={{float: "right"}}>{this.state.parkingClerkPId}</div>} /> */}
+                  {this.getParkingClerkId()}
                 </ListItem>
                 <Divider />
                 <ListItem button style={{background: "white"}}>
                   <ListItemText style={{width: "25%", verticalAlign: "baseline" , fontSize: '15px'}} primary={"員工名稱:"} />
-                  <ListItemText style={{display: "inline-block", verticalAlign: "baseline" , fontSize: '15px'}} primary={<div style={{float: "right"}}>{this.state.parkingClerkName}</div>} />
+                  {/* <ListItemText style={{display: "inline-block", verticalAlign: "baseline" , fontSize: '15px'}} primary={<div style={{float: "right"}}>{this.state.parkingClerkName}</div>} /> */}
+                  {this.getParkingClerkName()}
                 </ListItem>
                 <Divider />
                 <ListItem button style={{background: "white"}}>

@@ -31,6 +31,9 @@ export default class requestFormPage extends Component {
     const {name,carnum} = this.refs
     console.log(carnum)
     console.log(name)
+    if(carnum == undefined) {
+      Toast.info("請先輸入車牌號碼",3);
+    }
     this.props.getStatusRequest(carnum.state.value)
     carnum.setState({value: ''});
     name.setState({value: ''});
@@ -40,7 +43,7 @@ export default class requestFormPage extends Component {
     // simulate img loading
     setTimeout(() => {
       this.setState({
-        data: ['https://holland.pk/uptow/i4/9c889af0fae008bac83a304525b4398b.jpg', 'https://holland.pk/uptow/i4/01ba5299072c7a0d9a19ebf4f151d65e.jpg'],
+        data: ['https://holland.pk/uptow/i4/570d4c6cdf6ec2d403a36614e55ebae2.jpg', 'https://holland.pk/uptow/i4/2cf8023e2fec3b0b679efb01794f7810.jpg'],
       });
     }, 100);
   }
@@ -63,7 +66,7 @@ export default class requestFormPage extends Component {
             <div
               key={val + index}
               href="http://www.alipay.com"
-              style={{ display: 'inline-block', width: '100%', height: this.state.imgHeight, float:"right"  }}
+              style={{ display: 'inline-block', width: '100%', height: this.state.imgHeight, float:"right", maxWidth: '100%' }}
             >
             {/* https://zos.alipayobjects.com/rmsportal/AiyWuByWklrrUDlFignR.png */}
             {/* require('../icon/caricon.png') */}
@@ -71,7 +74,7 @@ export default class requestFormPage extends Component {
               <img
                 src={val}
                 alt=""
-                style={{ width: '50%', verticalAlign: 'top'}}
+                style={{ width: '100%', height: '100%', objectFit: "contain", verticalAlign: 'top'}}
                 onLoad={() => {
                   // fire window resize event to change height
                   window.dispatchEvent(new Event('resize'));
