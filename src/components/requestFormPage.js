@@ -20,7 +20,9 @@ export default class requestFormPage extends Component {
     voiceComponent: null,
     parkButtonStatus: false,
     fetchButtonStatus: false,
-    queryButtonStatus: false
+    queryButtonStatus: false,
+    carnum: "",
+    orderid: ""
   }
   handleparkButtonOpen = () => {
     this.setState({ parkButtonStatus: true });
@@ -45,33 +47,50 @@ export default class requestFormPage extends Component {
   };
 
   onAdded = () => {
-    {this.handleparkButtonOpen()}
   //   const {captcha,carnum} = this.refs
   //   console.log(carnum)
   //   console.log(captcha)
   //   this.props.addNewOrderRequest(carnum.state.value)
   //   carnum.setState({value: ''});
   //   captcha.setState({value: ''}); 
+    const carnum = this.state.carnum;
+    console.log(carnum);
+
+    if(carnum == "") {
+      Toast.info("請先輸入車牌號碼",3);
+    }
+    this.props.addNewOrderRequest(carnum);
+    this.setState({carnum: ""});
+    this.handleparkButtonClose();
   }
   onFetch = () => {
-    {this.handlefetchButtonOpen()}
   //   const {captcha,carnum} = this.refs
   //   console.log(carnum)
   //   console.log(captcha)
   //   this.props.addNewFetchRequest(carnum.state.value)
   //   carnum.setState({value: ''});
   //   captcha.setState({value: ''});
+    const carnum = this.state.carnum;
+    const orderid = this.state.orderid;
+    console.log(carnum);
+    console.log(orderid);
+
+    if(carnum == "" || orderid == "") {
+      Toast.info("請先輸入訂單編號及車牌號碼",3);
+    }
+    this.props.addNewFetchRequest(carnum);
+    this.setState({carnum: "", orderid: ""});
+    this.handlefetchButtonClose();
   }
   onInquire = () => {
-    {this.handlequeryButtonOpen()}
-    // const {carnum} = this.refs
-    // console.log(carnum)
+    const carnum = this.state.carnum;
+    console.log(carnum);
 
-    // if(carnum == "") {
-    //   Toast.info("請先輸入車牌號碼",3);
-    // }
-    // this.props.getStatusRequest(carnum.state.value)
-    // carnum.setState({value: ''});
+    if(carnum == "") {
+      Toast.info("請先輸入車牌號碼",3);
+    }
+    this.props.getStatusRequest(carnum);
+    this.setState({carnum: ""});
   }
   
   componentDidMount() {
@@ -151,14 +170,15 @@ export default class requestFormPage extends Component {
           id="carnum"
           label="車牌號碼"
           type="carnum"
-          ref="carnum"
+          value={this.state.carnum}
+          onChange={e => this.setState({ carnum: e.target.value })}
         />
       </DialogContent>
       <DialogActions>
         <Button onClick={this.handleparkButtonClose} type="secondary" size='small' >
         取消
         </Button>
-        <Button onClick={this.handleparkButtonClose} type="primary" size='small'  >
+        <Button onClick={this.onAdded} type="primary" size='small'  >
         提交
         </Button>
       </DialogActions>
@@ -182,7 +202,8 @@ export default class requestFormPage extends Component {
           id="orderid"
           label="訂單編號"
           type="orderid"
-          ref="orderid"
+          value={this.state.orderid}
+          onChange={e => this.setState({ orderid: e.target.value })}
         />
         <TextField
           fullwidth={this.state.fullWidth}
@@ -191,14 +212,15 @@ export default class requestFormPage extends Component {
           id="carnum"
           label="車牌號碼"
           type="carnum"
-          ref="carnum"
+          value={this.state.carnum}
+          onChange={e => this.setState({ carnum: e.target.value })}
         />
       </DialogContent>
       <DialogActions>
         <Button onClick={this.handlefetchButtonClose} type="secondary" size='small' >
         取消
         </Button>
-        <Button onClick={this.handlefetchButtonClose} type="primary" size='small'  >
+        <Button onClick={this.onFetch} type="primary" size='small'  >
         提交
         </Button>
       </DialogActions>
@@ -211,7 +233,7 @@ export default class requestFormPage extends Component {
           // fullScreen={fullScreen}
           aria-labelledby="form-dialog-title"
         >
-          <DialogTitle id="form-dialog-title">創建泊車請求</DialogTitle>
+          <DialogTitle id="form-dialog-title">查詢車輛狀態</DialogTitle>
           
           <DialogContent>
             <TextField
@@ -222,14 +244,15 @@ export default class requestFormPage extends Component {
               id="carnum"
               label="車牌號碼"
               type="carnum"
-              ref="carnum"
+              value={this.state.carnum}
+              onChange={e => this.setState({ carnum: e.target.value })}
             />
           </DialogContent>
           <DialogActions>
             <Button onClick={this.handlequeryButtonClose} type="secondary" size='small' >
             取消
             </Button>
-            <Button onClick={this.handlequeryButtonClose} type="primary" size='small'  >
+            <Button onClick={this.onInquire} type="primary" size='small'  >
             查詢
             </Button>
           </DialogActions>
@@ -251,11 +274,11 @@ export default class requestFormPage extends Component {
           </List>
           <br />
           <div>
-            <Button type="primary" onClick={this.onAdded}>泊車</Button><WhiteSpace />
+            <Button type="primary" onClick={this.handleparkButtonOpen}>泊車</Button><WhiteSpace />
             {this.getParkingDialog()}
-            <Button type="primary" onClick={this.onFetch}>取車</Button><WhiteSpace />
+            <Button type="primary" onClick={this.handlefetchButtonOpen}>取車</Button><WhiteSpace />
             {this.getFetchingDialog()}
-            <Button type="primary" onClick={this.onInquire}>查詢</Button><WhiteSpace />
+            <Button type="primary" onClick={this.handlequeryButtonOpen}>查詢</Button><WhiteSpace />
             {this.getQueryDialog()}
           </div>
           {this.getAdvertisement()}

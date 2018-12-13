@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
-import { Toast } from 'antd-mobile';
 import { connect } from "react-redux"
 import requestFormPage from '../components/requestFormPage'
 import { addParkOrder, getOrderByCarNumber, changeOrderStatus } from '../util/APIUtils';
+import { Modal, Toast } from 'antd-mobile';
 
+const alert = Modal.alert;
   const getLatestCarOrderOfCar=(carOrderList)=>{
     let largestId=0;  
     let result=null;
@@ -36,14 +37,23 @@ const mapDispatchToProps =(dispatch) => ({
   // .then(res => res.json())
    addParkOrder(newOrderRequestItem)
    .then(res => {
-    Toast.success("成功申請泊車",3);
+    // Toast.success("成功申請泊車",3);
+    alert('成功申請泊車', <div>訂單編號: <b>{res.id}</b> <br/>車牌號碼: <b>{res.carNumber}</b><br/><br/>***請緊記提取單據***<br/>***以作日後提取車輛使用***</div>, [
+      {
+        text: '確認',
+        onPress: () =>
+          new Promise((resolve) => {
+            setTimeout(resolve, 1000);
+          }),
+      },
+    ])
      dispatch({
        type: "ADD_NEW_ORDER_REQUEST",
        payload: {
-         id: res.id,
-         carNumber: res.carNumber,
-         requestType: res.requestType,
-         status: res.status
+        //  id: res.id,
+        //  carNumber: res.carNumber,
+        //  requestType: res.requestType,
+        //  status: res.status
        }
      })
    })
@@ -84,14 +94,14 @@ const mapDispatchToProps =(dispatch) => ({
     //  }).then(res => res.json())
     changeOrderStatus(order.id,newOrderRequestItem)
     .then(res => {
-      Toast.success("成功申請取車",3);
+      Toast.success("成功申請取車",4);
       dispatch({
         type: "ADD_NEW_ORDER_REQUEST",
         payload: {
-          id: res.id,
-          carNumber: res.carNumber,
-          requestType: res.requestType,
-          status: res.status
+          // id: res.id,
+          // carNumber: res.carNumber,
+          // requestType: res.requestType,
+          // status: res.status
         }
       })
     })
@@ -133,4 +143,17 @@ const mapDispatchToProps =(dispatch) => ({
   }
   })
    
+  const printReceipt = () => (
+    alert('Delete', 'Are you sure???', [
+      { text: 'Cancel', onPress: () => console.log('cancel') },
+      {
+        text: 'Ok',
+        onPress: () =>
+          new Promise((resolve) => {
+            Toast.info('onPress Promise', 1);
+            setTimeout(resolve, 1000);
+          }),
+      },
+    ])
+  );
  export default connect(null, mapDispatchToProps)(requestFormPage)
