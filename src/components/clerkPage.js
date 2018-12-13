@@ -49,7 +49,7 @@ export default class clerkPage extends Component {
           barTintColor="white"
           tabBarPosition="bottom"
           hidden={this.state.hidden}
-          prerenderingSiblingsNumber={0}
+          prerenderingSiblingsNumber={Infinity}
         >
           <TabBar.Item
             title="搶單"

@@ -60,6 +60,10 @@ class LoginForm extends Component {
                     }
                 });
             }
+            else {
+                const description =  "請填寫用戶名稱或密碼"
+                Toast.info(description,3);                           
+            }
             
         });
     }
