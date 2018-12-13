@@ -2,6 +2,8 @@ import { List, InputItem, WhiteSpace, Button,Toast,Carousel, WingBlank } from 'a
 import React, { Component } from 'react';
 import  { Router } from 'react-router';
 import SloganPage from './sloganPage';
+import Sound from 'react-sound';
+import soundfile from '../music/Welcome.mp3';
 
 export default class requestFormPage extends Component {
   
@@ -11,32 +13,32 @@ export default class requestFormPage extends Component {
     slideIndex: 2,
   }
   onAdded = () => {
-    const {name,carnum} = this.refs
+    const {captcha,carnum} = this.refs
     console.log(carnum)
-    console.log(name)
+    console.log(captcha)
     this.props.addNewOrderRequest(carnum.state.value)
     carnum.setState({value: ''});
-    name.setState({value: ''});
+    captcha.setState({value: ''});
     
   }
   onFetch = () => {
-    const {name,carnum} = this.refs
+    const {captcha,carnum} = this.refs
     console.log(carnum)
-    console.log(name)
+    console.log(captcha)
     this.props.addNewFetchRequest(carnum.state.value)
     carnum.setState({value: ''});
-    name.setState({value: ''});
+    captcha.setState({value: ''});
   }
   onInquire = () => {
-    const {name,carnum} = this.refs
+    const {captcha,carnum} = this.refs
     console.log(carnum)
-    console.log(name)
+    console.log(captcha)
     if(carnum == "") {
       Toast.info("請先輸入車牌號碼",3);
     }
     this.props.getStatusRequest(carnum.state.value)
     carnum.setState({value: ''});
-    name.setState({value: ''});
+    captcha.setState({value: ''});
   }
   
   componentDidMount() {
@@ -57,8 +59,8 @@ export default class requestFormPage extends Component {
           dots={false}
           infinite
           selectedIndex={this.state.slideIndex}
-          beforeChange={(from, to) => console.log(`slide from ${from} to ${to}`)}
-          afterChange={index => console.log('slide to', index)}
+          // beforeChange={(from, to) => console.log(`slide from ${from} to ${to}`)}
+          // afterChange={index => console.log('slide to', index)}
           autoplayInterval={5000}
         >
           {this.state.data.map((val, index) => (
@@ -90,14 +92,21 @@ export default class requestFormPage extends Component {
 
     return (
         <div>
-          
+
+          <Sound
+          url={soundfile}
+          playStatus={Sound.status.PLAYING}
+          onLoading={this.handleSongLoading}
+          onPlaying={this.handleSongPlaying}
+          onFinishedPlaying={this.handleSongFinishedPlaying}
+          />
           <SloganPage />
           <List renderHeader={() => <span><h1 style={{textAlign:"center", color: "white"}}>冰露泊車</h1></span>}>
-            <InputItem ref='name' style={{ padding: "50px" }}>
-            <p style={{ color: "#1890ff" }}>姓名 </p>
-            </InputItem>
             <InputItem ref='carnum' style={{ padding: "50px" }}>
-            <p style={{ color: "#1890ff" }}>車牌號碼 </p>
+            <p>車牌號碼 </p>
+            </InputItem>
+            <InputItem ref='captcha' style={{ padding: "50px" }}>
+            <p>個人驗證碼 </p>
             </InputItem>
           </List>
           <br />
