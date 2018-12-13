@@ -10,7 +10,7 @@ import pickAcceptedOrderCarPage from './components/pickAcceptedOrderCarPage';
 import viewAcceptedOrderPage from './components/viewAcceptedOrderPage';
 import Login from './components/Login'
 import { getCurrentUser, getCurrentParkingClerk } from './util/APIUtils';
-import { ACCESS_TOKEN, CLERK_ID } from './constants';
+import { ACCESS_TOKEN, CLERK_ID, USER_ID } from './constants';
 import clerkPage from './components/clerkPage';
 import PrivateRoute from './components/PrivateRoute';
 import Sound from 'react-sound';
@@ -51,6 +51,7 @@ class App extends Component {
         parkingClerkId: response.idInRole
       });
       localStorage.setItem(CLERK_ID, response.idInRole);
+      localStorage.setItem(USER_ID, response.id);
       console.log("goToClerkPage")
       
       Toast.success(`歡迎你 ${response.name}!!!`,2);

@@ -1,4 +1,4 @@
-import { BASE_URL, API_BASE_URL, POLL_LIST_SIZE, ACCESS_TOKEN, CLERK_ID } from '../constants';
+import { BASE_URL, API_BASE_URL, POLL_LIST_SIZE, ACCESS_TOKEN, CLERK_ID, USER_ID } from '../constants';
 
 const request = (options) => {
     const headers = new Headers({
@@ -199,4 +199,15 @@ export function getParkingClerkDetail(){
         url: BASE_URL + '/parkingclerks/'+localStorage.getItem(CLERK_ID),
         method: 'GET'
     }); 
+}
+
+export function changeUserPassword(newPassword){
+    console.log(localStorage.getItem(USER_ID))
+    return request({
+        // url: BASE_URL + '/parkingclerks/'+parkingClerkId+'/orders?status=completed',
+        url: API_BASE_URL + "/users/"+localStorage.getItem(USER_ID),
+        method: 'PATCH',
+        body: JSON.stringify(newPassword)
+    }); 
+   
 }

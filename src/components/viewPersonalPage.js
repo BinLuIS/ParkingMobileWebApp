@@ -1,4 +1,4 @@
-import { List, Button, WhiteSpace } from 'antd-mobile';
+import { List, Button, WhiteSpace, Toast } from 'antd-mobile';
 import React, { Component } from 'react'
 import Typography from '@material-ui/core/Typography';
 import Avatar from '@material-ui/core/Avatar';
@@ -16,6 +16,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import {changeUserPassword} from '../util/APIUtils';
 
 
 export default class viewPersonalPage extends Component {
@@ -24,7 +25,9 @@ export default class viewPersonalPage extends Component {
     parkingClerkPId: 0,
     parkingClerkName: "",
     parkingClerkLots: [],
-    parkingClerkLotString: ""
+    parkingClerkLotString: "",
+    newPassword:"",
+    confirmPassword:""
   
   }
   handleSubmit = () => {
@@ -37,6 +40,15 @@ export default class viewPersonalPage extends Component {
 
   handleClose = () => {
     this.setState({ open: false });
+  };
+
+  handleChange = () => {
+    if (this.state.newPassword == this.state.confirmPassword)
+    changeUserPassword({password: this.state.newPassword})
+    .then(res=>{
+      console.log(res)
+    }).then(this.handleClose()).then(Toast.success('更改密碼成功', 3));
+    else Toast.fail('新密碼和確認新密碼不符', 3);
   };
 
   getPersonalInfo = () => {
@@ -69,6 +81,13 @@ export default class viewPersonalPage extends Component {
     this.getPersonalInfo();
           
   }
+
+  newPasswordOnChange = (event)=>{
+      this.setState({newPassword:event.target.value})
+  }
+  confirmPasswordOnChange = (event)=>{
+    this.setState({confirmPassword:event.target.value})
+}
 
  getParkingClerkId = () => {
       if(this.state.parkingClerkPId == 0) {          
@@ -174,17 +193,11 @@ export default class viewPersonalPage extends Component {
           <DialogContent>
             <TextField
               margin="dense"
-              id="password"
-              label="舊密碼"
-              type="password"
-              fullWidth
-            />
-            <TextField
-              margin="dense"
               id="newPassword"
               label="新密碼"
               type="password"
               fullWidth
+              onChange={this.newPasswordOnChange}
             />
             <TextField
               margin="dense"
@@ -192,13 +205,14 @@ export default class viewPersonalPage extends Component {
               label="確認新密碼"
               type="password"
               fullWidth
+              onChange={this.confirmPasswordOnChange}
             />
           </DialogContent>
           <DialogActions>
             <Button onClick={this.handleClose} type="secondary" size='small' >
             取消
             </Button>
-            <Button onClick={this.handleClose} type="primary" size='small'  >
+            <Button onClick={this.handleChange} type="primary" size='small'  >
             提交
             </Button>
           </DialogActions>

@@ -6,6 +6,7 @@ export const BASE_URL = 'https://parkingsystem.herokuapp.com'
 //export const API_BASE_URL = '/api';
 export const ACCESS_TOKEN = 'accessToken';
 export const CLERK_ID = 'parkingClerkId';
+export const USER_ID = 'userId';
 
 export const NAME_MIN_LENGTH = 1;
 export const NAME_MAX_LENGTH = 40;
