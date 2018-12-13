@@ -4,6 +4,19 @@ import { connect } from "react-redux"
 import requestFormPage from '../components/requestFormPage'
 import { addParkOrder, getOrderByCarNumber, changeOrderStatus } from '../util/APIUtils';
 
+  const getLatestCarOrderOfCar=(carOrderList)=>{
+    let largestId=0;  
+    let result=null;
+    for(let i=0;i<carOrderList.length;i++){
+        if(carOrderList[i].id>largestId){
+            largestId=carOrderList[i].id;
+            result=carOrderList[i];
+        }
+      }
+      return result
+  }
+
+
 const mapDispatchToProps =(dispatch) => ({
     addNewOrderRequest: newOrderRequest => {
       const newOrderRequestItem ={
@@ -59,7 +72,8 @@ const mapDispatchToProps =(dispatch) => ({
     if(resp.length==0){
       Toast.fail("沒有此車子的申請",3);
     }else {
-        if(resp.length>0 && resp[resp.length-1].status=='parked'){
+        let order=getLatestCarOrderOfCar(resp)
+        if(order.status=='parked'){
     //     fetch("https://parkingsystem.herokuapp.com/orders/"+resp[0].id, {
     //      method: 'PATCH', 
     //      headers: new Headers({
@@ -68,7 +82,7 @@ const mapDispatchToProps =(dispatch) => ({
     //    mode: 'cors', 
     //    body: JSON.stringify(newOrderRequestItem)
     //  }).then(res => res.json())
-    changeOrderStatus(resp[0].id,newOrderRequestItem)
+    changeOrderStatus(order.id,newOrderRequestItem)
     .then(res => {
       Toast.success("成功申請取車",3);
       dispatch({
@@ -97,16 +111,17 @@ const mapDispatchToProps =(dispatch) => ({
       if(resp.length==0){
         Toast.fail("沒有此車子的申請",3);
       }else{
+        let order=getLatestCarOrderOfCar(resp);
       // console.log(resp[0].status)
-      if(resp.length>0 && resp[resp.length-1].status=='pendingParking')
+      if(order.status=='pendingParking')
         Toast.success("你的車子正等待服務員處理",3);
-      else if(resp.length>0 && resp[resp.length-1].status=='accepted')
+      else if(order.status=='accepted')
         Toast.success("你的泊車申請已被接納",3);
-      else if(resp.length>0 && resp[resp.length-1].status=='parked')
+      else if(order.status=='parked')
         Toast.success("你的車子已進入停車場",3);
-      else if(resp.length>0 && resp[resp.length-1].status=='pendingFetching')
+      else if(order.status=='pendingFetching')
         Toast.success("你的車子正等待被提取, 請耐心等候",3);
-      else if(resp.length>0 && resp[resp.length-1].status=='completed')
+      else if(order.status=='completed')
         Toast.success("你的車子已被提取",3);
     }
   })
