@@ -101,16 +101,16 @@ export default class requestFormPage extends Component {
   componentDidMount() {
     // simulate img loading
 
-    this.setState({ voiceComponent: (<Sound
-      url={soundfile}
-      playStatus={Sound.status.PLAYING}
-      onLoading={this.handleSongLoading}
-      onPlaying={this.handleSongPlaying}
-      onFinishedPlaying={this.handleSongFinishedPlaying}
-      volume={100}
-      autoLoad={true}
-      // loop ={true}
-    />) });
+    // this.setState({ voiceComponent: (<Sound
+    //   url={soundfile}
+    //   playStatus={Sound.status.PLAYING}
+    //   onLoading={this.handleSongLoading}
+    //   onPlaying={this.handleSongPlaying}
+    //   onFinishedPlaying={this.handleSongFinishedPlaying}
+    //   volume={100}
+    //   autoLoad={true}
+    //   // loop ={true}
+    // />) });
     setTimeout(() => {
       this.setState({
         data: ['https://holland.pk/uptow/i4/570d4c6cdf6ec2d403a36614e55ebae2.jpg', 'https://holland.pk/uptow/i4/2cf8023e2fec3b0b679efb01794f7810.jpg'],
@@ -266,7 +266,7 @@ export default class requestFormPage extends Component {
 
     return (
         <div>
-          {this.state.voiceComponent}
+          {/* {this.state.voiceComponent} */}
           <SloganPage />
           <List renderHeader={() => <span><h1 style={{textAlign:"center", color: "white"}}>冰露泊車</h1></span>}>
             {/* <InputItem ref='carnum' style={{ padding: "50px" }}>

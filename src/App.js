@@ -81,19 +81,19 @@ class App extends Component {
     Toast.success("你已成功登出",3);
   }
 
-  onVoice = () => {
-    if(this.state.isAuthenticated == true)
-      return (<Sound
-          url={soundfile}
-          playStatus={Sound.status.PLAYING}
-          onLoading={this.handleSongLoading}
-          onPlaying={this.handleSongPlaying}
-          onFinishedPlaying={this.handleSongFinishedPlaying}
-          volume={100}
-          autoLoad={true}
-          // loop ={true}
-        />);
-  }
+  // onVoice = () => {
+  //   if(this.state.isAuthenticated == true)
+  //     return (<Sound
+  //         url={soundfile}
+  //         playStatus={Sound.status.PLAYING}
+  //         onLoading={this.handleSongLoading}
+  //         onPlaying={this.handleSongPlaying}
+  //         onFinishedPlaying={this.handleSongFinishedPlaying}
+  //         volume={100}
+  //         autoLoad={true}
+  //         // loop ={true}
+  //       />);
+  // }
 
   handleLogin=(history)=> {
     console.log("handleLogin");
@@ -140,7 +140,7 @@ class App extends Component {
     console.log("Auth"+this.state.isAuthenticated)
     return (
       <Layout>
-        {this.onVoice()}
+        {/* {this.onVoice()} */}
         <Content>
           <Switch>
             <Route path="/" exact render={(props) => <Login onLogin={this.handleLogin} {...props} />}></Route>
