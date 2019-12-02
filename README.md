@@ -48,8 +48,8 @@ Our parking system earns money by subscription for each parking service provider
 4. Create a parking request
 5. Parking clerk accept the request
 6. Manager can view the resource utilization, e.g. parking lot utilization rate and number of parking clerks
-7. Create a car fetching request
-8. Parking clerk fetch cart
+7. Creates a car pick-up request
+8. Parking clerk will drive the car to customer's location and let customer pick up the car.
 
 ## Team Members (in alphabetical order)
 - Connie Ip (Tech Lead & Full Stack)
