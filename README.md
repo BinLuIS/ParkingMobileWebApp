@@ -35,9 +35,9 @@ This parking system is the final project of a bootcamp which we joint in Nov, 20
 
 ## Business Logic of Parking System
 Assumption:
-We have partnered with some parking service provider which will have their own parking boys helping customers park their cars.
+We have partnered with some parking service provider which will have their own parking clerks helping customers park their cars.
 
-Our parking system is a platform showing which parking lot a customer is going to park his/her car to so that parking boys can take the order and make money. On top of that, this parking system provides a management tool, covering utilization rate of each parking lot, resource planning (who are on duty).
+Our parking system is a platform showing which parking lot a customer is going to park his/her car to so that parking clerks can take the order and make money. On top of that, this parking system provides a management tool, covering utilization rate of each parking lot, resource planning (who are on duty).
 
 Our parking system earns money by subscription for each parking service provider and advertisement.
 
