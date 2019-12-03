@@ -55,12 +55,12 @@ export default class viewAllOrderPage extends Component {
         // .then(results => results.json())
         grabPendingOrder("1",{"parkingOrderId" : order.id})
         .then(res => {
-            Toast.success('成功搶單', 3);
+            Toast.success('Order accepted', 3);
           this.getAllOrder();
         })
         .catch((error) => {
             console.log('error: ' + error);
-            Toast.fail("搶單失敗, 請向管理員查詢",3);
+            Toast.fail("Failed to accept order. Please contact technical support",3);
          });
     }
     
@@ -85,7 +85,7 @@ export default class viewAllOrderPage extends Component {
                   />
                 </ListItemAvatar>
                 <ListItemText style={{verticalAlign: "baseline" , fontSize: '15px'}} primary={each.carNumber} />
-                <div><span style={{verticalAlign: "baseline", fontSize: '15px'}}>搶單 ></span></div>
+                <div><span style={{verticalAlign: "baseline", fontSize: '15px'}}>Complete ></span></div>
                 {/* <div>停車時間: 17:00</div> */}
               </ListItem>
               <Divider />
@@ -94,7 +94,7 @@ export default class viewAllOrderPage extends Component {
           </List>);
         }
         else {
-            return (<div style={{background:"#F5F4F9", verticalAlign: "baseline", textAlign: "center", fontSize: '15px', padding: "5px"}}>現在沒有任何訂單</div>);
+            return (<div style={{background:"#F5F4F9", verticalAlign: "baseline", textAlign: "center", fontSize: '15px', padding: "5px"}}>There is no new order</div>);
         }
     }
 
@@ -104,7 +104,7 @@ export default class viewAllOrderPage extends Component {
             <div>
             
             <Typography variant="h5" className={this.props.title} style={{background:"#1B82D2"}}>
-                <h4 style={{textAlign:"center", color: "white", padding: "20px 20px", margin: "0px 0px 0px 0px"}}>訂單</h4>
+                <h4 style={{textAlign:"center", color: "white", padding: "20px 20px", margin: "0px 0px 0px 0px"}}>Order</h4>
             </Typography>
             <PullToRefresh
                 pullDownContent={<PullDownContent />}
