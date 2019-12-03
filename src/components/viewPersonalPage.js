@@ -47,8 +47,8 @@ export default class viewPersonalPage extends Component {
     changeUserPassword({password: this.state.newPassword})
     .then(res=>{
       console.log(res)
-    }).then(this.handleClose()).then(Toast.success('更改密碼成功', 3));
-    else Toast.fail('新密碼和確認新密碼不符', 3);
+    }).then(this.handleClose()).then(Toast.success('Successfully change the password', 3));
+    else Toast.fail('New Password and new password confirmed are unmatched', 3);
   };
 
   getPersonalInfo = () => {
@@ -91,7 +91,7 @@ export default class viewPersonalPage extends Component {
 
  getParkingClerkId = () => {
       if(this.state.parkingClerkPId == 0) {          
-        return (<ListItemText style={{display: "inline-block", verticalAlign: "baseline" , fontSize: '15px'}} primary={<div style={{float: "right"}}>下載中...</div>} />);
+        return (<ListItemText style={{display: "inline-block", verticalAlign: "baseline" , fontSize: '15px'}} primary={<div style={{float: "right"}}>Loading...</div>} />);
       }
       else {
           return (<ListItemText style={{display: "inline-block", verticalAlign: "baseline" , fontSize: '15px'}} primary={<div style={{float: "right"}}>{this.state.parkingClerkPId}</div>} />);
@@ -99,7 +99,7 @@ export default class viewPersonalPage extends Component {
     }
     getParkingClerkName = () => {
       if(this.state.parkingClerkPId == 0) {          
-        return (<ListItemText style={{display: "inline-block", verticalAlign: "baseline" , fontSize: '15px'}} primary={<div style={{float: "right"}}>下載中...</div>} />);
+        return (<ListItemText style={{display: "inline-block", verticalAlign: "baseline" , fontSize: '15px'}} primary={<div style={{float: "right"}}>Loading...</div>} />);
       }
       else {
           return (<ListItemText style={{display: "inline-block", verticalAlign: "baseline" , fontSize: '15px'}} primary={<div style={{float: "right"}}>{this.state.parkingClerkName}</div>} />);
@@ -108,7 +108,7 @@ export default class viewPersonalPage extends Component {
 
     getParkingClerkLotString = () => {
         if(this.state.parkingClerkPId == 0) {
-            return (<ListItemText style={{display: "inline-block" , fontSize: '15px'}} primary={<div style={{float: "right"}}>下載中...</div>} />);
+            return (<ListItemText style={{display: "inline-block" , fontSize: '15px'}} primary={<div style={{float: "right"}}>Loading...</div>} />);
         }
         else {
           if(this.state.parkingClerkLots.length > 0) {
@@ -127,7 +127,7 @@ export default class viewPersonalPage extends Component {
             
           }
           else {
-              return (<ListItemText style={{display: "inline-block" , fontSize: '15px'}} primary={<div style={{float: "right"}}>沒有所屬的停車場</div>} />);
+              return (<ListItemText style={{display: "inline-block" , fontSize: '15px'}} primary={<div style={{float: "right"}}>No parking lot assigned</div>} />);
           }
         }
     }
@@ -142,7 +142,7 @@ export default class viewPersonalPage extends Component {
 
         {/* {console.log(`Lot String state: ${this.state.parkingClerkLotString}`)} */}
         <Typography variant="h5" className={this.props.title} style={{ background: "#1B82D2" }}>
-          <h4 style={{ textAlign: "center", color: "white", padding: "20px 20px", margin: "0px 0px 0px 0px" }}>個人頁面</h4>
+          <h4 style={{ textAlign: "center", color: "white", padding: "20px 20px", margin: "0px 0px 0px 0px" }}>My Profile</h4>
         </Typography>
         <PullToRefresh
           pullDownContent={<PullDownContent />}
@@ -162,19 +162,19 @@ export default class viewPersonalPage extends Component {
             <List className={this.props.root}>
               <div>
                 <ListItem button style={{ background: "white" }}>
-                  <ListItemText style={{ width: "25%", verticalAlign: "baseline", fontSize: '15px' }} primary={"停車員編號:"} />
+                  <ListItemText style={{ width: "25%", verticalAlign: "baseline", fontSize: '15px' }} primary={"Parking Clerk ID:"} />
                   {/* <ListItemText style={{display: "inline-block", verticalAlign: "baseline" , fontSize: '15px'}} primary={<div style={{float: "right"}}>{this.state.parkingClerkPId}</div>} /> */}
                   {this.getParkingClerkId()}
                 </ListItem>
                 <Divider />
                 <ListItem button style={{ background: "white" }}>
-                  <ListItemText style={{ width: "25%", verticalAlign: "baseline", fontSize: '15px' }} primary={"員工名稱:"} />
+                  <ListItemText style={{ width: "25%", verticalAlign: "baseline", fontSize: '15px' }} primary={"Employee Name:"} />
                   {/* <ListItemText style={{display: "inline-block", verticalAlign: "baseline" , fontSize: '15px'}} primary={<div style={{float: "right"}}>{this.state.parkingClerkName}</div>} /> */}
                   {this.getParkingClerkName()}
                 </ListItem>
                 <Divider />
                 <ListItem button style={{ background: "white" }}>
-                  <ListItemText style={{ width: "25%", fontSize: '15px' }} primary={"停車場:"} />
+                  <ListItemText style={{ width: "25%", fontSize: '15px' }} primary={"Parking Lot:"} />
                   {this.getParkingClerkLotString()}
                 </ListItem>
                 <Divider />
@@ -183,18 +183,18 @@ export default class viewPersonalPage extends Component {
             <br />
             <br />
             <WhiteSpace size="lg" />
-            <Button type="primary" onClick={this.handleClickOpen}>更改密碼</Button><WhiteSpace />
+            <Button type="primary" onClick={this.handleClickOpen}>Change Password</Button><WhiteSpace />
             <Dialog
           open={this.state.open}
           onClose={this.handleClose}
           aria-labelledby="form-dialog-title"
         >
-          <DialogTitle id="form-dialog-title">更改密碼</DialogTitle>
+          <DialogTitle id="form-dialog-title">Change Password</DialogTitle>
           <DialogContent>
             <TextField
               margin="dense"
               id="newPassword"
-              label="新密碼"
+              label="New Password"
               type="password"
               fullWidth
               onChange={this.newPasswordOnChange}
@@ -202,7 +202,7 @@ export default class viewPersonalPage extends Component {
             <TextField
               margin="dense"
               id="confirmPassword"
-              label="確認新密碼"
+              label="Confirm New Password"
               type="password"
               fullWidth
               onChange={this.confirmPasswordOnChange}
@@ -210,15 +210,15 @@ export default class viewPersonalPage extends Component {
           </DialogContent>
           <DialogActions>
             <Button onClick={this.handleClose} type="secondary" size='small' >
-            取消
+            Cancel
             </Button>
             <Button onClick={this.handleChange} type="primary" size='small'  >
-            提交
+            Submit
             </Button>
           </DialogActions>
         </Dialog>
             <br />
-            <Button type="primary" onClick={this.handleSubmit}>登出</Button><WhiteSpace />
+            <Button type="primary" onClick={this.handleSubmit}>Logout</Button><WhiteSpace />
           </div>
         </PullToRefresh>
       </div>
