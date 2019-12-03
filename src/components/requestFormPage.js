@@ -57,7 +57,7 @@ export default class requestFormPage extends Component {
     console.log(carnum);
 
     if(carnum == "") {
-      Toast.info("請先輸入車牌號碼",3);
+      Toast.info("Please type Car Number",3);
     } 
     else {
       this.props.addNewOrderRequest(carnum);
@@ -78,7 +78,7 @@ export default class requestFormPage extends Component {
     console.log(orderid);
 
     if(carnum == "" || orderid == "") {
-      Toast.info("請先輸入訂單編號及車牌號碼",3);
+      Toast.info("Please type order number and car number",3);
     }
     else {
       this.props.addNewFetchRequest(carnum, orderid);
@@ -91,7 +91,7 @@ export default class requestFormPage extends Component {
     console.log(carnum);
 
     if(carnum == "") {
-      Toast.info("請先輸入車牌號碼",3);
+      Toast.info("Please type Car Number",3);
     }else {
       this.props.getStatusRequest(carnum);
     }
@@ -163,7 +163,7 @@ export default class requestFormPage extends Component {
       // fullScreen={fullScreen}
       aria-labelledby="form-dialog-title"
     >
-      <DialogTitle id="form-dialog-title">創建泊車請求</DialogTitle>
+      <DialogTitle id="form-dialog-title">Create Car Parking Request</DialogTitle>
       
       <DialogContent>
         <TextField
@@ -172,7 +172,7 @@ export default class requestFormPage extends Component {
           maxwidth={this.state.maxWidth}
           margin="dense"
           id="carnum"
-          label="車牌號碼"
+          label="Car Number"
           type="carnum"
           value={this.state.carnum}
           onChange={e => this.setState({ carnum: e.target.value })}
@@ -180,10 +180,10 @@ export default class requestFormPage extends Component {
       </DialogContent>
       <DialogActions>
         <Button onClick={this.handleparkButtonClose} type="secondary" size='small' >
-        取消
+        Cancel
         </Button>
         <Button onClick={this.onAdded} type="primary" size='small'  >
-        提交
+        Submit
         </Button>
       </DialogActions>
     </Dialog>);
@@ -195,7 +195,7 @@ export default class requestFormPage extends Component {
       // fullScreen={fullScreen}
       aria-labelledby="form-dialog-title"
     >
-      <DialogTitle id="form-dialog-title">創建取車請求</DialogTitle>
+      <DialogTitle id="form-dialog-title">Create Car Picking Up Request</DialogTitle>
       
       <DialogContent>
         <TextField
@@ -204,7 +204,7 @@ export default class requestFormPage extends Component {
           maxwidth={this.state.maxWidth}
           margin="dense"
           id="orderid"
-          label="訂單編號"
+          label="Order Number"
           type="orderid"
           value={this.state.orderid}
           onChange={e => this.setState({ orderid: e.target.value })}
@@ -214,7 +214,7 @@ export default class requestFormPage extends Component {
           maxwidth={this.state.maxWidth}
           margin="dense"
           id="carnum"
-          label="車牌號碼"
+          label="Car Number"
           type="carnum"
           value={this.state.carnum}
           onChange={e => this.setState({ carnum: e.target.value })}
@@ -222,10 +222,10 @@ export default class requestFormPage extends Component {
       </DialogContent>
       <DialogActions>
         <Button onClick={this.handlefetchButtonClose} type="secondary" size='small' >
-        取消
+        Cancel
         </Button>
         <Button onClick={this.onFetch} type="primary" size='small'  >
-        提交
+        Submit
         </Button>
       </DialogActions>
     </Dialog>);
@@ -237,7 +237,7 @@ export default class requestFormPage extends Component {
           // fullScreen={fullScreen}
           aria-labelledby="form-dialog-title"
         >
-          <DialogTitle id="form-dialog-title">查詢車輛狀態</DialogTitle>
+          <DialogTitle id="form-dialog-title">Check Car Status</DialogTitle>
           
           <DialogContent>
             <TextField
@@ -246,7 +246,7 @@ export default class requestFormPage extends Component {
               maxwidth={this.state.maxWidth}
               margin="dense"
               id="carnum"
-              label="車牌號碼"
+              label="Car Number"
               type="carnum"
               value={this.state.carnum}
               onChange={e => this.setState({ carnum: e.target.value })}
@@ -254,10 +254,10 @@ export default class requestFormPage extends Component {
           </DialogContent>
           <DialogActions>
             <Button onClick={this.handlequeryButtonClose} type="secondary" size='small' >
-            取消
+            Cancel
             </Button>
             <Button onClick={this.onInquire} type="primary" size='small'  >
-            查詢
+            Search
             </Button>
           </DialogActions>
         </Dialog>);
@@ -268,7 +268,7 @@ export default class requestFormPage extends Component {
         <div>
           {/* {this.state.voiceComponent} */}
           <SloganPage />
-          <List renderHeader={() => <span><h1 style={{textAlign:"center", color: "white"}}>冰露泊車</h1></span>}>
+          <List renderHeader={() => <span><h1 style={{textAlign:"center", color: "white"}}>BinLu Parking System</h1></span>}>
             {/* <InputItem ref='carnum' style={{ padding: "50px" }}>
             <p>車牌號碼 </p>
             </InputItem>
@@ -278,11 +278,11 @@ export default class requestFormPage extends Component {
           </List>
           <br />
           <div>
-            <Button type="primary" onClick={this.handleparkButtonOpen}>泊車</Button><WhiteSpace />
+            <Button type="primary" onClick={this.handleparkButtonOpen}>Park car</Button><WhiteSpace />
             {this.getParkingDialog()}
-            <Button type="primary" onClick={this.handlefetchButtonOpen}>取車</Button><WhiteSpace />
+            <Button type="primary" onClick={this.handlefetchButtonOpen}>Pick up car</Button><WhiteSpace />
             {this.getFetchingDialog()}
-            <Button type="primary" onClick={this.handlequeryButtonOpen}>查詢</Button><WhiteSpace />
+            <Button type="primary" onClick={this.handlequeryButtonOpen}>Search</Button><WhiteSpace />
             {this.getQueryDialog()}
           </div>
           {this.getAdvertisement()}
