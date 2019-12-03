@@ -38,9 +38,9 @@ const mapDispatchToProps =(dispatch) => ({
    addParkOrder(newOrderRequestItem)
    .then(res => {
     // Toast.success("成功申請泊車",3);
-    alert('成功申請泊車', <div>訂單編號: <b>{res.id}</b> <br/>車牌號碼: <b>{res.carNumber}</b><br/><br/>***請緊記提取單據***<br/>***以作日後提取車輛使用***</div>, [
+    alert('Successfully to request car parking', <div>Order Number: <b>{res.id}</b> <br/>Car Number: <b>{res.carNumber}</b><br/><br/>***Please keep this receipt***<br/>***You need to pick up this car with this recepit***</div>, [
       {
-        text: '確認',
+        text: 'Confirm',
         onPress: () =>
           new Promise((resolve) => {
             setTimeout(resolve, 1000);
@@ -59,10 +59,10 @@ const mapDispatchToProps =(dispatch) => ({
    })
    .catch((error) => {
     if(error.status === 409) {
-      Toast.fail("你的車子已被申請，請勿重覆",3);                    
+      Toast.fail("You have requested to park this car before.",3);                    
     } else {
       console.log('error: ' + error);
-      Toast.fail("未能申請泊車, 請向管理員查詢",3);                         
+      Toast.fail("Fail to park this car. Please contact technical support.",3);                         
     }
     
   }); 
@@ -81,7 +81,7 @@ const mapDispatchToProps =(dispatch) => ({
   .then(resp => {
     // console.log(resp[0].status)
     if(resp.length==0){
-      Toast.fail("沒有符合的訂單編號及車牌號碼",3);
+      Toast.fail("No related order number or car number is found",3);
     }else {
         let order=getLatestCarOrderOfCar(resp)
         if(order.status=='parked'){
@@ -95,7 +95,7 @@ const mapDispatchToProps =(dispatch) => ({
     //  }).then(res => res.json())
     changeOrderStatus(newOrderRequestOrderId,newOrderRequestItem)
     .then(res => {
-      Toast.success("成功申請取車",4);
+      Toast.success("Your car pick up request is received",4);
       dispatch({
         type: "ADD_NEW_ORDER_REQUEST",
         payload: {
@@ -107,14 +107,14 @@ const mapDispatchToProps =(dispatch) => ({
       })
     }).catch((error) => {
       if(error.status === 404) {
-        Toast.fail("沒有符合的訂單編號及車牌號碼",3);                    
+        Toast.fail("No related order number or car number is found",3);                    
       } else {
         console.log('error: ' + error);
-        Toast.fail("未能申請取車, 請向管理員查詢",3);                         
+        Toast.fail("Pick up failed. Please contact technical support",3);                         
       }
        })
   }else{
-      Toast.fail("車子不在停車場",3);
+      Toast.fail("This car is not in parking lot.",3);
   }
 }
 })
@@ -127,25 +127,25 @@ const mapDispatchToProps =(dispatch) => ({
     getOrderByCarNumber(getOrderRequest)
     .then(resp => {
       if(resp.length==0){
-        Toast.fail("沒有此車子的申請",3);
+        Toast.fail("No request is found",3);
       }else{
         let order=getLatestCarOrderOfCar(resp);
       // console.log(resp[0].status)
       if(order.status=='pendingParking')
-        Toast.success("你的車子正等待服務員處理",3);
+        Toast.success("Waiting for car parking request to be received.",3);
       else if(order.status=='accepted')
-        Toast.success("你的泊車申請已被接納",3);
+        Toast.success("Car parking request is received",3);
       else if(order.status=='parked')
-        Toast.success("你的車子已進入停車場",3);
+        Toast.success("Your car is now in parking lot.",3);
       else if(order.status=='pendingFetching')
-        Toast.success("你的車子正等待被提取, 請耐心等候",3);
+        Toast.success("Parking Clerk is picking up your car.",3);
       else if(order.status=='completed')
-        Toast.success("你的車子已被提取",3);
+        Toast.success("Your car has been picked up",3);
     }
   })
     .catch((error) => {
       console.log('error: ' + error);
-      Toast.fail("請向管理員查詢",3);
+      Toast.fail("Please contact technical support.",3);
      
     });
   }
