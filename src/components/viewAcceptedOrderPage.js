@@ -60,12 +60,12 @@ export default class viewAcceptedOrderPage extends Component {
             // }).then(res => res.json())
             changeOrderStatus(resp[0].id,fetchCarItem)
      .then(res => {
-        Toast.success('完成訂單', 3);
+        Toast.success('Order completed', 3);
       this.getAcceptedOrder();
      })
      .catch((error) => {
         console.log('error: ' + error);
-        Toast.fail("未能完成訂單, 請向管理員查詢",3);
+        Toast.fail("Failed to complete this order. Please contact technical support",3);
      })
     }
     })
@@ -80,7 +80,7 @@ export default class viewAcceptedOrderPage extends Component {
     getParkingLot=(order)=>{
         console.log(order)
         if(order.status=='pendingFetching'){
-            return <div>停車場: {order.parkingLot.name}</div>
+            return <div>Parking Lot: {order.parkingLot.name}</div>
         }else{
             return <div></div>
         }
@@ -89,12 +89,12 @@ export default class viewAcceptedOrderPage extends Component {
 
     getAction=(order)=>{
         if(order.status=='accepted'){
-            return <div onClick={()=>{this.props.onChangePage("pickAcceptedOrderCarPage");this.props.onChangeOrderID(order.id);}}><span style={{verticalAlign: "baseline", fontSize: '15px'}}>泊車 ></span></div>
+            return <div onClick={()=>{this.props.onChangePage("pickAcceptedOrderCarPage");this.props.onChangeOrderID(order.id);}}><span style={{verticalAlign: "baseline", fontSize: '15px'}}>Park ></span></div>
         }else if(order.status=='pendingFetching'){
-            return <div onClick={()=>{ {alert('確認取車', '請確認是否完成取車', [
-                { text: '取消', onPress: () => console.log('cancel') },
-                { text: '確認', onPress: () => {{this.fetchCar(order)}; console.log('ok')} },
-              ])}} }><span style={{verticalAlign: "baseline", fontSize: '15px'}}>取車 ></span></div>
+            return <div onClick={()=>{ {alert('Car Picking Up', 'Are you going to pick up this car?', [
+                { text: 'Cancel', onPress: () => console.log('cancel') },
+                { text: 'Confirm', onPress: () => {{this.fetchCar(order)}; console.log('ok')} },
+              ])}} }><span style={{verticalAlign: "baseline", fontSize: '15px'}}>Pick up car ></span></div>
         }
     }
     getIcon = (order) => {
@@ -132,7 +132,7 @@ export default class viewAcceptedOrderPage extends Component {
               </List>);
         }
         else {
-            return (<div style={{background:"#F5F4F9", verticalAlign: "baseline", textAlign: "center", fontSize: '15px', padding: "5px"}}>現在你沒有任何處理中的訂單</div>);
+            return (<div style={{background:"#F5F4F9", verticalAlign: "baseline", textAlign: "center", fontSize: '15px', padding: "5px"}}>No accepted order.</div>);
         }
     }
     render() {
@@ -140,7 +140,7 @@ export default class viewAcceptedOrderPage extends Component {
       return (
         <div>
             <Typography variant="h5" className={this.props.title} style={{background:"#1B82D2"}}>
-                <h4 style={{textAlign:"center", color: "white", padding: "20px 20px", margin: "0px 0px 0px 0px"}}>處理訂單</h4>
+                <h4 style={{textAlign:"center", color: "white", padding: "20px 20px", margin: "0px 0px 0px 0px"}}>Handle order</h4>
             </Typography>
             <PullToRefresh
                 pullDownContent={<PullDownContent />}
