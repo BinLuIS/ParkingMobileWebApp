@@ -54,7 +54,7 @@ class App extends Component {
       localStorage.setItem(USER_ID, response.id);
       console.log("goToClerkPage")
       
-      Toast.success(`歡迎你 ${response.name}!!!`,2);
+      Toast.success(`Welcome ${response.name}!!!`,2);
       history.push('/clerkPage');
     }).catch(error => {
       console.log('error of getcurrentuser')
@@ -78,7 +78,7 @@ class App extends Component {
     });
     history.push('/login');
     window.location.reload();
-    Toast.success("你已成功登出",3);
+    Toast.success("Successfully logout",3);
   }
 
   // onVoice = () => {
