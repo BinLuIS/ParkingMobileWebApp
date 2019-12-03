@@ -59,7 +59,7 @@ class pickAcceptedOrderParkingLocationPage extends React.Component {
           {
             this.state.data.map(each=><div>
             <ListItem style={{background: "white"}} button onClick={()=>this.passLotID(each.id,each.name)}> 
-                <ListItemText primary= {each.name + " (現有空位: " + each.availableCapacity + ")" }/>
+                <ListItemText primary= {each.name + " (Vacancy: " + each.availableCapacity + ")" }/>
             </ListItem>
             <Divider />
             </div>)
@@ -67,7 +67,7 @@ class pickAcceptedOrderParkingLocationPage extends React.Component {
           </List>);
     }
     else {
-        return (<div style={{background:"#F5F4F9", verticalAlign: "baseline", textAlign: "center", fontSize: '15px', padding: "5px"}}>沒有可供選擇的停車場</div>);
+        return (<div style={{background:"#F5F4F9", verticalAlign: "baseline", textAlign: "center", fontSize: '15px', padding: "5px"}}>No available Parking Lot</div>);
     }
 }
   render() {
@@ -75,7 +75,7 @@ class pickAcceptedOrderParkingLocationPage extends React.Component {
     return (
       <div>
           <Typography variant="h5" className={this.props.title} style={{background:"#1B82D2"}}>
-              <h4 style={{textAlign:"center", color: "white", padding: "20px 20px", margin: "0px 0px 0px 0px"}}><Icon type="left" style={{float: "left", fontSize: "20px", paddingTop: "5px"}} onClick={()=>this.passLotID(this.props.lotID,this.props.lotName)}/>停車地點</h4>
+              <h4 style={{textAlign:"center", color: "white", padding: "20px 20px", margin: "0px 0px 0px 0px"}}><Icon type="left" style={{float: "left", fontSize: "20px", paddingTop: "5px"}} onClick={()=>this.passLotID(this.props.lotID,this.props.lotName)}/>Car Parking Location</h4>
           </Typography>
             {this.getListItem()}
         </div>
