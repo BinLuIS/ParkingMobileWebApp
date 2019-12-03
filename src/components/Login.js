@@ -53,15 +53,15 @@ class LoginForm extends Component {
                     this.props.onLogin();
                 }).catch(error => {
                     if(error.status === 401) {
-                        Toast.fail("用戶名稱或密碼有錯, 請重新輸入",3);                    
+                        Toast.fail("Invalid username or password. Please try again",3);                    
                     } else {
-                        const description =  error.message || '登入失敗, 請重新登入'
+                        const description =  error.message || 'Failed to login. Please try again.'
                         Toast.fail(description,3);                           
                     }
                 });
             }
             else {
-                const description =  "請填寫用戶名稱或密碼"
+                const description =  "Please fill in username and password"
                 Toast.info(description,3);                           
             }
             
@@ -77,15 +77,13 @@ class LoginForm extends Component {
         return (
           <div>
             <Typography variant="h5" className={this.props.title} style={{background:"#1B82D2"}}>
-                <h5 style={{textAlign:"center", color: "white", padding: "20px 20px", margin: "0px 0px 0px 0px"}}>停車系統(停車員操作平台)<br/>登錄介面</h5>
+                <h5 style={{textAlign:"center", color: "white", padding: "20px 20px", margin: "0px 0px 0px 0px"}}>Parking System(Parking Clerk Platform)<br/>Login Interface</h5>
             </Typography>
             <div>
                 {/* <WhiteSpace size="lg" />
                 <NoticeBar background="white" marqueeProps={{ loop: true, leading: 800, trailing: 800, fps: 40}} icon={null}> */}
                     <div style={{textAlign:"center", background:"white", paddingTop: "8px", paddingBottom: "8px"}}>
-                        <span style={{color: "#1B82D2"}}>宗旨:    </span>
-                        <span style={{color: "#1B82D2"}}>讓客人享受泊車    </span>
-                        <span style={{color: "#1B82D2"}}>Make Car Parking Enjoyable    </span>
+                        <span style={{color: "#1B82D2"}}>Joyful Parking    </span>
                     </div>
                 {/* </NoticeBar>
                 <WhiteSpace size="lg" /> */}
@@ -101,9 +99,9 @@ class LoginForm extends Component {
             {...getFieldProps('usernameOrEmail', {
                 rules: [{ required: true, message: 'Please input your username or email!' }],
             })}
-            placeholder="請輸入你的用戶名稱"
+            placeholder="Username"
           >
-            帳戶
+            Username
             </InputItem>
           <InputItem
             {...getFieldProps('password', {
@@ -111,10 +109,10 @@ class LoginForm extends Component {
             })}
             type="password"
             placeholder="******"
-          >密碼</InputItem>
+          >Password</InputItem>
         </List>
         <div>
-          <Button type="primary" onClick={this.handleSubmit}>登錄</Button><WhiteSpace />
+          <Button type="primary" onClick={this.handleSubmit}>Login</Button><WhiteSpace />
           </div>
           </div>
         );

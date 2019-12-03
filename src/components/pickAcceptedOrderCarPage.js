@@ -40,11 +40,11 @@ import {checkParkingLotParkingOrder} from '../util/APIUtils'
           checkParkingLotParkingOrder(this.props.lotID,{"parkingOrderId" : orderID})
           .then(res => {
           });
-          Toast.success('完成泊車', 3);
+          Toast.success('Car Parking Completed', 3);
           this.props.onChangePage("viewAcceptedOrderPage");
         }
         else {
-          Toast.info("請先選擇停車場",3);
+          Toast.info("Please select Parking Lot",3);
         }
     }
 
@@ -54,10 +54,10 @@ import {checkParkingLotParkingOrder} from '../util/APIUtils'
       console.log(this.props.lotID);
       console.log(this.props.lotName);
       if(this.props.lotID != -1 && this.props.lotID !== undefined) {
-        listItem = <ListItemText primary={"選擇了: " + this.props.lotName} />
+        listItem = <ListItemText primary={this.props.lotName + " is selected"} />
         }
         else {
-        listItem =<ListItemText primary="選擇停車場" />
+        listItem =<ListItemText primary="Choose Parking Lot" />
         }
       return (
       //   <div>
@@ -66,7 +66,7 @@ import {checkParkingLotParkingOrder} from '../util/APIUtils'
 
         <div>
           <Typography variant="h5" className={this.props.title} style={{background:"#1B82D2"}}>
-              <h4 style={{textAlign:"center", color: "white", padding: "20px 20px", margin: "0px 0px 0px 0px"}}><Icon type="left" style={{float: "left", fontSize: "20px", paddingTop: "5px"}} onClick={()=>this.props.onChangePage("viewAcceptedOrderPage")}/>停車地點</h4>
+              <h4 style={{textAlign:"center", color: "white", padding: "20px 20px", margin: "0px 0px 0px 0px"}}><Icon type="left" style={{float: "left", fontSize: "20px", paddingTop: "5px"}} onClick={()=>this.props.onChangePage("viewAcceptedOrderPage")}/>Car Parking Location</h4>
           </Typography>
             <List>
               <List component="nav" className={this.props.classes.root}>
@@ -82,7 +82,7 @@ import {checkParkingLotParkingOrder} from '../util/APIUtils'
            <br />
            <br />
             <div>
-             <Button type="primary" onClick={()=>{this.checkOrder(this.props.orderID)}}>完成泊車</Button><WhiteSpace />
+             <Button type="primary" onClick={()=>{this.checkOrder(this.props.orderID)}}>Car Parking COmpleted</Button><WhiteSpace />
             </div>
         </div>
       );
