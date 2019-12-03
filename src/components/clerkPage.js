@@ -52,7 +52,7 @@ export default class clerkPage extends Component {
           prerenderingSiblingsNumber={Infinity}
         >
           <TabBar.Item
-            title="搶單"
+            title="Compete for car parking order"
             key="gradOrder"
             icon={
               <Icon type="profile"  />
@@ -106,7 +106,7 @@ export default class clerkPage extends Component {
             selectedIcon={
               <Icon type="clock-circle" theme="filled"/>
             }
-            title="歷史"
+            title="History"
             key="history"
             // dot
             selected={this.state.selectedPage === 'viewHistoryOrderPage'}
@@ -125,7 +125,7 @@ export default class clerkPage extends Component {
             selectedIcon={
               <Icon type="user" theme="outlined"/>
             }
-            title="個人"
+            title="My Profile"
             key="personal"
             selected={this.state.selectedPage === 'viewPersonalPage'}
             onPress={() => {
