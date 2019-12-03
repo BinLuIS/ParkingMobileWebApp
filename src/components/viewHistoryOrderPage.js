@@ -55,7 +55,7 @@ export default class viewHistoryOrderPage extends Component {
           </List>);
       }
       else {
-          return (<div style={{background:"#F5F4F9", verticalAlign: "baseline", textAlign: "center", fontSize: '15px', padding: "5px"}}>你沒有任何已完成的訂單</div>);
+          return (<div style={{background:"#F5F4F9", verticalAlign: "baseline", textAlign: "center", fontSize: '15px', padding: "5px"}}>No order has been completed</div>);
       }
     }
     render() {
@@ -63,7 +63,7 @@ export default class viewHistoryOrderPage extends Component {
       return (
         <div>
             <Typography variant="h5" className={this.props.title} style={{background:"#1B82D2"}}>
-                <h4 style={{textAlign:"center", color: "white", padding: "20px 20px", margin: "0px 0px 0px 0px"}}>歷史訂單</h4>
+                <h4 style={{textAlign:"center", color: "white", padding: "20px 20px", margin: "0px 0px 0px 0px"}}>History</h4>
             </Typography>
             <PullToRefresh
                 pullDownContent={<PullDownContent />}
