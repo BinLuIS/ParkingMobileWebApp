@@ -151,6 +151,11 @@ class App extends Component {
             <PrivateRoute path="/pickAcceptedOrderParkingLocationPage" authenticated={this.state.isAuthenticated}  component={pickAcceptedOrderParkingLocationPage}></PrivateRoute>
             <PrivateRoute path="/pickAcceptedOrderCarPage/:id" authenticated={this.state.isAuthenticated} component={pickAcceptedOrderCarPage}></PrivateRoute>
             <PrivateRoute path="/pickAcceptedOrderCarPage" authenticated={this.state.isAuthenticated} component={pickAcceptedOrderCarPage}></PrivateRoute> */}
+            <Route path="/viewAcceptedOrderPage" component={viewAcceptedOrderPage}></Route>
+            <Route path="/pickAcceptedOrderCarPage/pickAcceptedOrderParkingLocationPage" component={pickAcceptedOrderParkingLocationPage}></Route>
+            <Route path="/pickAcceptedOrderParkingLocationPage" component={pickAcceptedOrderParkingLocationPage}></Route>
+            <Route path="/pickAcceptedOrderCarPage/:id" component={pickAcceptedOrderCarPage}></Route>
+            <Route path="/pickAcceptedOrderCarPage" component={pickAcceptedOrderCarPage}></Route>            
             <Route path="/login" render={(props) => <Login onLogin={this.handleLogin} {...props} />}></Route>
 
             
