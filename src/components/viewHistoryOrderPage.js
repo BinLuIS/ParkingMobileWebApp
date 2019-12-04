@@ -63,7 +63,7 @@ export default class viewHistoryOrderPage extends Component {
       return (
         <div>
             <Typography variant="h5" className={this.props.title} style={{background:"#1B82D2"}}>
-                <h4 style={{textAlign:"center", color: "white", padding: "20px 20px", margin: "0px 0px 0px 0px"}}>History</h4>
+                <p style={{textAlign:"center", color: "white", padding: "20px 20px", margin: "0px 0px 0px 0px"}}>History</p>
             </Typography>
             <PullToRefresh
                 pullDownContent={<PullDownContent />}

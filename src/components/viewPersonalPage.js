@@ -142,7 +142,7 @@ export default class viewPersonalPage extends Component {
 
         {/* {console.log(`Lot String state: ${this.state.parkingClerkLotString}`)} */}
         <Typography variant="h5" className={this.props.title} style={{ background: "#1B82D2" }}>
-          <h4 style={{ textAlign: "center", color: "white", padding: "20px 20px", margin: "0px 0px 0px 0px" }}>My Profile</h4>
+          <p style={{ textAlign: "center", color: "white", padding: "20px 20px", margin: "0px 0px 0px 0px" }}>My Profile</p>
         </Typography>
         <PullToRefresh
           pullDownContent={<PullDownContent />}

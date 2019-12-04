@@ -66,7 +66,7 @@ import {checkParkingLotParkingOrder} from '../util/APIUtils'
 
         <div>
           <Typography variant="h5" className={this.props.title} style={{background:"#1B82D2"}}>
-              <h4 style={{textAlign:"center", color: "white", padding: "20px 20px", margin: "0px 0px 0px 0px"}}><Icon type="left" style={{float: "left", fontSize: "20px", paddingTop: "5px"}} onClick={()=>this.props.onChangePage("viewAcceptedOrderPage")}/>Car Parking Location</h4>
+              <p style={{textAlign:"center", color: "white", padding: "20px 20px", margin: "0px 0px 0px 0px"}}><Icon type="left" style={{float: "left", fontSize: "20px", paddingTop: "5px"}} onClick={()=>this.props.onChangePage("viewAcceptedOrderPage")}/>Car Parking Location</p>
           </Typography>
             <List>
               <List component="nav" className={this.props.classes.root}>
