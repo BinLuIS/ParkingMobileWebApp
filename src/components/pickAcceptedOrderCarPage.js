@@ -82,7 +82,7 @@ import {checkParkingLotParkingOrder} from '../util/APIUtils'
            <br />
            <br />
             <div>
-             <Button type="primary" onClick={()=>{this.checkOrder(this.props.orderID)}}>Car Parking COmpleted</Button><WhiteSpace />
+             <Button type="primary" onClick={()=>{this.checkOrder(this.props.orderID)}}>Car Parking Completed</Button><WhiteSpace />
             </div>
         </div>
       );
