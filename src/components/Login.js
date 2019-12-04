@@ -77,7 +77,7 @@ class LoginForm extends Component {
         return (
           <div>
             <Typography variant="h5" className={this.props.title} style={{background:"#1B82D2"}}>
-                <h5 style={{textAlign:"center", color: "white", padding: "20px 20px", margin: "0px 0px 0px 0px"}}>Parking System(Parking Clerk Platform)<br/>Login Interface</h5>
+                <p style={{textAlign:"center", color: "white", padding: "20px 20px", margin: "0px 0px 0px 0px"}}>Parking System(Parking Clerk Platform)<br/>Login Interface</h>
             </Typography>
             <div>
                 {/* <WhiteSpace size="lg" />
