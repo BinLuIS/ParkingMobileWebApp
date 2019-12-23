@@ -8,7 +8,6 @@ import Typography from '@material-ui/core/Typography';
 
 class Login extends Component {
     render() {
-        console.log(this.props)
         const LoginWrapper = createForm()(LoginForm);
         return (
             <div>
@@ -26,16 +25,12 @@ class LoginForm extends Component {
 
     handleSubmit(event) {
         event.preventDefault();   
-        console.log(this.props.form)
         this.props.form.validateFields((err, values) => {
             if (!err) {
                 const loginRequest = Object.assign({}, values);
                 login(loginRequest)
                 .then(response => {
-                    console.log("response of /auth/signin")
-                    console.log(response)
                     localStorage.setItem(ACCESS_TOKEN, response.accessToken);
-                    console.log("set accesstoken");
                     // setTimeout(getCurrentUser()
                     // .then(response => {
                     //     Toast.success(`歡迎你 ${response.name}!!!`,2);

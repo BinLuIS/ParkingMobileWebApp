@@ -135,7 +135,6 @@ class App extends Component {
 
   render() {
     
-    console.log("Auth"+this.state.isAuthenticated)
     return (
       <Layout>
         {/* {this.onVoice()} */}

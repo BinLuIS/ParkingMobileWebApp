@@ -48,8 +48,6 @@ import {checkParkingLotParkingOrder} from '../util/APIUtils'
     render() {
       
       let listItem;
-      console.log(this.props.lotID);
-      console.log(this.props.lotName);
       if(this.props.lotID != -1 && this.props.lotID !== undefined) {
         listItem = <ListItemText primary={this.props.lotName + " is selected"} />
         }
