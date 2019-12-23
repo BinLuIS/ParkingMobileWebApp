@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { login } from '../util/APIUtils';
-import { Toast, Input, List, InputItem, WhiteSpace, Button , Icon, NoticeBar} from 'antd-mobile';
+import { Toast, List, InputItem, WhiteSpace, Button } from 'antd-mobile';
 import { createForm } from 'rc-form';
 import { ACCESS_TOKEN } from '../constants';
 

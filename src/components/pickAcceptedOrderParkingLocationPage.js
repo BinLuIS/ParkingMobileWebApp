@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Icon } from 'antd';
 import { withStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';

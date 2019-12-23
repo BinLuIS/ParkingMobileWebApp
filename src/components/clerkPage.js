@@ -1,7 +1,6 @@
-import { TabBar, ListView } from 'antd-mobile';
-import {Layout, Icon } from 'antd';
+import { TabBar } from 'antd-mobile';
+import {Icon } from 'antd';
 import React, { Component } from 'react'
-import ReactDOM from 'react-dom';
 import '../css/clerkPage.css';
 import ViewAllOrderPage from './viewAllOrderPage';
 import ViewAcceptedOrderPage from './viewAcceptedOrderPage';

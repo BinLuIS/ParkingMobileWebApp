@@ -1,13 +1,10 @@
-
-import {InputItem, WhiteSpace, Button,Toast } from 'antd-mobile';
+import {WhiteSpace, Button,Toast } from 'antd-mobile';
 import React from 'react';
 import { Icon } from 'antd';
-import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-import {Route, Link,Switch} from 'react-router-dom';
 import '../css/pickAcceptedOrderCarPage.css';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';

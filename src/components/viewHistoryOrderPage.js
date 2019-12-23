@@ -1,7 +1,5 @@
-import { TabBar, ListView,List } from 'antd-mobile';
-import { Icon } from 'antd';
+import { List } from 'antd-mobile';
 import React, { Component } from 'react'
-import ReactDOM from 'react-dom';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 import ListItem from '@material-ui/core/ListItem';

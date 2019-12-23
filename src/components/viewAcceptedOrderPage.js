@@ -1,7 +1,5 @@
 import { List, Toast} from 'antd-mobile';
-import { Icon } from 'antd';
 import React, { Component } from 'react'
-import ReactDOM from 'react-dom';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 import ListItem from '@material-ui/core/ListItem';
@@ -10,7 +8,7 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Divider from '@material-ui/core/Divider';
 import {PullToRefresh, PullDownContent, ReleaseContent, RefreshContent} from "react-js-pull-to-refresh";
 import { getClerksprocessingOrders, getOrderByCarNumber, changeOrderStatus } from '../util/APIUtils';
-import { Modal, Button, WhiteSpace, WingBlank} from 'antd-mobile';
+import { Modal} from 'antd-mobile';
 
 const alert = Modal.alert;
 

@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { connect } from "react-redux"
 import requestFormPage from '../components/requestFormPage'
 import { addParkOrder, getOrderByCarNumber, changeOrderStatus } from '../util/APIUtils';

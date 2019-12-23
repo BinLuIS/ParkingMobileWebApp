@@ -1,5 +1,5 @@
-import { Carousel, WingBlank, NoticeBar, WhiteSpace, Icon } from 'antd-mobile';
-import React, { Component } from 'react';
+import { NoticeBar, WhiteSpace } from 'antd-mobile';
+import React from 'react';
 import '../css/sloganPage.css';
 
 export default class SloganPage extends React.Component {

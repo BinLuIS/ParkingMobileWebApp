@@ -1,22 +1,20 @@
 import React, { Component } from 'react';
 import './css/App.css';
-import { Layout, Menu, Icon } from 'antd';
+import { Layout } from 'antd';
 import { Toast } from 'antd-mobile';
-import {Route, Link,Switch} from 'react-router-dom'
+import {Route,Switch} from 'react-router-dom'
 import ClerkPage from './components/clerkPage';
 import requestFormPage from './containers/requestFormPageContainer';
 import pickAcceptedOrderParkingLocationPage from './components/pickAcceptedOrderParkingLocationPage';
 import pickAcceptedOrderCarPage from './components/pickAcceptedOrderCarPage';
 import viewAcceptedOrderPage from './components/viewAcceptedOrderPage';
 import Login from './components/Login'
-import { getCurrentUser, getCurrentParkingClerk } from './util/APIUtils';
+import { getCurrentUser } from './util/APIUtils';
 import { ACCESS_TOKEN, CLERK_ID, USER_ID } from './constants';
-import clerkPage from './components/clerkPage';
 import PrivateRoute from './components/PrivateRoute';
-import Sound from 'react-sound';
-import soundfile from './music/welcome_employee.mp3';
 
-const { Header, Sider, Content } = Layout;
+
+const { Content } = Layout;
 class App extends Component {
   constructor(props) {
     super(props);

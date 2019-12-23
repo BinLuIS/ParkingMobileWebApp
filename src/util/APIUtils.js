@@ -1,4 +1,4 @@
-import { BASE_URL, API_BASE_URL, POLL_LIST_SIZE, ACCESS_TOKEN, CLERK_ID, USER_ID } from '../constants';
+import { BASE_URL, API_BASE_URL, ACCESS_TOKEN, CLERK_ID, USER_ID } from '../constants';
 
 const request = (options) => {
     const headers = new Headers({

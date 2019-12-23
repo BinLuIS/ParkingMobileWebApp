@@ -1,8 +1,6 @@
 import { List, Button, WhiteSpace, Toast } from 'antd-mobile';
 import React, { Component } from 'react'
 import Typography from '@material-ui/core/Typography';
-import Avatar from '@material-ui/core/Avatar';
-import Grid from '@material-ui/core/Grid';
 import '../css/viewPersonalPage.css';
 import ImageAvatars from './ImageAvatars';
 import ListItem from '@material-ui/core/ListItem';
@@ -14,7 +12,6 @@ import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import {changeUserPassword} from '../util/APIUtils';
 
