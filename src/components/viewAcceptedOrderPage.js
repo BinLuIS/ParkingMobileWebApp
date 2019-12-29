@@ -75,16 +75,6 @@ export default class viewAcceptedOrderPage extends Component {
             resolve();
         });
     }
-    getParkingLot=(order)=>{
-        console.log(order)
-        if(order.status=='pendingFetching'){
-            return <div>Parking Lot: {order.parkingLot.name}</div>
-        }else{
-            return <div></div>
-        }
-
-    }
-
     getAction=(order)=>{
         if(order.status=='accepted'){
             return <div onClick={()=>{this.props.onChangePage("pickAcceptedOrderCarPage");this.props.onChangeOrderID(order.id);}}><span style={{verticalAlign: "baseline", fontSize: '15px'}}>Park ></span></div>
@@ -92,7 +82,7 @@ export default class viewAcceptedOrderPage extends Component {
             return <div onClick={()=>{ {alert('Car Picking Up', 'Are you going to pick up this car?', [
                 { text: 'Cancel', onPress: () => console.log('cancel') },
                 { text: 'Confirm', onPress: () => {{this.fetchCar(order)}; console.log('ok')} },
-              ])}} }><span style={{verticalAlign: "baseline", fontSize: '15px'}}>Pick up car ></span></div>
+              ])}} }><span style={{verticalAlign: "baseline", fontSize: '15px'}}>Pick up car in {order.parkingLot.name}&nbsp;></span></div>
         }
     }
     getIcon = (order) => {
@@ -120,7 +110,6 @@ export default class viewAcceptedOrderPage extends Component {
                     <ListItemText style={{verticalAlign: "baseline" , fontSize: '15px'}} primary={each.carNumber} />
                     {/* <div onClick={()=>this.grabOrder(each)}><span style={{verticalAlign: "baseline", fontSize: '15px'}}>搶單 ></span></div> */}
                     {/* <div>停車時間: 17:00</div> */}
-                    {this.getParkingLot(each)}
                     {this.getAction(each)}
                   </ListItem>
                   <Divider />
