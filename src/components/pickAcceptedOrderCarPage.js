@@ -74,6 +74,8 @@ import {checkParkingLotParkingOrder} from '../util/APIUtils'
             <div>
              <Button type="primary" onClick={()=>{this.checkOrder(this.props.orderID)}}>Confirm</Button><WhiteSpace />
             </div>
+            <div style={{background:"#F5F4F9", background:"#F5F4F9", height: "100vh"}}>
+            </div>
         </div>
       );
     }
