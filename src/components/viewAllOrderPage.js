@@ -65,7 +65,7 @@ export default class viewAllOrderPage extends Component {
     getListItem = () => {
         if(this.state.data.length > 0) {
             return (<List className={this.props.root}>
-            {this.state.data.map(each => (
+            {this.state.data.reverse().map(each => (
               <div key={each.id}>
               <ListItem 
               key={each.id} button style={{background: "white"}} onClick={()=>this.grabOrder(each)}>
