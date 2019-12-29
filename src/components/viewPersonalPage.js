@@ -1,8 +1,6 @@
 import { List, Button, WhiteSpace, Toast } from 'antd-mobile';
 import React, { Component } from 'react'
 import Typography from '@material-ui/core/Typography';
-import Avatar from '@material-ui/core/Avatar';
-import Grid from '@material-ui/core/Grid';
 import '../css/viewPersonalPage.css';
 import ImageAvatars from './ImageAvatars';
 import ListItem from '@material-ui/core/ListItem';
@@ -14,7 +12,6 @@ import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import {changeUserPassword} from '../util/APIUtils';
 
@@ -27,7 +24,8 @@ export default class viewPersonalPage extends Component {
     parkingClerkLots: [],
     parkingClerkLotString: "",
     newPassword:"",
-    confirmPassword:""
+    confirmPassword:"",
+    open:false
   
   }
   handleSubmit = () => {
@@ -46,9 +44,8 @@ export default class viewPersonalPage extends Component {
     if (this.state.newPassword == this.state.confirmPassword)
     changeUserPassword({password: this.state.newPassword})
     .then(res=>{
-      console.log(res)
     }).then(this.handleClose()).then(Toast.success('Successfully change the password', 3));
-    else Toast.fail('New Password and new password confirmed are unmatched', 3);
+    else Toast.fail('Your password and confirmation password do not match.', 3);
   };
 
   getPersonalInfo = () => {
@@ -57,7 +54,6 @@ export default class viewPersonalPage extends Component {
       .then(response => {
         this.setState({ parkingClerkName: response.name, parkingClerkPId: response.id });
         temp_pId = response.id;
-        console.log(`ppppp state: ${response.id}`);
         getParkingClerksParkinglot(temp_pId)
           .then(response => {
             this.setState({ parkingClerkLots: response });
@@ -120,7 +116,6 @@ export default class viewPersonalPage extends Component {
               else
                 tempstr += `${e.name}, `;
             });
-            console.log(tempstr);
             // this.setState({parkingClerkLotString: tempstr});
             
           return (<ListItemText style={{width: "70%", display: "inline-block" , fontSize: '15px', float: "right"}} primary={<div style={{ float: "right"}}>{tempstr}</div>} />);
@@ -133,9 +128,9 @@ export default class viewPersonalPage extends Component {
     }
   render() {
     // {console.log(`EID state: ${this.state.parkingClerkEId}`)}
-    { console.log(`PID state: ${this.state.parkingClerkPId}`) }
-    { console.log(`Name state: ${this.state.parkingClerkName}`) }
-    { console.log(`Lot state: ${this.state.parkingClerkLots}`) }
+    // { console.log(`PID state: ${this.state.parkingClerkPId}`) }
+    // { console.log(`Name state: ${this.state.parkingClerkName}`) }
+    // { console.log(`Lot state: ${this.state.parkingClerkLots}`) }
     return (
 
       <div>
@@ -202,7 +197,7 @@ export default class viewPersonalPage extends Component {
             <TextField
               margin="dense"
               id="confirmPassword"
-              label="Confirm New Password"
+              label="Confirmation Password"
               type="password"
               fullWidth
               onChange={this.confirmPasswordOnChange}

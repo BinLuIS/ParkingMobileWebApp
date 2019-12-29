@@ -1,16 +1,10 @@
-import { TabBar, ListView,Toast } from 'antd-mobile';
-import { Icon } from 'antd';
+import { Toast } from 'antd-mobile';
 import React, { Component } from 'react'
-import ReactDOM from 'react-dom';
 import '../css/viewAllOrderPage.css';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import Checkbox from '@material-ui/core/Checkbox';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
@@ -38,8 +32,6 @@ export default class viewAllOrderPage extends Component {
         // .then(results => results.json())
         .then(res => {
           this.setState({data:res})
-          console.log(res);
-          console.log(this.state.data);
         });
         
     }
@@ -59,7 +51,6 @@ export default class viewAllOrderPage extends Component {
           this.getAllOrder();
         })
         .catch((error) => {
-            console.log('error: ' + error);
             Toast.fail("Failed to accept order. Please contact technical support",3);
          });
     }
@@ -72,20 +63,19 @@ export default class viewAllOrderPage extends Component {
     }
         
     getListItem = () => {
-        
         if(this.state.data.length > 0) {
             return (<List className={this.props.root}>
-            {this.state.data.map(each => (
-              <div>
+            {this.state.data.reverse().map(each => (
+              <div key={each.id}>
               <ListItem 
-              key={each} button style={{background: "white"}} onClick={()=>this.grabOrder(each)}>
+              key={each.id} button style={{background: "white"}} onClick={()=>this.grabOrder(each)}>
                 <ListItemAvatar>
                   <Avatar
                     src={require('../icon/caricon.png')}
                   />
                 </ListItemAvatar>
                 <ListItemText style={{verticalAlign: "baseline" , fontSize: '15px'}} primary={each.carNumber} />
-                <div><span style={{verticalAlign: "baseline", fontSize: '15px'}}>Complete ></span></div>
+                <div><span style={{verticalAlign: "baseline", fontSize: '15px'}}>Compete ></span></div>
                 {/* <div>停車時間: 17:00</div> */}
               </ListItem>
               <Divider />

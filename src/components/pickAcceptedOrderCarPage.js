@@ -1,13 +1,10 @@
-
-import {InputItem, WhiteSpace, Button,Toast } from 'antd-mobile';
+import {WhiteSpace, Button,Toast } from 'antd-mobile';
 import React from 'react';
 import { Icon } from 'antd';
-import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-import {Route, Link,Switch} from 'react-router-dom';
 import '../css/pickAcceptedOrderCarPage.css';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
@@ -51,8 +48,6 @@ import {checkParkingLotParkingOrder} from '../util/APIUtils'
     render() {
       
       let listItem;
-      console.log(this.props.lotID);
-      console.log(this.props.lotName);
       if(this.props.lotID != -1 && this.props.lotID !== undefined) {
         listItem = <ListItemText primary={this.props.lotName + " is selected"} />
         }
@@ -76,13 +71,10 @@ import {checkParkingLotParkingOrder} from '../util/APIUtils'
                 <Divider />
               </List>
             </List>
-            <br />
-           <br />
-            <br />
-           <br />
-           <br />
             <div>
-             <Button type="primary" onClick={()=>{this.checkOrder(this.props.orderID)}}>Car Parking Completed</Button><WhiteSpace />
+             <Button type="primary" onClick={()=>{this.checkOrder(this.props.orderID)}}>Confirm</Button><WhiteSpace />
+            </div>
+            <div style={{background:"#F5F4F9", background:"#F5F4F9", height: "100vh"}}>
             </div>
         </div>
       );

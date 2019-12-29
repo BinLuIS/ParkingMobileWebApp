@@ -1,7 +1,5 @@
 import { List, Toast} from 'antd-mobile';
-import { Icon } from 'antd';
 import React, { Component } from 'react'
-import ReactDOM from 'react-dom';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 import ListItem from '@material-ui/core/ListItem';
@@ -10,7 +8,7 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Divider from '@material-ui/core/Divider';
 import {PullToRefresh, PullDownContent, ReleaseContent, RefreshContent} from "react-js-pull-to-refresh";
 import { getClerksprocessingOrders, getOrderByCarNumber, changeOrderStatus } from '../util/APIUtils';
-import { Modal, Button, WhiteSpace, WingBlank} from 'antd-mobile';
+import { Modal} from 'antd-mobile';
 
 const alert = Modal.alert;
 
@@ -32,8 +30,6 @@ export default class viewAcceptedOrderPage extends Component {
         // .then(results => results.json())
         .then(res => {
           this.setState({data:res})
-          console.log(res);
-          console.log(this.state.data);
         });
     }
 
@@ -42,13 +38,11 @@ export default class viewAcceptedOrderPage extends Component {
           carNumber: order.carNumber,
           status: 'completed'
         }
-        console.log(fetchCarItem)
         // fetch("https://parkingsystem.herokuapp.com/orders?carNumber="+order.carNumber, {
         //     mode: 'cors', 
         // }).then(res => res.json())
         getOrderByCarNumber(order.carNumber)
             .then(resp => {
-                console.log(resp[0].status)
                 if(resp.length>0 && resp[0].status=='pendingFetching'){
             //     fetch("https://parkingsystem.herokuapp.com/orders/"+resp[0].id, {
             //     method: 'PATCH', 
@@ -64,7 +58,7 @@ export default class viewAcceptedOrderPage extends Component {
       this.getAcceptedOrder();
      })
      .catch((error) => {
-        console.log('error: ' + error);
+
         Toast.fail("Failed to complete this order. Please contact technical support",3);
      })
     }
@@ -77,24 +71,14 @@ export default class viewAcceptedOrderPage extends Component {
             resolve();
         });
     }
-    getParkingLot=(order)=>{
-        console.log(order)
-        if(order.status=='pendingFetching'){
-            return <div>Parking Lot: {order.parkingLot.name}</div>
-        }else{
-            return <div></div>
-        }
-
-    }
-
     getAction=(order)=>{
         if(order.status=='accepted'){
             return <div onClick={()=>{this.props.onChangePage("pickAcceptedOrderCarPage");this.props.onChangeOrderID(order.id);}}><span style={{verticalAlign: "baseline", fontSize: '15px'}}>Park ></span></div>
         }else if(order.status=='pendingFetching'){
             return <div onClick={()=>{ {alert('Car Picking Up', 'Are you going to pick up this car?', [
-                { text: 'Cancel', onPress: () => console.log('cancel') },
-                { text: 'Confirm', onPress: () => {{this.fetchCar(order)}; console.log('ok')} },
-              ])}} }><span style={{verticalAlign: "baseline", fontSize: '15px'}}>Pick up car ></span></div>
+                { text: 'Cancel'},
+                { text: 'Confirm', onPress: () => {this.fetchCar(order)} },
+              ])}} }><span style={{verticalAlign: "baseline", fontSize: '15px'}}>Pick up car in {order.parkingLot.name}&nbsp;></span></div>
         }
     }
     getIcon = (order) => {
@@ -109,11 +93,10 @@ export default class viewAcceptedOrderPage extends Component {
         }
     }
     getListItem = () => {
-        
         if(this.state.data.length > 0) {
             return (<List className={this.props.root}>
-                {this.state.data.map(each => (<div>
-                  <ListItem key={each} button style={{background: "white"}} >
+                {this.state.data.map(each => (<div key={each.id}>
+                  <ListItem key={each.id} button style={{background: "white"}} >
                     <ListItemAvatar>
                       {/* <Avatar
                           src={require('../icon/caricon.png')}
@@ -123,7 +106,6 @@ export default class viewAcceptedOrderPage extends Component {
                     <ListItemText style={{verticalAlign: "baseline" , fontSize: '15px'}} primary={each.carNumber} />
                     {/* <div onClick={()=>this.grabOrder(each)}><span style={{verticalAlign: "baseline", fontSize: '15px'}}>搶單 ></span></div> */}
                     {/* <div>停車時間: 17:00</div> */}
-                    {this.getParkingLot(each)}
                     {this.getAction(each)}
                   </ListItem>
                   <Divider />

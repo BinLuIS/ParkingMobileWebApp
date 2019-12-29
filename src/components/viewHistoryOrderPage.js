@@ -1,7 +1,5 @@
-import { TabBar, ListView,List } from 'antd-mobile';
-import { Icon } from 'antd';
+import { List } from 'antd-mobile';
 import React, { Component } from 'react'
-import ReactDOM from 'react-dom';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 import ListItem from '@material-ui/core/ListItem';
@@ -24,8 +22,6 @@ export default class viewHistoryOrderPage extends Component {
       getCompletedOrder("1")
         .then(res => {
           this.setState({data:res})
-          console.log(res);
-          console.log(this.state.data);
         });
     }
     onPullList=()=> {
@@ -39,8 +35,8 @@ export default class viewHistoryOrderPage extends Component {
       if(this.state.data.length > 0) {
           return (<List className={this.props.root}>
             {this.state.data.map(each => (
-                <div>
-              <ListItem key={each} button style={{background: "white"}}>
+                <div key={each.id}>
+              <ListItem key={each.id} button style={{background: "white"}}>
                 <ListItemAvatar>
                   <Avatar
                     src={require('../icon/likeicon.png')}

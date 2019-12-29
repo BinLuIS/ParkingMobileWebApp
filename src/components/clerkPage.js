@@ -1,7 +1,6 @@
-import { TabBar, ListView } from 'antd-mobile';
-import {Layout, Icon } from 'antd';
+import { TabBar } from 'antd-mobile';
+import {Icon } from 'antd';
 import React, { Component } from 'react'
-import ReactDOM from 'react-dom';
 import '../css/clerkPage.css';
 import ViewAllOrderPage from './viewAllOrderPage';
 import ViewAcceptedOrderPage from './viewAcceptedOrderPage';
@@ -40,9 +39,8 @@ export default class clerkPage extends Component {
     }
   }
   render() {
-    console.log(`IDnew ${localStorage.getItem(CLERK_ID)}`);
     return (
-      <div style={{ position: 'fixed', height: '100%', width: '100%', top: 0 }}>
+      <div style={{height: '100%', width: '100%', top: 0, fontSize: "30px", position:"sticky"}}>
         <TabBar
           unselectedTintColor="#949494"
           tintColor="#33A3F4"
@@ -52,7 +50,7 @@ export default class clerkPage extends Component {
           prerenderingSiblingsNumber={Infinity}
         >
           <TabBar.Item
-            title="Compete for car parking order"
+            title="New Order"
             key="gradOrder"
             icon={
               <Icon type="profile"  />
@@ -84,7 +82,7 @@ export default class clerkPage extends Component {
             selectedIcon={
               <Icon type="car"  theme="twoTone"/>
             }
-            title="停取"
+            title="My Order"
             key="getOrder"
             // badge={'123'}
             selected={this.state.selectedPage === 'viewAcceptedOrderPage'}

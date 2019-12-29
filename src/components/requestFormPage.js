@@ -1,15 +1,11 @@
-import { List, InputItem, WhiteSpace, Button,Toast,Carousel, WingBlank } from 'antd-mobile';
+import { List, WhiteSpace, Button,Toast,Carousel, WingBlank } from 'antd-mobile';
 import React, { Component } from 'react';
-import  { Router } from 'react-router';
 import SloganPage from './sloganPage';
-import Sound from 'react-sound';
-import soundfile from '../music/welcome_customer.mp3';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import DialogContentText from '@material-ui/core/DialogContentText';
 
 export default class requestFormPage extends Component {
   
@@ -54,7 +50,6 @@ export default class requestFormPage extends Component {
   //   carnum.setState({value: ''});
   //   captcha.setState({value: ''}); 
     const carnum = this.state.carnum;
-    console.log(carnum);
 
     if(carnum == "") {
       Toast.info("Please type Car Number",3);
@@ -74,8 +69,6 @@ export default class requestFormPage extends Component {
   //   captcha.setState({value: ''});
     const carnum = this.state.carnum;
     const orderid = this.state.orderid;
-    console.log(carnum);
-    console.log(orderid);
 
     if(carnum == "" || orderid == "") {
       Toast.info("Please type order number and car number",3);
@@ -88,7 +81,6 @@ export default class requestFormPage extends Component {
   }
   onInquire = () => {
     const carnum = this.state.carnum;
-    console.log(carnum);
 
     if(carnum == "") {
       Toast.info("Please type Car Number",3);

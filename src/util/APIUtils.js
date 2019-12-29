@@ -1,4 +1,4 @@
-import { BASE_URL, API_BASE_URL, POLL_LIST_SIZE, ACCESS_TOKEN, CLERK_ID, USER_ID } from '../constants';
+import { BASE_URL, API_BASE_URL, ACCESS_TOKEN, CLERK_ID, USER_ID } from '../constants';
 
 const request = (options) => {
     const headers = new Headers({
@@ -24,7 +24,6 @@ const request = (options) => {
 };
 
 export function login(loginRequest) {
-    console.log("login /auth/signin")
     return request({
         url: API_BASE_URL + "/auth/signin",
         method: 'POST',
@@ -62,12 +61,8 @@ export function checkEmailAvailability(email) {
 // }
 export function getCurrentUser() {
     if(!localStorage.getItem(ACCESS_TOKEN)) {
-        console.log("No access token")
         return Promise.reject("No access token set.");
     }
-    console.log('getAccessToken')
-    console.log(localStorage.getItem(ACCESS_TOKEN))
-    console.log("getCurrentUser call api /user/me")
     return request({
         url: API_BASE_URL + "/user/me",
         method: 'GET'
@@ -202,7 +197,6 @@ export function getParkingClerkDetail(){
 }
 
 export function changeUserPassword(newPassword){
-    console.log(localStorage.getItem(USER_ID))
     return request({
         // url: BASE_URL + '/parkingclerks/'+parkingClerkId+'/orders?status=completed',
         url: API_BASE_URL + "/users/"+localStorage.getItem(USER_ID),

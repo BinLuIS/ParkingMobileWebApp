@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Icon } from 'antd';
 import { withStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
@@ -37,7 +36,6 @@ class pickAcceptedOrderParkingLocationPage extends React.Component {
           this.setState({parkingClerkId: response.id});
           getParkingClerksParkinglot(response.id)
           .then(res => {
-            console.log(res);
             let lots=res.filter(each=> each.availableCapacity>0)
             this.setState({data:lots});
           });
@@ -57,7 +55,7 @@ class pickAcceptedOrderParkingLocationPage extends React.Component {
     if(this.state.data.length > 0) {
         return (<List>
           {
-            this.state.data.map(each=><div>
+            this.state.data.map(each=><div key={each.id}>
             <ListItem style={{background: "white"}} button onClick={()=>this.passLotID(each.id,each.name)}> 
                 <ListItemText primary= {each.name + " (Vacancy: " + each.availableCapacity + ")" }/>
             </ListItem>
@@ -71,13 +69,14 @@ class pickAcceptedOrderParkingLocationPage extends React.Component {
     }
 }
   render() {
-    console.log(this.state.data);
     return (
       <div>
           <Typography variant="h5" className={this.props.title} style={{background:"#1B82D2"}}>
               <p style={{textAlign:"center", color: "white", padding: "20px 20px", margin: "0px 0px 0px 0px"}}><Icon type="left" style={{float: "left", fontSize: "20px", paddingTop: "5px"}} onClick={()=>this.passLotID(this.props.lotID,this.props.lotName)}/>Car Parking Location</p>
           </Typography>
-            {this.getListItem()}
+            <div style={{background:"#F5F4F9", background:"#F5F4F9", height: "100vh"}}>
+              {this.getListItem()}
+            </div>            
         </div>
     );
   }
