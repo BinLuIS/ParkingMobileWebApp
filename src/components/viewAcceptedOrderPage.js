@@ -30,8 +30,6 @@ export default class viewAcceptedOrderPage extends Component {
         // .then(results => results.json())
         .then(res => {
           this.setState({data:res})
-          console.log(res);
-          console.log(this.state.data);
         });
     }
 
@@ -40,13 +38,11 @@ export default class viewAcceptedOrderPage extends Component {
           carNumber: order.carNumber,
           status: 'completed'
         }
-        console.log(fetchCarItem)
         // fetch("https://parkingsystem.herokuapp.com/orders?carNumber="+order.carNumber, {
         //     mode: 'cors', 
         // }).then(res => res.json())
         getOrderByCarNumber(order.carNumber)
             .then(resp => {
-                console.log(resp[0].status)
                 if(resp.length>0 && resp[0].status=='pendingFetching'){
             //     fetch("https://parkingsystem.herokuapp.com/orders/"+resp[0].id, {
             //     method: 'PATCH', 
@@ -62,7 +58,7 @@ export default class viewAcceptedOrderPage extends Component {
       this.getAcceptedOrder();
      })
      .catch((error) => {
-        console.log('error: ' + error);
+
         Toast.fail("Failed to complete this order. Please contact technical support",3);
      })
     }
@@ -80,8 +76,8 @@ export default class viewAcceptedOrderPage extends Component {
             return <div onClick={()=>{this.props.onChangePage("pickAcceptedOrderCarPage");this.props.onChangeOrderID(order.id);}}><span style={{verticalAlign: "baseline", fontSize: '15px'}}>Park ></span></div>
         }else if(order.status=='pendingFetching'){
             return <div onClick={()=>{ {alert('Car Picking Up', 'Are you going to pick up this car?', [
-                { text: 'Cancel', onPress: () => console.log('cancel') },
-                { text: 'Confirm', onPress: () => {{this.fetchCar(order)}; console.log('ok')} },
+                { text: 'Cancel'},
+                { text: 'Confirm', onPress: () => {this.fetchCar(order)} },
               ])}} }><span style={{verticalAlign: "baseline", fontSize: '15px'}}>Pick up car in {order.parkingLot.name}&nbsp;></span></div>
         }
     }

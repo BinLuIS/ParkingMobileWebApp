@@ -22,8 +22,6 @@ export default class viewHistoryOrderPage extends Component {
       getCompletedOrder("1")
         .then(res => {
           this.setState({data:res})
-          console.log(res);
-          console.log(this.state.data);
         });
     }
     onPullList=()=> {

@@ -50,7 +50,6 @@ export default class requestFormPage extends Component {
   //   carnum.setState({value: ''});
   //   captcha.setState({value: ''}); 
     const carnum = this.state.carnum;
-    console.log(carnum);
 
     if(carnum == "") {
       Toast.info("Please type Car Number",3);
@@ -70,8 +69,6 @@ export default class requestFormPage extends Component {
   //   captcha.setState({value: ''});
     const carnum = this.state.carnum;
     const orderid = this.state.orderid;
-    console.log(carnum);
-    console.log(orderid);
 
     if(carnum == "" || orderid == "") {
       Toast.info("Please type order number and car number",3);
@@ -84,7 +81,6 @@ export default class requestFormPage extends Component {
   }
   onInquire = () => {
     const carnum = this.state.carnum;
-    console.log(carnum);
 
     if(carnum == "") {
       Toast.info("Please type Car Number",3);

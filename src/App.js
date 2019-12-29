@@ -31,16 +31,12 @@ class App extends Component {
   }
 
   loadCurrentUser = (history) => {
-    console.log('loadCurrentUser')
     this.setState({
       isLoading: true
     });
 
     getCurrentUser()
     .then(response => {
-      console.log("response of loadCurrentuser getcurrentuser")
-      console.log(response)
-      console.log('set state')
       this.setState({
         currentUser: response.username,
         isAuthenticated: true,
@@ -50,12 +46,10 @@ class App extends Component {
       });
       localStorage.setItem(CLERK_ID, response.idInRole);
       localStorage.setItem(USER_ID, response.id);
-      console.log("goToClerkPage")
       
       Toast.success(`Welcome ${response.name}!!!`,2);
       history.push('/clerkPage');
     }).catch(error => {
-      console.log('error of getcurrentuser')
       this.setState({
         isLoading: false
       });  
@@ -68,8 +62,6 @@ class App extends Component {
 
   handleLogout=(history)=>{
     localStorage.removeItem(ACCESS_TOKEN);
-    console.log("logouttttt")
-    console.log(localStorage.getItem(ACCESS_TOKEN))
     this.setState({
       currentUser: null,
       isAuthenticated: false
@@ -94,7 +86,6 @@ class App extends Component {
   // }
 
   handleLogin=(history)=> {
-    console.log("handleLogin");
     this.loadCurrentUser(history);
   // getCurrentUser()
   //   .then(response => {

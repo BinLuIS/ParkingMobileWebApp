@@ -36,7 +36,6 @@ class pickAcceptedOrderParkingLocationPage extends React.Component {
           this.setState({parkingClerkId: response.id});
           getParkingClerksParkinglot(response.id)
           .then(res => {
-            console.log(res);
             let lots=res.filter(each=> each.availableCapacity>0)
             this.setState({data:lots});
           });
@@ -70,7 +69,6 @@ class pickAcceptedOrderParkingLocationPage extends React.Component {
     }
 }
   render() {
-    console.log(this.state.data);
     return (
       <div>
           <Typography variant="h5" className={this.props.title} style={{background:"#1B82D2"}}>

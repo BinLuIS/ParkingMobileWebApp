@@ -44,7 +44,6 @@ export default class viewPersonalPage extends Component {
     if (this.state.newPassword == this.state.confirmPassword)
     changeUserPassword({password: this.state.newPassword})
     .then(res=>{
-      console.log(res)
     }).then(this.handleClose()).then(Toast.success('Successfully change the password', 3));
     else Toast.fail('Your password and confirmation password do not match.', 3);
   };
@@ -55,7 +54,6 @@ export default class viewPersonalPage extends Component {
       .then(response => {
         this.setState({ parkingClerkName: response.name, parkingClerkPId: response.id });
         temp_pId = response.id;
-        console.log(`ppppp state: ${response.id}`);
         getParkingClerksParkinglot(temp_pId)
           .then(response => {
             this.setState({ parkingClerkLots: response });
@@ -118,7 +116,6 @@ export default class viewPersonalPage extends Component {
               else
                 tempstr += `${e.name}, `;
             });
-            console.log(tempstr);
             // this.setState({parkingClerkLotString: tempstr});
             
           return (<ListItemText style={{width: "70%", display: "inline-block" , fontSize: '15px', float: "right"}} primary={<div style={{ float: "right"}}>{tempstr}</div>} />);

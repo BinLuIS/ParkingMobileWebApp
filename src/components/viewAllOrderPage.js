@@ -32,8 +32,6 @@ export default class viewAllOrderPage extends Component {
         // .then(results => results.json())
         .then(res => {
           this.setState({data:res})
-          console.log(res);
-          console.log(this.state.data);
         });
         
     }
@@ -53,7 +51,6 @@ export default class viewAllOrderPage extends Component {
           this.getAllOrder();
         })
         .catch((error) => {
-            console.log('error: ' + error);
             Toast.fail("Failed to accept order. Please contact technical support",3);
          });
     }

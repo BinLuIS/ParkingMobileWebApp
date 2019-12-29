@@ -39,9 +39,8 @@ export default class clerkPage extends Component {
     }
   }
   render() {
-    console.log(`IDnew ${localStorage.getItem(CLERK_ID)}`);
     return (
-      <div style={{height: '100%', width: '100%', top: 0, fontSize: "30px"}}>
+      <div style={{height: '100%', width: '100%', top: 0, fontSize: "30px", position:"sticky"}}>
         <TabBar
           unselectedTintColor="#949494"
           tintColor="#33A3F4"

@@ -24,8 +24,6 @@ const mapDispatchToProps =(dispatch) => ({
         carNumber: newOrderRequest
         
       }
-      console.log(newOrderRequestItem)
-     console.log(JSON.stringify(newOrderRequestItem))
   //    fetch("https://parkingsystem.herokuapp.com/orders", {
   //      method: 'POST', 
   //      headers: new Headers({
@@ -61,7 +59,6 @@ const mapDispatchToProps =(dispatch) => ({
     if(error.status === 409) {
       Toast.fail("You have requested to park this car before.",3);                    
     } else {
-      console.log('error: ' + error);
       Toast.fail("Fail to park this car. Please contact technical support.",3);                         
     }
     
@@ -73,7 +70,6 @@ const mapDispatchToProps =(dispatch) => ({
       orderId: newOrderRequestOrderId,
       status: 'pendingFetching'
     }
-    console.log(`${newOrderRequestCarNum}, ${newOrderRequestOrderId}`)
   //   fetch("https://parkingsystem.herokuapp.com/orders?carNumber="+newOrderRequest, {
   //   mode: 'cors', 
   // }).then(res => res.json())
@@ -109,7 +105,6 @@ const mapDispatchToProps =(dispatch) => ({
       if(error.status === 404) {
         Toast.fail("No related order number or car number is found",3);                    
       } else {
-        console.log('error: ' + error);
         Toast.fail("Pick up failed. Please contact technical support",3);                         
       }
        })
@@ -123,7 +118,6 @@ const mapDispatchToProps =(dispatch) => ({
     const newOrderRequestItem ={
       carNumber: getOrderRequest,
     }
-    console.log(newOrderRequestItem)
     getOrderByCarNumber(getOrderRequest)
     .then(resp => {
       if(resp.length==0){
@@ -144,7 +138,6 @@ const mapDispatchToProps =(dispatch) => ({
     }
   })
     .catch((error) => {
-      console.log('error: ' + error);
       Toast.fail("Please contact technical support.",3);
      
     });
