@@ -46,7 +46,7 @@ export default class viewPersonalPage extends Component {
     .then(res=>{
       console.log(res)
     }).then(this.handleClose()).then(Toast.success('Successfully change the password', 3));
-    else Toast.fail('New Password and new password confirmed are unmatched', 3);
+    else Toast.fail('Your password and confirmation password do not match.', 3);
   };
 
   getPersonalInfo = () => {
@@ -200,7 +200,7 @@ export default class viewPersonalPage extends Component {
             <TextField
               margin="dense"
               id="confirmPassword"
-              label="Confirm New Password"
+              label="Confirmation Password"
               type="password"
               fullWidth
               onChange={this.confirmPasswordOnChange}
