@@ -107,11 +107,10 @@ export default class viewAcceptedOrderPage extends Component {
         }
     }
     getListItem = () => {
-        
         if(this.state.data.length > 0) {
             return (<List className={this.props.root}>
-                {this.state.data.map(each => (<div>
-                  <ListItem key={each} button style={{background: "white"}} >
+                {this.state.data.map(each => (<div key={each.id}>
+                  <ListItem key={each.id} button style={{background: "white"}} >
                     <ListItemAvatar>
                       {/* <Avatar
                           src={require('../icon/caricon.png')}

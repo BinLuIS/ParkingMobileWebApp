@@ -66,13 +66,12 @@ export default class viewAllOrderPage extends Component {
     }
         
     getListItem = () => {
-        
         if(this.state.data.length > 0) {
             return (<List className={this.props.root}>
             {this.state.data.map(each => (
               <div>
               <ListItem 
-              key={each} button style={{background: "white"}} onClick={()=>this.grabOrder(each)}>
+              key={each.id} button style={{background: "white"}} onClick={()=>this.grabOrder(each)}>
                 <ListItemAvatar>
                   <Avatar
                     src={require('../icon/caricon.png')}
