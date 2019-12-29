@@ -41,7 +41,7 @@ export default class clerkPage extends Component {
   render() {
     console.log(`IDnew ${localStorage.getItem(CLERK_ID)}`);
     return (
-      <div style={{ position: 'fixed', height: '100%', width: '100%', top: 0 }}>
+      <div style={{height: '100%', width: '100%', top: 0 }}>
         <TabBar
           unselectedTintColor="#949494"
           tintColor="#33A3F4"
@@ -51,7 +51,7 @@ export default class clerkPage extends Component {
           prerenderingSiblingsNumber={Infinity}
         >
           <TabBar.Item
-            title="Compete for car parking order"
+            title="New Order"
             key="gradOrder"
             icon={
               <Icon type="profile"  />
@@ -83,7 +83,7 @@ export default class clerkPage extends Component {
             selectedIcon={
               <Icon type="car"  theme="twoTone"/>
             }
-            title="停取"
+            title="My Order"
             key="getOrder"
             // badge={'123'}
             selected={this.state.selectedPage === 'viewAcceptedOrderPage'}
