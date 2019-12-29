@@ -55,7 +55,7 @@ class pickAcceptedOrderParkingLocationPage extends React.Component {
     if(this.state.data.length > 0) {
         return (<List>
           {
-            this.state.data.map(each=><div>
+            this.state.data.map(each=><div key={each.id}>
             <ListItem style={{background: "white"}} button onClick={()=>this.passLotID(each.id,each.name)}> 
                 <ListItemText primary= {each.name + " (Vacancy: " + each.availableCapacity + ")" }/>
             </ListItem>
