@@ -128,9 +128,9 @@ export default class viewPersonalPage extends Component {
     }
   render() {
     // {console.log(`EID state: ${this.state.parkingClerkEId}`)}
-    { console.log(`PID state: ${this.state.parkingClerkPId}`) }
-    { console.log(`Name state: ${this.state.parkingClerkName}`) }
-    { console.log(`Lot state: ${this.state.parkingClerkLots}`) }
+    // { console.log(`PID state: ${this.state.parkingClerkPId}`) }
+    // { console.log(`Name state: ${this.state.parkingClerkName}`) }
+    // { console.log(`Lot state: ${this.state.parkingClerkLots}`) }
     return (
 
       <div>
