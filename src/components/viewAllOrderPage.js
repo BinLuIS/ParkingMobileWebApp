@@ -78,7 +78,7 @@ export default class viewAllOrderPage extends Component {
                   />
                 </ListItemAvatar>
                 <ListItemText style={{verticalAlign: "baseline" , fontSize: '15px'}} primary={each.carNumber} />
-                <div><span style={{verticalAlign: "baseline", fontSize: '15px'}}>Complete ></span></div>
+                <div><span style={{verticalAlign: "baseline", fontSize: '15px'}}>Compete ></span></div>
                 {/* <div>停車時間: 17:00</div> */}
               </ListItem>
               <Divider />

@@ -37,8 +37,8 @@ export default class viewHistoryOrderPage extends Component {
       if(this.state.data.length > 0) {
           return (<List className={this.props.root}>
             {this.state.data.map(each => (
-                <div>
-              <ListItem key={each} button style={{background: "white"}}>
+                <div key={each.id}>
+              <ListItem key={each.id} button style={{background: "white"}}>
                 <ListItemAvatar>
                   <Avatar
                     src={require('../icon/likeicon.png')}
