@@ -24,7 +24,8 @@ export default class viewPersonalPage extends Component {
     parkingClerkLots: [],
     parkingClerkLotString: "",
     newPassword:"",
-    confirmPassword:""
+    confirmPassword:"",
+    open:false
   
   }
   handleSubmit = () => {
