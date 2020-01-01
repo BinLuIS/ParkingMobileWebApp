@@ -135,9 +135,10 @@ export function getParkingClerksParkinglot(parkingClerkId){
     });
 }
 
-export function getAllParkingLots() {
+export function getAllParkingLots(){
     return request({
-        url: BASE_URL + "/parkinglots",
+        // url: BASE_URL + '/parkingclerks/'+parkingClerkId+"/parkinglots",
+        url: BASE_URL + '/parkinglots',
         method: 'GET'
     });
 }

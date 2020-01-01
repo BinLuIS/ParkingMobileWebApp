@@ -7,7 +7,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
 import '../css/pickAcceptedOrderParkingLocationPage.css';
 import Typography from '@material-ui/core/Typography';
-import {getParkingClerksParkinglot} from '../util/APIUtils';
+import {getAllParkingLots} from '../util/APIUtils';
 import {getCurrentUser} from '../util/APIUtils';
 
 const styles = theme => ({
@@ -34,8 +34,9 @@ class pickAcceptedOrderParkingLocationPage extends React.Component {
     getCurrentUser()
         .then(response => {
           this.setState({parkingClerkId: response.id});
-          getParkingClerksParkinglot(response.id)
+          getAllParkingLots()
           .then(res => {
+            console.log(res);
             let lots=res.filter(each=> each.availableCapacity>0)
             this.setState({data:lots});
           });
@@ -51,7 +52,7 @@ class pickAcceptedOrderParkingLocationPage extends React.Component {
 
   }
   getListItem = () => {
-       
+    console.log(this.state.data)
     if(this.state.data.length > 0) {
         return (<List>
           {
